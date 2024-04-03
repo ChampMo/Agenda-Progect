@@ -1,0 +1,23 @@
+.navinwork{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    padding-top: 30px;
+    background: linear-gradient(to right, #12419C, #368BB2);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    z-index: 1000;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.profile-user{
+    width: 50px;
+    height: 50px;
+    background-color: aliceblue;
+    border-radius: 100%;
+    margin-bottom: 10px;
+}
