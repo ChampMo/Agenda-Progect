@@ -1,19 +1,19 @@
-import './Landing.css';  // Add a CSS file for styling
-import vector1 from '../public/images/vector1.png';
+import './Landing.css'; 
+import vectorlanding from '../public/images/vector-landing.png';
 import loGo from '../public/images/logo.png';
 
 function Landing() {
   return (
     <div className='landing'>
-      <div className='box-vector1'>
-        <img className='vector1' src={vector1} alt='' />
+      <div className='box-vector-landing'>
+        <img className='vector-landing' src={vectorlanding} alt='' />
        
       </div>
 
       <div className='container'>
         <nav className='nav'>
           <img className='logo' src={loGo} alt='' />
-          <div  className='login'>Login</div>
+          <div  className='bt-login'>Login</div>
         </nav>
         <header className='header'>
           <h1>Welcome to Agenda </h1>
