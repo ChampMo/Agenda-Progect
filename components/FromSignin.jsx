@@ -6,6 +6,7 @@ function FromSignin(props) {
 
   return (
     <>
+      <div className='text-insignin'>Sign in</div>
       <label htmlFor='email' className='text-email'>Email</label>
       <input type='email' id='email' name='email' className='input-emailsignin'/>
       <label htmlFor='password'className='text-passlogin'>Password</label>
@@ -13,7 +14,7 @@ function FromSignin(props) {
       <label htmlFor='password'className='text-passlogin'>Re-Password</label>
       <input type='password' id='password' name='password' className='input-repasssignin'/>
       <div className='bg-button-loginsi'>
-          <div className='button-goto-signin'>Have account? <a onClick={change}>Login!</a></div>
+          <div className='button-goto-signin'>Have account? &nbsp;<a onClick={change}>Login!</a></div>
           <div className='button-login'>Sign In</div>
       </div>
     </>

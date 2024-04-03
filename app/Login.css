@@ -33,6 +33,7 @@
     position: relative;
     margin-top: 100px;
     margin-right: 10%;
+    transition-duration: 2s;
 }
 .bg-mid{
     position: absolute;
@@ -48,18 +49,29 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: 1;
 }
 .bg-front{
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 630px;
     height: 700px;
+    top: 30px;
+    left:40px;
+    z-index: 2;
 }
--front
+
 .bgprop-container{
     position: relative;
+}
+.text-inlogin,.text-insignin{
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    display: none;
 }
 .text-login{
     margin-left: 180px;
@@ -133,6 +145,9 @@
 }
 .button-goto-signin{
     color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     a{
         cursor: pointer;
         color: #28659C;
@@ -141,7 +156,6 @@
 .button-login{
     width: 150px;
     height: 40px;
-    border: 1px solid #28659C;
     border-radius: 50px;
     display: flex;
     justify-content: center;
@@ -208,6 +222,7 @@
     }
     100% {
         opacity: 1;
+        left:-40px;
     }
 }
 
@@ -265,7 +280,7 @@
         margin-right: 10%;
     }
     100% {
-        margin-right: -35%;
+        margin-right: -40%;
         border-radius: 0;
         left:-40px;
     }
@@ -302,11 +317,46 @@
 }
 @keyframes move-from-login-reverse {
     0% {
+        left:-40px;
     }
     50% {
         opacity: 0;
     }
     100% {
         opacity: 1;
+    }
+}
+
+
+
+@media only screen and (max-width: 1500px) {
+    .containerlogin{
+        justify-content: center;
+    }
+    
+    .bgproplogin{
+        display: none;
+    }
+    .bg-back{
+        min-width: 450px;
+        width: 60%;
+    }
+    .bg-mid{
+        width: 100%;
+    }
+    .bg-front{
+        width: 100%;
+    }
+    .text-login{
+        margin-left: 0;
+    }
+    .text-signin{
+        display: none;
+    }
+    .bgprop-container{
+        display: none;
+    }
+    .text-inlogin,.text-insignin{
+        display: flex;
     }
 }

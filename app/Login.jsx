@@ -61,11 +61,10 @@ function Login() {
       </div>
       <div className='containerlogin'>
         <div className={bgBack}>
-          <div className={bgMid}>
+          <div className={bgMid}></div>
             <form className={bgFront}>
               <Formlog change={change}stagePage={stagePage}/>
             </form>
-          </div>
         </div>
         
         <BgpropContain bgpropContainer={bgpropContainer}stagePage={stagePage}/>
