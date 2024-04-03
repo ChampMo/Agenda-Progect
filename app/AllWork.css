@@ -1,0 +1,54 @@
+body{
+    background: linear-gradient(to bottom ,#7CFBDD, #12419C);
+}
+.vectorlogin{
+    position: absolute;
+    top: 0;
+}
+.allcontent{
+    display: flex;
+    justify-content: center;    
+}
+.content{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    background-color: gray;
+    width: 1000px;
+    align-items: center;
+    
+}
+.mail{
+    margin: 10px 0px 0px 10px;
+
+}
+.work{
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #00B7F1;
+}
+.welcome{
+    display: flex;
+    align-self: flex-start;
+
+}
+.subwork{
+    width: 1000px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+}
+.subwork button{
+    height: 40px;
+}
+.or{
+    margin: 30px 0;
+}
+.create{
+    width: 1000px;
+    height: 70px;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: #12419C;
+}
