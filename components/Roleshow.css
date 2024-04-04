@@ -1,0 +1,19 @@
+.role-show{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+}
+.all-role{
+    width: 100%;
+}
+.in-role{
+    width: 200px;
+    margin: 50px 0 0 80px;
+    display: flex;
+    gap: 20px;
+}
+.topic-role{
+    font-size: 20px;
+    font-weight: 600;
+}

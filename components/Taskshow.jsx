@@ -1,5 +1,7 @@
-import React from 'react'
-import './Taskshow.css'
+import React from 'react';
+import './Taskshow.css';
+import Taskbox from './Taskbox.jsx';
+import Addtask from './Addtask.jsx';
 
 function Taskshow() {
   return (
@@ -10,17 +12,16 @@ function Taskshow() {
                 <div className='all-task'>All Task</div>
                 <div className='my-task'>My Task</div>
             </div>
-            <div className='container-task'>
-                <div className='box-task'>box</div>
-            </div>
+            <Taskbox/>
         </div>
         <div className='add-task-box'>
             <div className='add-task'>Add Task</div>
         </div>
         
     </div>
+    {/* <Addtask/> */}
     </>
   )
-}
+};
 
-  export default Taskshow
+  export default Taskshow;

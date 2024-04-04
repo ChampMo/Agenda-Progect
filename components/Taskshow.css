@@ -18,22 +18,7 @@
     border-right: 1px solid #000;
     padding-right: 20px;
 }
-.container-task{
-    width: 100%;
-}
-.box-task{
-    max-width: 1500px;
-    height: 80px;
-    background-color: rgba(255, 255, 255, 0.7);
-    margin: 20px 80px;
-    padding: 0 20px;
-    font-size: 18px;
-    border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+
 .add-task-box{
     width: 100%;
 }
