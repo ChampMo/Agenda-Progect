@@ -5,6 +5,8 @@ import Sidebar from '../components/Sidebar.jsx'
 import Taskshow from '../components/Taskshow.jsx'
 import Roleshow from '../components/Roleshow.jsx'
 import SidebarSetting from '../components/Sidebar-setting.jsx'
+import Profile from '../components/setting-manu/Profile.jsx'
+import Project from '../components/setting-manu/Project.jsx'
 
 
 function Workspace() {
@@ -20,7 +22,9 @@ function Workspace() {
           <div className='sidebar-box'></div>
 
           {/* <Taskshow/> */}
-          <Roleshow/>
+          {/* <Roleshow/> */}
+          {/* <Profile/> */}
+          <Project/>
         </div>
         
     </div>
