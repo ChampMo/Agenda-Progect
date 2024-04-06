@@ -7,7 +7,7 @@ import Roleshow from '../components/Roleshow.jsx'
 import SidebarSetting from '../components/Sidebar-setting.jsx'
 import Profile from '../components/setting-manu/Profile.jsx'
 import Project from '../components/setting-manu/Project.jsx'
-
+import PeopleRole from '../components/setting-manu/PeopleRole.jsx'
 
 function Workspace() {
 
@@ -24,7 +24,8 @@ function Workspace() {
           {/* <Taskshow/> */}
           {/* <Roleshow/> */}
           {/* <Profile/> */}
-          <Project/>
+          {/* <Project/> */}
+          <PeopleRole/>
         </div>
         
     </div>

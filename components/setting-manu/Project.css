@@ -23,7 +23,7 @@
 }
 .info-project{
     margin-left: 5%;
-    width: 700px;
+    max-width: 700px;
     height: 300px;
     display: flex;
     flex-direction: column;
