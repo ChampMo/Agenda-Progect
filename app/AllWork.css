@@ -13,17 +13,16 @@ body{
     display: flex;
     position: relative;
     flex-direction: column;
-    background-color: gray;
     width: 1000px;
     align-items: center;
-    
+    left: 50%;
 }
 .mail{
-    margin: 10px 0px 0px 10px;
+    margin: 15px
 
 }
 .work{
-    border: 1px solid black;
+    border: 2px solid #DFDFDF;
     border-radius: 20px;
     background-color: #00B7F1;
 }
@@ -38,17 +37,50 @@ body{
     display: flex;
     flex-direction: row;
     background-color: white;
+    justify-content: space-between;
+    align-self: center;
+}
+.subwork:last-child{
+    border-radius: 0px 0px 18px 18px;
 }
 .subwork button{
     height: 40px;
+    color: black;
+    margin: 15px;
+    background-color: #6FFFD4;
+}
+.subwork p {
+    margin: 20px;
 }
 .or{
     margin: 30px 0;
+    color: white;
 }
 .create{
     width: 1000px;
     height: 70px;
-    border: 1px solid black;
+    border: 1px solid #DFDFDF;
     border-radius: 15px;
-    background-color: #12419C;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.first{
+    margin: 2px;
+    width: 200px;
+    background-color: #76D6FF;
+    border-radius: 19px 50px 50px 19px;
+}
+.first img{
+    width: 50%;
+}
+.mid{
+
+}
+.last button{
+    height: 40px;
+    color: black;
+    margin: 15px;
+    background-color: #6FFFD4;
 }
