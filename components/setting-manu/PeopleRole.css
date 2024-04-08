@@ -50,7 +50,10 @@
     color: #ffffff;
     border-radius: 5px;
     cursor: pointer;
-
+    transition-duration: 0.2s;
+}
+.bt-search-people:hover{
+    background-color: #2377ac;
 }
 .text-role{
     margin-top: 30px;
@@ -138,9 +141,11 @@
     color: #fff;
     border-radius: 5px;
     margin-left: 10px;
+    cursor: pointer;
+    transition-duration: 0.2s;
 }
 .bt-role-add:hover{
-    
+    background-color: #2377ac;
 }
 .text-people{
     margin-top: 30px;
