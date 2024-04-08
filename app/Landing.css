@@ -39,6 +39,7 @@
 .logo{
     width: 200px;
     object-fit:contain;
+    cursor: pointer;
 }
 .bt-login{
     display: flex;

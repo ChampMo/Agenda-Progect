@@ -16,6 +16,7 @@ function Login() {
 
   
   const [stagePage, setstagePage] = useState('login');
+  const [bgpage, setbgpage] = useState('login');
   const [vectorLogin, setvectorLogin] = useState('vector-login');
   const [bgpropContainer, setbgpropContainer] = useState('bgprop-container');
 
@@ -25,6 +26,7 @@ function Login() {
 
   const change = () => {
     if(stagePage === 'login'){
+      setbgpage('login animation-change-bg-color');
       setvectorLogin('vector-login animation-vector-login');
       setbgpropContainer('bgprop-container animation-text-login');
 
@@ -38,6 +40,7 @@ function Login() {
       
 
     }else{
+      setbgpage('login animation-change-bg-color-reverse');
       setvectorLogin('vector-login animation-vector-login-reverse');
       setbgpropContainer('bgprop-container animation-text-login-reverse');
 
@@ -55,7 +58,7 @@ function Login() {
 
   return (
     
-    <div className='login'>
+    <div className={bgpage}>
       <div className='box-vector-login'>
         <Vector vectorLogin={vectorLogin}stagePage={stagePage}/>
       </div>

@@ -1,0 +1,36 @@
+.task-show{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+}
+.task-box{
+    width: 100%;
+}
+.filter-task{
+    width: 200px;
+    margin: 50px 0 0 80px;
+    display: flex;
+    gap: 20px;
+
+}
+.all-task{
+    border-right: 1px solid #000;
+    padding-right: 20px;
+}
+
+.add-task-box{
+    width: 100%;
+}
+.add-task{
+    max-width: 1500px;
+    height: 50px;
+    margin: 0 80px 50px 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border:2px solid #12419C;
+    cursor: pointer;
+}

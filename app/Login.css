@@ -1,6 +1,6 @@
 
 .login{
-    background: linear-gradient(to bottom, #66D5D4, #13429D);
+    background: linear-gradient(to bottom, #66D5D4, #12419C);
     width: 100%;
     height: 100vh;
     position: absolute;
@@ -8,6 +8,7 @@
     left: 0;
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 .box-vector-login{
     width: 100%;
@@ -33,7 +34,7 @@
     position: relative;
     margin-top: 100px;
     margin-right: 10%;
-    transition-duration: 2s;
+    transition: all 1s ease-in;
 }
 .bg-mid{
     position: absolute;
@@ -164,6 +165,14 @@
     transition: rotateY 0.5s;
 }
 
+@keyframes change-bg-color {
+    0% {
+    }
+    100% {
+       background: linear-gradient(to bottom, #12419C, #66D5D4);
+    }
+}
+
 @keyframes move-bg-back {
     0% {
        margin-right: 10%;
@@ -191,12 +200,8 @@
         
     }
     50% {
-        transform: scale(4) translateX(200px) translateY(200px);
-        opacity: 0;
-    }
-    51% {
-        transform: scale(4) translateX(-200px) translateY(-200px);
-        opacity: 0;
+        transform: translateY(-1000px);
+
     }
     100% {
     }
@@ -226,6 +231,9 @@
     }
 }
 
+.animation-change-bg-color{
+    animation: change-bg-color 2s ease-in-out forwards;
+}
 .animation-vector-login{
     animation: move-vector-login 2s ease-in-out forwards;
 }
@@ -246,7 +254,9 @@
 
 
 
-
+.animation-change-bg-color-reverse{
+    animation: change-bg-color-reverse 2s ease-in-out forwards;
+}
 .animation-vector-login-reverse{
     animation: move-vector-login-reverse 2s ease-in-out forwards;
 }
@@ -263,7 +273,14 @@
 .animation-bg-front-reverse{
     animation: move-from-login-reverse 2s ease-in-out forwards;
 }
-
+@keyframes change-bg-color-reverse {
+    0% {
+        background: linear-gradient(to bottom, #12419C, #66D5D4);
+    }
+    100% {
+       background: linear-gradient(to bottom, #66D5D4, #12419C);
+    }
+}
 @keyframes move-bg-back-reverse {
     0% {
        margin-right: 10%;
@@ -291,12 +308,7 @@
         
     }
     50% {
-        transform: scale(4) translateX(200px) translateY(200px);
-        opacity: 0;
-    }
-    51% {
-        transform: scale(4) translateX(-200px) translateY(-200px);
-        opacity: 0;
+        transform: translateY(-1000px);
     }
     100% {
     }
