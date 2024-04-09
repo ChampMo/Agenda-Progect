@@ -1,4 +1,4 @@
-.sidebar{
+.sidebarsetting{
     position: fixed;
     top: 0;
     left: 0;
@@ -14,8 +14,28 @@
     padding: 20px 0;
     padding-top: 70px;
     z-index: 100;
-    transition: 0.3s ease-in-out;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: translateX(-300px);
+    animation: move-sidebar-setting 0.3s ease-in-out forwards;
+}
+@keyframes move-sidebar-setting {
+    0% {
+        
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes move-sidebar-setting-reverse {
+    0% {
+        
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+.backanimetion{
+    animation: move-sidebar-setting-reverse 0.3s ease-in-out reverse forwards;
 }
 .text-setting-account, .text-setting-Workspace{
     width: 100%;

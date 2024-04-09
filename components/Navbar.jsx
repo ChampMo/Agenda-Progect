@@ -7,7 +7,7 @@ export function Navbar(){
     return(
         <>
             <div className="navbar">
-                <Link to="/"><div className="logo-href"><img className="logonav" src={logo} alt="" /></div></Link>
+                <Link to="/allwork"><div className="logo-href"><img className="logonav" src={logo} alt="" /></div></Link>
                 <a href="/"><div className="profile"></div></a>
             </div> 
         </>

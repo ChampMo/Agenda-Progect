@@ -38,17 +38,30 @@
     max-width: 1000px;
 }
 .mail{
-    margin: 15px
-
+    padding: 15px;
+    width:100%;
+    background-color: #00B7F1;
+    border-radius:18px 18px 0 0;
 }
 .work{
     border: 2px solid #DFDFDF;
     border-radius: 20px;
-    background-color: #00B7F1;
+    background-color: #FFF;
     font-size: 20px;
     height: auto;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
+}
+.container-work{
+    width: 100%;
+    border-radius: 0px 0px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .welcome{
     display: flex;
@@ -62,7 +75,7 @@
     height: 70px;
     display: flex;
     flex-direction: row;
-    background-color: white;
+    background: none;
     justify-content: space-between;
     align-self: center;
     font-size: 18px;

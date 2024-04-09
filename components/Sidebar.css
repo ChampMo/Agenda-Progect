@@ -16,6 +16,18 @@
     z-index: 100;
     transition: 0.3s ease-in-out;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    overflow: auto;
+}
+.sidebar::-webkit-scrollbar {
+    background: none;
+    border-radius: 10px;
+    width: 5px;
+    height: 5px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: none; 
+    background-color: #81818137;
+    border-radius: 10px;
 }
 .project-info{
     width: 100%;

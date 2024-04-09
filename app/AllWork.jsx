@@ -21,11 +21,16 @@ function AllWork(){
                         </div>
                         <div className='work'>
                             <div className='mail'><h4>Workspaces for ...</h4></div>
+                            <div className="container-work">
                                 <Work/>
                                 <Work/>
                                 <Work/>
                                 <Work/>
+                                <Work/>
+                            </div>
+                                
                         </div>
+                        
                         <div className='or'>
                             OR
                         </div>

@@ -7,7 +7,7 @@ function Navinwork() {
   return (
     <>
     <div className='navinwork'>
-        <Link to="/"><img className='logoinwork' src={loGoW} alt='' /></Link>
+        <Link to="/allwork"><img className='logoinwork' src={loGoW} alt='' /></Link>
         <div className='profile-user'></div>
     </div>
     </>
