@@ -18,6 +18,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: translateY(1000px);
+    animation: move-addtask 0.3s ease-in-out forwards;
 }
 
 .bg-back-addtask{
@@ -31,6 +33,7 @@
 }
 .bg-front-addtask{
     position: absolute;
+    padding-right: 50px;
     top: 25px;
     left: -30px;
     max-width: 1200px;
@@ -180,4 +183,24 @@
     height: 35px;
     cursor: pointer;
     margin-right: 50px;
+}
+@keyframes move-addtask {
+    0% {
+        visibility: visible;
+    }
+    100% {
+        visibility: visible;
+        transform: translateY(0px);
+    }
+}
+@keyframes move-addtask-reverse {
+    0% {
+        transform: translateY(1000px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.animation-addtask-reverse{
+    animation: move-addtask-reverse 0.3s ease-in-out reverse forwards;
 }

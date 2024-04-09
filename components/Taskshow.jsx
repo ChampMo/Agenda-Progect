@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Taskshow.css';
 import Taskbox from './Taskbox.jsx';
 import Addtask from './Addtask.jsx';
 
 function Taskshow() {
+  const [atciveaddtask, setAtciveaddtask] = useState(false)
+  const addtask =()=>{
+    setAtciveaddtask(true)
+  }
   return (
     <>
     <div className='task-show'>
@@ -15,11 +19,11 @@ function Taskshow() {
             <Taskbox/>
         </div>
         <div className='add-task-box'>
-            <div className='add-task'>Add Task</div>
+            <div className='add-task' onClick={addtask}>Add Task</div>
         </div>
         
     </div>
-    {/* <Addtask/> */}
+    {atciveaddtask && <Addtask setAtciveaddtask={setAtciveaddtask}/>}
     </>
   )
 };

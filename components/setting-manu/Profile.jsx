@@ -1,5 +1,6 @@
 import React from 'react'
 import './Profile.css'
+import ChangePass from './ChangePass.jsx'
 
 function Profile() {
   return (
@@ -19,7 +20,7 @@ function Profile() {
             </div>
             <div className="delete-acc-profile">Delete Account</div>
         </div>
-        
+        <ChangePass/>
     </>
 
   )

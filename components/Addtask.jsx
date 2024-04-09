@@ -1,13 +1,21 @@
-import react from 'react';
+import react,{useState} from 'react';
 import './Addtask.css';
 
-function Addtask(){
+function Addtask({setAtciveaddtask}){
+    const [classcomponentaddtask, setClasscomponentaddtask] = useState('component-addtask');
+    const setAtciveaddtaskfalse =()=>{
+        setClasscomponentaddtask('component-addtask animation-addtask-reverse')
+        setTimeout(() => {
+            setAtciveaddtask(false)
+        }, 200);
+    }
     return(
         <>
-        <div className='bgcomponent-addtask'>
-        </div>
-        <div className='component-addtask'>
-            <div className='bg-back-addtask'>
+        <div className='bgcomponent-addtask'></div>
+        <div className={classcomponentaddtask} onClick={setAtciveaddtaskfalse}>
+            <div className='bg-back-addtask' onClick={(innerClickEvent) => {
+                    innerClickEvent.stopPropagation();
+                }}>
                 <div className='bg-front-addtask'></div>
                 <div className="component-add">
                     <div className="bgaddt">
