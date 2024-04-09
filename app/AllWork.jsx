@@ -1,7 +1,9 @@
 import './AllWork.css'
 import vectorlogin from '../public/images/vector-login.png';
-import {Navbar} from '../components/Navbar'
+import {Navbar} from '../components/Navbar';
+import Work from '../components/Work';
 import alltaskprop from '../public/images/alltask-prop.png';
+
 
 function AllWork(){
     return(
@@ -19,18 +21,10 @@ function AllWork(){
                         </div>
                         <div className='work'>
                             <div className='mail'><h4>Workspaces for ...</h4></div>
-                            <div className='subwork'>
-                                <p>Something Workspace</p>
-                                <button>LAUNCH</button>
-                            </div>
-                            <div className='subwork'>
-                                <p>Something Workspace</p>
-                                <button>LAUNCH</button>
-                            </div>
-                            <div className='subwork'>
-                                <p>Something Workspace</p>
-                                <button>LAUNCH</button>
-                            </div>
+                                <Work/>
+                                <Work/>
+                                <Work/>
+                                <Work/>
                         </div>
                         <div className='or'>
                             OR

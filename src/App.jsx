@@ -8,10 +8,10 @@ import Workspace from '../app/Workspace.jsx';
 function App() {
   return (
     <>
-    {/* <Landing/> */}
+    <Landing/>
     {/* <Login/> */}
-    {/* <AllWork/> */}
-    <Workspace/>
+    <AllWork/>
+    {/* <Workspace/> */}
     </>
   );
 }
