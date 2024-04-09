@@ -15,3 +15,6 @@
     align-items: center;
     cursor: pointer;
 }
+.box-role:hover{
+    background-color: rgba(247, 247, 247, 0.7);
+}

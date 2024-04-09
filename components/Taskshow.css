@@ -17,8 +17,11 @@
 .all-task{
     border-right: 1px solid #000;
     padding-right: 20px;
+    cursor: pointer;
 }
-
+.my-task{
+    cursor: pointer;
+}
 .add-task-box{
     width: 100%;
 }

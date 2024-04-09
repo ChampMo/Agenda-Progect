@@ -26,7 +26,7 @@
     max-width: 600px;
     width: 100%;
     height: 700px;
-    background: linear-gradient(to bottom, #205DA5, #54C9C4);
+    background: linear-gradient(to bottom, #54C9C4, #2e6fb9);
     border-radius: 40px;
     transform: translateX(30px) translateY(-25px);
     position: relative;
@@ -88,9 +88,13 @@
     align-items: center;
     justify-content: center;
     width: 250px;
-    height: 35px;
+    height: 40px;
     cursor: pointer;
     margin-right: 50px;
+    transition-duration: 0.2s;
+}
+.bt-cpass:hover{
+    background-color: #195396;
 }
 @keyframes move-cpass {
     0% {

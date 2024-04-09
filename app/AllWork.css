@@ -40,8 +40,13 @@
 .mail{
     padding: 15px;
     width:100%;
-    background-color: #00B7F1;
+    background-color: #12419C;
+    background: linear-gradient(to left, rgb(26, 90, 218), #12419C);
     border-radius:18px 18px 0 0;
+    h4{
+       color: #fff; 
+    }
+    
 }
 .work{
     border: 2px solid #DFDFDF;
