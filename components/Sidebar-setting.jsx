@@ -3,13 +3,32 @@ import './Sidebar-setting.css'
 import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome'
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 
-function Sidebar({setSidebar, setComponentwork}) {
+function Sidebar({setSidebar, setComponentwork, componentwork}) {
   const [sidebarsetting, setSidebarsetting] = useState('sidebarsetting')
 
+
+  const [classbgbtsetting, setClassbgbtsetting] = useState('bg-bt-setting');
+  React.useEffect(() => {
+    switch (componentwork) {
+      case 'Profile':
+        setClassbgbtsetting('bg-bt-setting');
+        break;
+      case 'Project':
+        setClassbgbtsetting('bg-bt-setting bg-bt-project');
+        break;
+      case 'PeopleRole':
+        setClassbgbtsetting('bg-bt-setting bg-bt-People');
+        break;
+      default:
+        null;
+    }
+  }, [componentwork]);
   const toggleSidebar= () =>{
-    setSidebarsetting('sidebarsetting backanimetion')
+    setSidebarsetting('sidebarsetting backanimetion');
+    setComponentwork('Taskshow');
     setTimeout(() => {
       setSidebar(true)
+      
     }, 300);
     
   }
@@ -17,16 +36,20 @@ function Sidebar({setSidebar, setComponentwork}) {
     <>
     <div className={sidebarsetting}>
         <div className='top-manu'>
+            <div className={classbgbtsetting}>
+              <div className="p1"></div>
+              <div className="p2"></div>
+            </div>
             <div className="text-setting-account">Account</div>
             <div className='setting-sidebar'>
-                <div className='setting-task' onClick={() => setComponentwork('Profile')}>Profile</div>
+                <div className='setting-profile' onClick={() => setComponentwork('Profile')}>Profile</div>
                 <div className='setting-Language'>Language</div>
                 <div className='setting-Theme'>Theme</div>
             </div>
             <div className="text-setting-Workspace">Workspace</div>
             <div className='setting-sidebar'>
                 <div className='setting-Project' onClick={() => setComponentwork('Project')}>Project</div>
-                <div className='setting-People' onClick={() => setComponentwork('PeopleRole')}>People</div>
+                <div className='setting-People' onClick={() => setComponentwork('PeopleRole')}>People & Role</div>
             </div>
         </div>
         <div className="setting" onClick={toggleSidebar}>

@@ -6,13 +6,13 @@
     display: flex;
 }
 .container-picture-profile{
-    width: 400px;
+    max-width: 600px;
+    width: 100%;
     height: 300px;
     align-items: center;
     display: flex;
-    margin-left: 20%;
     justify-content: flex-end;
-    margin-top: 15%;
+    margin-top: 250px;
 }
 .img-profile{
     width: 300px;
@@ -33,7 +33,8 @@
     gap: 50px;
     font-size: 22px;
     font-weight: 600;
-    margin-top: 15%;
+    margin-top: 250px;
+    margin-right: 50px;
 }
 .change-pass-profile{
     width: 200px;

@@ -37,8 +37,8 @@ function Workspace() {
     <>
     <div className='container-workspace'>
         <Navinwork/>
-        <Sidebar setSidebar={setSidebar} setComponentwork={setComponentwork}/>
-        {sidebar?null:<SidebarSetting setSidebar={setSidebar} setComponentwork={setComponentwork}/>}
+        <Sidebar setSidebar={setSidebar} setComponentwork={setComponentwork} componentwork={componentwork}/>
+        {sidebar?null:<SidebarSetting setSidebar={setSidebar} setComponentwork={setComponentwork} componentwork={componentwork}/>}
         <div className='container-manu-show'>
           <div className='sidebar-box'></div>
 

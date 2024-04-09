@@ -70,6 +70,7 @@
 .manu-sidebar{
     padding:0 10px;
     margin-top: 20px;
+    position: relative;
 }
 .manu-task, .manu-role, .manu-schedule{
     display: flex;
@@ -80,6 +81,8 @@
     padding: 15px 30px;
     border-radius: 50px;
     cursor: pointer;
+    position: relative;
+    z-index: 2;
 }
 .setting{
     display: flex;
@@ -91,4 +94,30 @@
     cursor: pointer;
     width: 150px;
     gap:10px;
+}
+.bg-bt-sidebar{
+    position: absolute;
+    width: 90%;
+    height: 50px;
+    background-color: #1B479F;
+    border-radius: 50px;
+    z-index: 0;
+    top: 4PX;
+    transition-duration: 0.2s;
+}
+.bg-bt-role{
+    top: 61px;
+}
+.bg-bt-schedule{
+    top: 117px;
+}
+.col-white{
+    color: #ffffff;
+}
+.bgbtworkspace{
+    width: 80px;
+    object-fit: cover;
+    height: 50px;
+    position: absolute;
+    right: 20px;
 }
