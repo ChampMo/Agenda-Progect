@@ -1,13 +1,13 @@
 import './Login.css'; 
 import { useState } from 'react';
 import vectorlogin from '../public/images/vector-login.png';
-import vectorsignin from '../public/images/vector-signin.png';
+import vectorsignup from '../public/images/vector-signup.png';
 import bgproplogin from '../public/images/bgproplogin.png';
 import logingrp from '../public/images/logingrp.png';
-import bgpropsignin from '../public/images/bgpropsignin.png';
-import signingrp from '../public/images/signingrp.png';
+import bgpropsignup from '../public/images/bgpropsignup.png';
+import signupgrp from '../public/images/signupgrp.png';
 import FormLogin from '../components/FormLogin.jsx';
-import FromSignin from '../components/FromSignin.jsx';
+import FromSignup from '../components/FromSignup.jsx';
 
 
 
@@ -35,7 +35,7 @@ function Login() {
       setbgFront('bg-front animation-bg-front');
 
       setTimeout(() => {
-        setstagePage('signin');
+        setstagePage('signup');
       }, 1000);
       
 
@@ -90,7 +90,7 @@ const Formlog = (props) => {
   }else{
     return (
       <>
-        <FromSignin change={change} />
+        <FromSignup change={change} />
       </>
     )
   }
@@ -109,9 +109,9 @@ const BgpropContain = (props) => {
   }else{
     return (
       <div className={bgpropContainer}>
-          <div className='text-signin'>Sign In</div>
-          <img className='bgproplogin' src={bgpropsignin} alt='' />
-          <img className='logingrp' src={signingrp} alt='' />
+          <div className='text-signup'>Sign Up</div>
+          <img className='bgproplogin' src={bgpropsignup} alt='' />
+          <img className='logingrp' src={signupgrp} alt='' />
       </div>
     )
   }
@@ -125,7 +125,7 @@ const Vector = (props) => {
     )
   }else{
     return (
-      <img className={vectorLogin} src={vectorsignin} alt='' />
+      <img className={vectorLogin} src={vectorsignup} alt='' />
     )
   }
 }

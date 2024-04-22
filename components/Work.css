@@ -14,14 +14,17 @@
 .subwork button{
     height: 40px;
     max-width: 120px;
-    color: black;
+    color: #fff;
     margin: 15px;
-    background-color: #6FFFD4;
+    background-color: #2960cd;
     display: flex;
     align-items: center;
     font-size: 18px;
     font-weight: 600;
-
+    transition: background-color 0.2s;
+}
+.subwork button:hover{
+    background-color: #1B479F;
 }
 .subwork p {
     margin: 20px;

@@ -36,6 +36,20 @@
     margin-top: 250px;
     margin-right: 50px;
 }
+.name-profile{
+    display: flex;
+    flex-wrap: wrap;
+}
+.name-info{
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 600;
+}
+.name-info:focus{
+    border-bottom: 1px solid #000000;
+}
 .change-pass-profile{
     width: 200px;
     height: 30px;

@@ -18,9 +18,14 @@
     border-right: 1px solid #000;
     padding-right: 20px;
     cursor: pointer;
+    color: #888888;
 }
 .my-task{
     cursor: pointer;
+    color: #888888;
+}
+.task-title-active{
+    color: #000000;
 }
 .add-task-box{
     width: 100%;

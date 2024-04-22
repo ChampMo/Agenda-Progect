@@ -5,16 +5,26 @@ import Addtask from './Addtask.jsx';
 
 function Taskshow() {
   const [atciveaddtask, setAtciveaddtask] = useState(false)
+  const [classAlltask, setClassAlltask] = useState('all-task  task-title-active')
+  const [classMytask, setClassMytask] = useState('my-task')
   const addtask =()=>{
     setAtciveaddtask(true)
+  }
+  const alltask =()=>{
+    setClassAlltask('all-task task-title-active')
+    setClassMytask('my-task')
+  }
+  const mytask =()=>{
+    setClassAlltask('all-task')
+    setClassMytask('my-task task-title-active')
   }
   return (
     <>
     <div className='task-show'>
         <div className='task-box'>
             <div className='filter-task'>
-                <div className='all-task'>All Task</div>
-                <div className='my-task'>My Task</div>
+                <div className={classAlltask} onClick={alltask}>All Task</div>
+                <div className={classMytask} onClick={mytask}>My Task</div>
             </div>
             <Taskbox/>
         </div>

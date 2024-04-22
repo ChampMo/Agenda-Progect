@@ -12,7 +12,7 @@ function FormLogin(props) {
       <label htmlFor='password'className='text-passlogin'>Password</label>
       <input type='password' id='password' name='password' className='input-passlogin'/>
       <div className='bg-button-login'>
-          <div className='button-goto-signin'>No account? &nbsp;<a onClick={change}>Sign In!</a></div>
+          <div className='button-goto-signup'>No account? &nbsp;<a onClick={change}>Sign Up!</a></div>
           <div className='button-login'>Login</div>
       </div>
     </>

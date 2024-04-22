@@ -7,6 +7,10 @@ function Profile() {
   const cpass =()=>{
     setAtcivecpass(true)
   }
+  const changename =()=>{
+    
+    console.log('change name')
+  }
   return (
     <>
         <div className='profile-show'>
@@ -16,7 +20,9 @@ function Profile() {
                 </div>
                 <div className="info-profile">
                     <div className="email-profile">Email : sonesambi@gmail.com</div>
-                    <div className="name-profile">Champ</div>
+                    <div className="name-profile">Username :&nbsp;
+                      <input className="name-info" onClick={changename}/>
+                    </div>
                     <div className="change-pass-profile" onClick={cpass}>Change Password</div>
                 </div> 
                 

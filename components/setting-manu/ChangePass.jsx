@@ -21,10 +21,10 @@ function ChangePass({setAtcivecpass}){
                         <div className="box-cpass">
                             <div className="text-oldp">Old Password</div>
                             <input className="input-oldp" type="text" />
-                            <div className="text-reoldp">Re-Old Password</div>
-                            <input className="input-reoldp" type="text" />
                             <div className="text-newp">New Password</div>
-                            <input className="input-newp" type="text" />
+                            <input className="input-newp" type="password" />
+                            <div className="text-renewp">Re-New Password</div>
+                            <input className="input-renewp" type="password" />
                         </div>
                         <div className="bg-bt-cpass">
                             <div type='submit' className='bt-cpass'>Change Password</div>
