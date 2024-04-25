@@ -1,6 +1,7 @@
 import './AllWork.css'
 import vectorlogin from '../public/images/vector-login.png';
 import {Navbar} from '../components/Navbar';
+import Share from '../components/Share';
 import Work from '../components/Work';
 import alltaskprop from '../public/images/alltask-prop.png';
 
@@ -18,6 +19,11 @@ function AllWork(){
                     <div className='content'>
                         <div className='welcome'>
                             <h2>Welcome To Agenda</h2>
+                        </div>
+                        <div className="share">
+                            <Share/> 
+                            <Share/> 
+                            <Share/> 
                         </div>
                         <div className='work'>
                             <div className='mail'><h4>Workspaces for ...</h4></div>

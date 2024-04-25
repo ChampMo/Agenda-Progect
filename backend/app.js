@@ -15,6 +15,9 @@ app.get('/testapi', (req, res) => {
 const db = require("./routes/db");
 app.use("/", db);
 
+// const datadb = require('./routes/model/datadb');
+// app.use("/", datadb);
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });

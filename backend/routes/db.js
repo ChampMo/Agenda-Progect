@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
-const { Users, RoleUser } = require('./model/schema');
+const  { User, UserWorkspace, Workspace, Task, RoleTask, RoleUser, Role } = require('./model/schema');
 
 const nosqlconect = "mongodb+srv://Champ:1234@agendadb.erxhg96.mongodb.net/Agenda"
 mongoose.connect(nosqlconect);
