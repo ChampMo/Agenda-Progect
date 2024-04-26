@@ -105,7 +105,7 @@
 .logingrp{
     position: absolute;
     width: 400px;
-    right: 100px;
+    right:150px;
     top:471px;
 }
 .text-email,.text-passlogin{
@@ -216,7 +216,7 @@
         opacity: 0;
     }
     100% {
-        transform: translateX(-1300px);
+        transform: translateX(-1220px);
     }
 }
 @keyframes move-from-login {
