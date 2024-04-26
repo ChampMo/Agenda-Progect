@@ -26,7 +26,10 @@ function Taskshow() {
                 <div className={classAlltask} onClick={alltask}>All Task</div>
                 <div className={classMytask} onClick={mytask}>My Task</div>
             </div>
-            <Taskbox/>
+            <div className="bg-all-taskbox">
+            <Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/>
+            <Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/><Taskbox/>
+            </div>
         </div>
         <div className='add-task-box'>
             <div className='add-task' onClick={addtask}>Add Task</div>

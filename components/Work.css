@@ -3,7 +3,6 @@
     height: 70px;
     display: flex;
     flex-direction: row;
-    background-color: white;
     justify-content: space-between;
     align-self: center;
     font-size: 18px;

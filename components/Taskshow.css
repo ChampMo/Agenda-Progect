@@ -14,6 +14,25 @@
     gap: 20px;
 
 }
+.bg-all-taskbox{
+    margin-top: 20px;
+    width: 100%;
+    height: 780px;
+    overflow: auto;
+}
+.bg-all-taskbox::-webkit-scrollbar {
+    background: none;
+    border-radius: 10px;
+    width: 10px;
+    height: 10px;
+   
+}
+
+.bg-all-taskbox::-webkit-scrollbar-thumb {
+    background: none; 
+    background-color: #2f6eb655;
+    border-radius: 10px;
+}
 .all-task{
     border-right: 1px solid #000;
     padding-right: 20px;
@@ -28,7 +47,10 @@
     color: #000000;
 }
 .add-task-box{
-    width: 100%;
+    width: 84%;
+    position: fixed;
+    bottom: 0;
+    background: linear-gradient(to bottom, #ffffff00, #45AABB);
 }
 .add-task{
     max-width: 1500px;

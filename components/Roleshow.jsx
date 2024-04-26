@@ -10,7 +10,7 @@ function Roleshow() {
             <div className='in-role'>
                 <div className='topic-role'>Role 1</div>
             </div> 
-            <Rolebox/>
+            <Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/>
         </div>
         
     </div>
