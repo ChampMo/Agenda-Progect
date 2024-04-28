@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 const  { User, UserWorkspace, Workspace, Task, RoleTask, RoleUser, Role } = require('./model/schema');
 
 const nosqlconect = "mongodb+srv://Champ:1234@agendadb.erxhg96.mongodb.net/Agenda"
-mongoose.connect(nosqlconect);
+mongoose.connect(nosqlconect, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
 
 const connection = mongoose.connection;
 

@@ -15,7 +15,8 @@ function getContrastColor(color) {
     return contrastColor;
   }
   
-  function Role() {
+  function Role(props) {
+    const {colorBorder} = props
     const [color, setColor] = useState(() => {
       return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
     });
@@ -23,7 +24,7 @@ function getContrastColor(color) {
   
     return (
       <>
-        <div className="role" style={{ backgroundColor: color }}>
+        <div className="role" style={{ backgroundColor: color ,border:colorBorder}} onClick={props.onClick}>
           <span style={{ color: contrastColor }}>champ</span>
         </div>
       </>

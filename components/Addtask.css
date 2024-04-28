@@ -69,7 +69,7 @@
     font-weight: 600;
 }
 .taskname{
-    font-size: 20px;
+    font-size: 22px;
     background: none;
     border: none;
     border-bottom: 1px solid #00000031;
@@ -110,18 +110,8 @@
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
-    max-height: 75px;
+    max-height: 72px;
     gap: 10px;
-}
-.role-item{
-    max-width: 500px;
-    padding: 0 10px;
-    height: 30px;
-    border-radius: 10px;
-    background-color: #ffcb70;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
 }
 .role-box::-webkit-scrollbar {
     background: none;
@@ -151,7 +141,6 @@
     align-items: center;
     border-radius: 50px;
     color: #fff;
-    background-color: #205DA5;
     background-color: #1c70d1;
     cursor: pointer;
 }
@@ -162,7 +151,6 @@
     align-items: center;
     border-radius: 50px;
     color: #fff;
-    background-color: #20a530;
     background-color: #0dc404;
     cursor: pointer;
 }

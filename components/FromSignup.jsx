@@ -12,7 +12,7 @@ function FromSignup(props) {
       <label htmlFor='password'className='text-passlogin'>Password</label>
       <input type='password' id='password' name='password' className='input-passsignup'/>
       <label htmlFor='password'className='text-passlogin'>Re-Password</label>
-      <input type='password' id='password' name='password' className='input-repasssignup'/>
+      <input type='password' id='repassword' name='password' className='input-repasssignup'/>
       <div className='bg-button-loginsi'>
           <div className='button-goto-signup'>Have account? &nbsp;<a onClick={change}>Login!</a></div>
           <div className='button-login'>Sign Up</div>

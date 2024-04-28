@@ -15,7 +15,7 @@ function PeopleRole() {
                 </div>
 
             </div>
-            <div className="text-role">Role</div>
+            <div className="text-role-set">Role</div>
             <div className="container-roleset">
                 <div className='container-role-add'>
                     <div className='bginput-role-add'>

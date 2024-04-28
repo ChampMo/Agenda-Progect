@@ -12,7 +12,7 @@ import FromSignup from '../components/FromSignup.jsx';
 
 
 function Login() {
-  
+
 
   
   const [stagePage, setstagePage] = useState('login');
@@ -84,7 +84,7 @@ const Formlog = (props) => {
   if(stagePage === 'login'){
     return (
       <>
-        <FormLogin change={change} />
+        <FormLogin change={change}/>
       </>
     )
   }else{
