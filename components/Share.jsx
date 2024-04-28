@@ -10,8 +10,8 @@ function Share(){
                     ... invite you to join ... workspace!
                 </div>
                 <div className="ans-share">
-                    <div className="bt-share-ansno"><FontAwesomeIcon icon={faXmark} /></div>
-                    <div className="bt-share-ansyes"></div>
+                    <div className="bt-share-ansno">Reject</div>
+                    <div className="bt-share-ansyes">Accept</div>
                 </div>
             </div>
         </>

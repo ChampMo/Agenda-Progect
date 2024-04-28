@@ -17,8 +17,9 @@
 .bg-all-taskbox{
     margin-top: 20px;
     width: 100%;
-    height: 780px;
+    height: 85vh;
     overflow: auto;
+    padding-bottom:100px ;
 }
 .bg-all-taskbox::-webkit-scrollbar {
     background: none;
