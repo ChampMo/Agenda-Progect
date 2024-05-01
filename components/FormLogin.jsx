@@ -11,9 +11,9 @@ function FormLogin(props) {
       
       if(response.data.success){
         console.log(response.data.success)
-        window.location.href = '/allwork';
+        // window.location.href = '/allwork';
       }else{
-        console.log(response.data.error)
+        console.log(response.data.success)
         setStatusEmailPass("Invalid Email or Password");
       }
     } catch (error) {
@@ -60,7 +60,7 @@ function FormLogin(props) {
       <div className='invalidlogin'>{statusEmailPass}</div>
       <div className='bg-button-login'>
           <div className='button-goto-signup'>No account? &nbsp;<a onClick={change}>Sign Up!</a></div>
-          <div className='button-login' onClick={handleSubmit}>Login</div>
+          <button className='button-login' onClick={handleSubmit}>Login</button>
       </div>
     </form>
     </>

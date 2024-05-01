@@ -4,9 +4,30 @@ import {Navbar} from '../components/Navbar';
 import Share from '../components/Share';
 import Work from '../components/Work';
 import alltaskprop from '../public/images/alltask-prop.png';
-
+import { useState } from 'react';
+import axios from 'axios';
 
 function AllWork(){
+    const [stagePage, setstagePage] = useState(true);
+    const Checklogin = () =>{
+        try {
+        axios.get('http://localhost:3000/api/checklogin')
+            .then(response => {
+            console.log(response.data.success);
+            if(response.data.success){
+                setstagePage(false)
+            }else{
+                setstagePage(true)
+            }
+            })
+            .catch(error => {
+            console.error(error);
+            });
+        } catch (error) {
+        console.error(error);
+        }
+    }
+    window.onload = Checklogin;
     return(
         <>
             <div className="container-allwork">

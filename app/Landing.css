@@ -54,6 +54,19 @@
     font-size: 20px;
     cursor: pointer;
 }
+.bt-logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50px;
+    color: #12419C;
+    font-size: 20px;
+    cursor: pointer;
+    gap: 10px;
+}
 .header{
     margin-left: 15%;
     margin-top: 80px;

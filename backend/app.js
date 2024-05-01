@@ -8,11 +8,7 @@ app.use(bodyParser.json());
 
 app.use(express.urlencoded({ extended: false }))
 
-app.use(cookieSession({
-    name:'session',
-    keys: ['key1','key2'],
-    maxAge: 3600 * 1000 * 24
-}))
+
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -20,9 +16,11 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/testapi', (req, res) => {
-    res.send('Hello World11');
-});
+app.use(cookieSession({
+    name:'session',
+    keys: ['key1','key2'],
+    maxAge: 3600 * 1000 * 24
+}))
 
 const login = require("./routes/login");
 app.use("/", login);

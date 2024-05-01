@@ -128,6 +128,10 @@
     font-size: 20px;
     color: #000;
 }
+.input-repasssignup{
+    margin-bottom: 20px;
+
+}
 .input-passlogin{
     margin-bottom: 20px;
 }
@@ -145,7 +149,7 @@
     display: flex;
     justify-content: space-between;
     margin: 20px 20px;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 .button-goto-signup{
     color: #000;
@@ -166,6 +170,18 @@
     align-items: center;
     cursor: pointer;
     transition: rotateY 0.5s;
+    background: none;
+}
+.button-signin{
+    width: 150px;
+    height: 40px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: rotateY 0.5s;
+    background: none;
 }
 
 .login-form{

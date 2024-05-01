@@ -7,8 +7,10 @@ export function Navbar(){
     return(
         <>
             <div className="navbar">
-                <Link to="/allwork"><div className="logo-href"><img className="logonav" src={logo} alt="" /></div></Link>
-                <a href="/"><div className="profile"></div></a>
+                <Link to="/"><div className="logo-href"><img className="logonav" src={logo} alt="" /></div></Link>
+                <div className="bg-logout-profile">
+                    <a href="/"><div className="profile"></div></a>
+                </div>
             </div> 
         </>
     )

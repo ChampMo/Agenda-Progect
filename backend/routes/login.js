@@ -9,20 +9,25 @@ const  { User, UserWorkspace, Workspace, Task, RoleTask, RoleUser, Role } = requ
 //login
 router.post('/api/login/', async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
 
         const { email, password } = req.body;
-        console.log(email, password);
-
 
         const user = await User.findOne({ email });
         console.log(user);
         if (user === null) {
             return res.json({ success: false, error: 'Invalid username or password' });
         }
+        console.log(password, user.password);
         const compare_result = await bcrypt.compare(password, user.password);
+        console.log(compare_result,'compare_result');
         if (compare_result) {
             req.session.isLoggedIn = true;
             req.session.userId = user.user_id;
+            console.log(req.session.isLoggedIn,"----",req.session.userId,"----",req.session.sig)
             return res.json({ success: true });
         } else {
             return res.json({ success: false, error: 'Invalid username or password' });
@@ -35,30 +40,31 @@ router.post('/api/login/', async (req, res) => {
 
 
 //register
-router.post('/save-register', async (req, res) => {
-    const { Uuserinput_sign, Ppassinput_sign } = req.body;
+router.post('/api/signup', async (req, res) => {
+    const { email, password } = req.body;
+    console.log(email, password);
     try {
 
 
-        const [user] = await User.findOne({ Uuserinput_sign });
-        if (user.length > 0) {
+        const user = await User.findOne({ email });
+        if (user !== null) {
             // อีเมลถูกลงทะเบียนแล้ว
-            res.json({ check_mail: false });
+            res.json({ success: false });
         } else {
 
             const saltRounds = 12;
-            const hashedPassword = await bcrypt.hash(Ppassinput_sign, saltRounds);
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
             // ทำการ insert ข้อมูลลงในฐานข้อมูล
 
-            const maxIdUser = await User.findOne()
+            let maxIdUser = await User.findOne()
                 .sort({ user_id: -1 }) // Sort by ID in descending order
-                .limit(1); // Limit to 1 document (the highest ID)
-        
+                .limit(1); // Limit to 1 document (the highest ID) 
+            let maxId = parseInt(maxIdUser.user_id)
             User.create([
-                {user_id: ++maxIdUser, email: Uuserinput_sign, password: Ppassinput_sign}
+                {user_id: ++maxId, email: email, password: hashedPassword}
             ]);
             console.log('Data inserted successfully');
-            res.json({ check_mail: true}) 
+            res.json({ success: true}) 
         }
     } catch (error) {
         console.error(error);
@@ -69,9 +75,18 @@ router.post('/save-register', async (req, res) => {
 
 //logout
 
-router.get('/logout', (req, res) => {
-    req.session = null;
-    res.redirect("/");
+// router.get('/logout', (req, res) => {
+//     req.session = null;
+
+// });
+router.get('/api/checklogin', (req, res) => {
+    const isLoggedInz =  req.session.isLoggedIn
+    console.log(req.session.isLoggedIn,"----",req.session.userId,"----",req.session.uuu)
+    if (isLoggedInz) {
+        res.json({ success:true })
+    } else {
+        res.json({ success:false })
+    }
 });
 
 

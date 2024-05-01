@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './Sidebar-setting.css'
 import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome'
-import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 function Sidebar({setSidebar, setComponentwork, componentwork}) {
   const [sidebarsetting, setSidebarsetting] = useState('sidebarsetting')
