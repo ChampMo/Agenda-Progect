@@ -1,16 +1,17 @@
-import './Work.css'
-import { Link } from 'react-router-dom'
+import "./Work.css";
+import { Link } from "react-router-dom";
 
-function Work(){
-    return(
+function Work() {
+    return (
         <>
-            <div className='subwork'>
-                <p>Something Workspace</p>
-                <Link to="/workspace"><button>LAUNCH</button></Link>
-            </div>
-            <div className="bt-line-work"></div>
+        <div className="subwork">
+            <p>Something Workspace</p>
+            <Link to="/workspace">
+            <button>LAUNCH</button>
+            </Link>
+        </div>
+        <div className="bt-line-work"></div>
         </>
-        
-    )
+    );
 }
-export default Work
+export default Work;

@@ -1,21 +1,42 @@
-import React from 'react';
-import './Roleshow.css';
-import Rolebox from './Rolebox'
+import React from "react";
+import "./Roleshow.css";
+import Rolebox from "./Rolebox";
 
 function Roleshow() {
   return (
     <>
-    <div className='role-show'>
-        <div className='all-role'>
-            <div className='in-role'>
-                <div className='topic-role'>Role 1</div>
-            </div> 
-            <Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/><Rolebox/>
+      <div className="role-show">
+        <div className="all-role">
+          <div className="in-role">
+            <div className="topic-role">Role 1</div>
+          </div>
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
+          <Rolebox />
         </div>
-        
-    </div>
+      </div>
     </>
-  )
-};
+  );
+}
 
-  export default Roleshow;
+export default Roleshow;
