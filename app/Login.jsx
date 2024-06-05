@@ -56,7 +56,7 @@ function Login() {
         <div className={bgBack}>
           <div className={bgMid}></div>
           <form className={bgFront}>
-            <Formlog change={change} stagePage={stagePage} />
+            <Formlog change={change} stagePage={stagePage} setstagePage={setstagePage}/>
           </form>
         </div>
 
@@ -81,7 +81,7 @@ const Formlog = (props) => {
   } else {
     return (
       <>
-        <FromSignup change={change} />
+        <FromSignup change={change}/>
       </>
     );
   }

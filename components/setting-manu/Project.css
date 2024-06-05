@@ -64,6 +64,7 @@
     cursor: pointer;
     font-size: 22px;
     font-weight: 600;
+    border-bottom: 1px solid #8d8d8d;
 }
 .nameset-info:focus{
     border-bottom: 1px solid #000000;

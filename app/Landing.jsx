@@ -1,18 +1,20 @@
 import "./Landing.css";
 import vectorlanding from "../public/images/vector-landing.png";
 import loGo from "../public/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 function Landing() {
+  
   const [stagePage, setstagePage] = useState(true);
+  const navigate = useNavigate();
   const Checklogin = async () => {
     try {
       await axios
-        .get("http://localhost:3000/api/checklogin")
+        .get("http://localhost:8000/api/checklogin")
         .then((response) => {
           console.log(response.data.success);
           if (response.data.success) {
@@ -34,9 +36,9 @@ function Landing() {
   }, []);
   const HandleLogout = async () => {
     try {
-      await axios.get("http://localhost:3000/logout");
+      await axios.get("http://localhost:8000/logout");
       setstagePage("");
-      window.location.href = "/";
+      navigate('/')
     } catch (error) {
       console.error(error);
     }

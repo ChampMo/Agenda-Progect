@@ -1,10 +1,9 @@
-const Database = require("../routes/db");
-const express = require("express");
-const router = express.Router();
-const bcrypt = require("bcrypt");
-const { body, validationResult } = require("express-validator");
+import express from 'express';
+import bcrypt from 'bcrypt';
+import { body, validationResult } from 'express-validator';
+import session from 'express-session'
 
-const {
+import {
     User,
     UserWorkspace,
     Workspace,
@@ -12,7 +11,10 @@ const {
     RoleTask,
     RoleUser,
     Role,
-} = require("./model/schema");
+} from './model/schema.js';
+import e from 'express';
+
+const router = express.Router();
 
 //login
 router.post("/api/login/", async (req, res) => {
@@ -38,7 +40,7 @@ router.post("/api/login/", async (req, res) => {
         req.session.isLoggedIn = true;
         req.session.userId = user.user_id;
         console.log(req.session.isLoggedIn, "----", req.session.userId, "----");
-        return res.json({ success: true });
+        return res.json({ success: true, massage: "Login successfully!"});
         } else {
         return res.json({
             success: false,
@@ -54,12 +56,12 @@ router.post("/api/login/", async (req, res) => {
 //register
 router.post("/api/signup", async (req, res) => {
     const { email, password } = req.body;
-    console.log(req.session.isLoggedIn, "----", req.session.userId, "+++");
+    console.log(req.session.isLoggedIn, "--dwwwwwwwwwwwwwwwwwwwwwwwww--", req.session.userId, "+++");
     try {
         const user = await User.findOne({ email });
         if (user !== null) {
         // อีเมลถูกลงทะเบียนแล้ว
-        res.json({ success: false });
+        res.json({ success: false ,massage:"Your account already signup."});
         } else {
         const saltRounds = 12;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -68,10 +70,18 @@ router.post("/api/signup", async (req, res) => {
         let maxIdUser = await User.findOne()
             .sort({ user_id: -1 }) // Sort by ID in descending order
             .limit(1); // Limit to 1 document (the highest ID)
-        let maxId = parseInt(maxIdUser.user_id);
+
+            let nextId
+        if(maxIdUser === null){
+            nextId = 0;
+        }else{
+            nextId = parseInt(maxIdUser.user_id) + 1;
+        }
+        console.log('nextId',nextId);
         User.create([
-            { user_id: ++maxId, email: email, password: hashedPassword },
+            { user_id: nextId, email: email, password: hashedPassword },
         ]);
+        console.log('nextId',nextId);
         console.log("Data inserted successfully");
         res.json({ success: true });
         }
@@ -83,10 +93,12 @@ router.post("/api/signup", async (req, res) => {
 
 //logout
 
-// router.get('/logout', (req, res) => {
-//     req.session = null;
+router.get('/logout', (req, res) => {
+    req.session = null;
+    res.json({ massage:"Logout successfully!" });
 
-// });
+});
+
 router.get("/api/checklogin", async (req, res) => {
     const isLoggedInz = req.session.isLoggedIn;
     console.log(
@@ -142,4 +154,4 @@ router.post("/repassword", async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

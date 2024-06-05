@@ -1,8 +1,26 @@
-const express = require('express');
+
+import express from 'express';
+import cookieSession from'cookie-session';
+import bodyParser from'body-parser';
+import session from 'express-session'
+import cookieParser from 'cookie-parser'
+import dotenv from 'dotenv';
+import cors from 'cors';
+
+const port = 8000;
+dotenv.config();
+
 const app = express();
-const cookieSession = require('cookie-session');
-const bodyParser = require('body-parser');
-const port = 3000;
+
+app.use(cors({
+    origin: ['http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+}));
+
+app.use(express.json());
+
+app.use(cookieParser())
 
 app.use(bodyParser.json());
 
@@ -10,25 +28,50 @@ app.use(express.urlencoded({ extended: false }))
 
 
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
 
-app.use(cookieSession({
-    name:'session',
-    keys: ['key1','key2'],
-    maxAge: 3600 * 1000 * 24
-}))
 
-const login = require("./routes/login");
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     next();
+// });
+
+
+
+
+
+app.use(session({
+    name: 'secret',
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false, // Set to true if using HTTPS only
+        httpOnly: false,
+        maxAge: 1000 * 60 * 60 * 24 * 7, // One week
+    },
+}));
+
+
+
+// app.use(cookieSession({
+//     name: 'session',
+//     keys: ['key1', 'key2'],
+//     maxAge: 3600 * 1000 * 24,
+//     secure: process.env.SESSION_SECRET === '1234',
+// }));
+
+import login from './routes/login.js';
 app.use("/", login);
 
-const db = require("./routes/db");
+import db from './routes/db.js';
 app.use("/", db);
 
-// const datadb = require('./routes/model/datadb');
+import allwork from './routes/allwork.js';
+app.use("/", allwork);
+
+
+// import datadb from './routes/model/datadb.js';
 // app.use("/", datadb);
 
 

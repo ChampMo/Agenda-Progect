@@ -8,18 +8,11 @@ import { useState } from "react";
 import axios from "axios";
 
 function AllWork() {
-    const [stagePage, setstagePage] = useState(true);
-    const Checklogin = async () => {
+    const handleCreateWorkspace = async () => {
         try {
-        await axios
-            .get("http://localhost:3000/api/checklogin")
+        await axios.get("http://localhost:8000/api/create/workspace/",{ withCredentials: true })
             .then((response) => {
-            console.log(response.data.success);
-            if (response.data.success) {
-                setstagePage(false);
-            } else {
-                setstagePage(true);
-            }
+            console.log(response.data);
             })
             .catch((error) => {
             console.error(error);
@@ -28,7 +21,6 @@ function AllWork() {
         console.error(error);
         }
     };
-    window.onload = Checklogin;
     return (
         <>
         <div className="container-allwork">
@@ -69,7 +61,9 @@ function AllWork() {
                     <div className="mid">Create a new Workspace</div>
                 </div>
                 <div className="last">
-                    <button>Create!</button>
+                    <button
+                    onClick={handleCreateWorkspace}
+                    >Create!</button>
                 </div>
                 </div>
             </div>

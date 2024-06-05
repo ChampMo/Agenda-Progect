@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 
 
 const UserSchema = new Schema({
-    user_id:String,
+    user_id:Number,
     username:String,
     email:String,
     password:String,
@@ -12,22 +12,22 @@ const UserSchema = new Schema({
 });
 
 const UserWorkspaceSchema = new Schema({
-    user_id:String,
-    workspace_id:String,
+    user_id:Number,
+    workspace_id:Number,
     Date_time:Date,
     status_workspace:String
 });
 
 const WorkspaceSchema = new Schema({
-    workspace_id:String,
+    workspace_id:Number,
     workspace_name:String,
     workspace_icon:String,
     workspace_create_date:Date
 });
 
 const TaskSchema = new Schema({
-    task_id:String,
-    workspace_id:String,
+    task_id:Number,
+    workspace_id:Number,
     task_name:String,
     task_create_date:Date,
     note:String,
@@ -36,18 +36,18 @@ const TaskSchema = new Schema({
 });
 
 const RoleTaskSchema = new Schema({
-    role_id:String,
-    task_id:String
+    role_id:Number,
+    task_id:Number
 });
 
 const RoleUserSchema = new Schema({
-    role_id:String,
-    user_id:String
+    role_id:Number,
+    user_id:Number
 });
 
 const RoleSchema = new Schema({
-    role_id:String,
-    workspace_id:String,
+    role_id:Number,
+    workspace_id:Number,
     role_name:String,
     color:String
 });
@@ -62,7 +62,7 @@ const RoleTask = mongoose.model('RoleTask', RoleTaskSchema);
 const RoleUser = mongoose.model('RoleUser', RoleUserSchema);
 const Role = mongoose.model('Role', RoleSchema);
 
-module.exports = { User, UserWorkspace, Workspace, Task, RoleTask, RoleUser, Role }; 
+export { User, UserWorkspace, Workspace, Task, RoleTask, RoleUser, Role }; 
 
 
 

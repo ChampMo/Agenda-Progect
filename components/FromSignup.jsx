@@ -1,18 +1,22 @@
 import React, { useState } from "react";
+import axiosPath from "../lib/axiosPath";
 import axios from "axios";
-
+  // axios.defaults.withCredentials = true;
 function FromSignup(props) {
+
   const { change } = props;
   const submitData = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/signup",
-        data
-      );
-
+        "http://localhost:8000/api/signup",{ 
+          withCredentials: true,
+          email,
+          password,
+        });
+        console.log(response)
       if (response.data.success) {
         alert("Sign Up Success");
-        window.location.href = "/Login";
+        change();
       } else {
         alert("Email already exists.");
       }
@@ -27,11 +31,7 @@ function FromSignup(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password === repassword || password.length > 6) {
-      const loginData = {
-        email,
-        password,
-      };
-      submitData(loginData);
+      submitData();
     } else {
       console.log("Password not match.");
     }

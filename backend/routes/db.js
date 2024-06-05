@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const mongoose = require("mongoose");
-const {
+import mongoose from "mongoose";
+import {
   User,
   UserWorkspace,
   Workspace,
@@ -9,10 +9,14 @@ const {
   RoleTask,
   RoleUser,
   Role,
-} = require("./model/schema");
+} from "./model/schema.js";
 
-const nosqlconect =
-  "mongodb+srv://Champ:1234@agendadb.erxhg96.mongodb.net/Agenda";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+
+const nosqlconect = process.env.NOSQLCONECT ;
 mongoose.connect(nosqlconect, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -25,4 +29,4 @@ connection.on(
   console.error.bind(console, "เกิดข้อผิดพลาดในการเชื่อมต่อ MongoDB:")
 );
 
-module.exports = router;
+export default router;

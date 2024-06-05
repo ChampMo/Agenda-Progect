@@ -1,19 +1,27 @@
 import React, { useState } from "react";
+import axiosPath from "../lib/axiosPath";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function FormLogin(props) {
+  
   const { change } = props;
+  const navigate = useNavigate();
 
-  const submitData = async (data) => {
+  const submitData = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/login/",
-        data
+        "http://localhost:8000/api/login/",{
+          withCredentials: true,
+          email,
+          password,
+        }
+        
       );
-
       if (response.data.success) {
         console.log(response.data.success);
-        // window.location.href = '/allwork';
+        navigate('/allwork');
       } else {
         console.log(response.data.success);
         setStatusEmailPass("Invalid Email or Password");
@@ -39,12 +47,9 @@ function FormLogin(props) {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
 
-    const loginData = {
-      email,
-      password,
-    };
 
-    submitData(loginData);
+
+    submitData();
 
     // Optionally, clear form fields after submission
 
