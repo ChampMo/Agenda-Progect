@@ -9,8 +9,11 @@ import SidebarSetting from "../components/Sidebar-setting.jsx";
 import Profile from "../components/setting-manu/Profile.jsx";
 import Project from "../components/setting-manu/Project.jsx";
 import PeopleRole from "../components/setting-manu/PeopleRole.jsx";
+import { useLocation } from "react-router-dom";
 
 function Workspace() {
+  const location = useLocation();
+  const workspace_id = location.state;
   const [sidebar, setSidebar] = useState(true);
   const [componentwork, setComponentwork] = useState("Taskshow");
   const renderActiveComponent = () => {
@@ -21,6 +24,7 @@ function Workspace() {
         return <Roleshow />;
       case "Scheduleshow":
         return <Scheduleshow />;
+        
       case "Profile":
         return <Profile />;
       case "Project":

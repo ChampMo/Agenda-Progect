@@ -13,9 +13,7 @@ export function Navbar() {
             </div>
             </Link>
             <div className="bg-logout-profile">
-            <a href="/">
                 <div className="profile"></div>
-            </a>
             </div>
         </div>
         </>

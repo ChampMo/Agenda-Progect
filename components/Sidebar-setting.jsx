@@ -12,6 +12,13 @@ function Sidebar({ setSidebar, setComponentwork, componentwork }) {
       case "Profile":
         setClassbgbtsetting("bg-bt-setting");
         break;
+      case "Language":
+        setClassbgbtsetting("bg-bt-setting bg-bt-Language");
+        break;
+      case "Theme":
+        setClassbgbtsetting("bg-bt-setting bg-bt-Theme");
+        break;
+
       case "Project":
         setClassbgbtsetting("bg-bt-setting bg-bt-project");
         break;
@@ -22,6 +29,7 @@ function Sidebar({ setSidebar, setComponentwork, componentwork }) {
         null;
     }
   }, [componentwork]);
+
   const toggleSidebar = () => {
     setSidebarsetting("sidebarsetting backanimetion");
     setComponentwork("Taskshow");
@@ -45,8 +53,14 @@ function Sidebar({ setSidebar, setComponentwork, componentwork }) {
             >
               Profile
             </div>
-            <div className="setting-Language">Language</div>
-            <div className="setting-Theme">Theme</div>
+            <div 
+            className="setting-Language"
+            onClick={() => setComponentwork("Language")}
+            >Language
+            </div>
+            <div 
+            className="setting-Theme"
+            onClick={() => setComponentwork("Theme")}>Theme</div>
           </div>
           <div className="text-setting-Workspace">Workspace</div>
           <div className="setting-sidebar">

@@ -11,33 +11,39 @@ function Landing() {
   
   const [stagePage, setstagePage] = useState(true);
   const navigate = useNavigate();
-  const Checklogin = async () => {
-    try {
-      await axios
-        .get("http://localhost:8000/api/checklogin")
-        .then((response) => {
-          console.log(response.data.success);
-          if (response.data.success) {
-            setstagePage(false);
-          } else {
-            setstagePage(true);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
 
   useEffect(() => {
+    const Checklogin = async () => {
+      try {
+        await axios
+          .get("http://localhost:8000/api/checklogin")
+          .then((response) => {
+            console.log(response.data.success);
+            if (response.data.success) {
+              setstagePage(false);
+            } else {
+              setstagePage(true);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    };
     Checklogin();
-  }, []);
+  }, [stagePage]);
+  
+  console.log('stagePage',stagePage)
+  
+
   const HandleLogout = async () => {
     try {
-      await axios.get("http://localhost:8000/logout");
-      setstagePage("");
+      await axios.get("http://localhost:8000/logout")
+      console.log('Logout successfully!')
+      setstagePage(true);
       navigate('/')
     } catch (error) {
       console.error(error);
@@ -77,9 +83,10 @@ function Landing() {
             Agenda is a platform that allows you to create and manage your
             events
           </p>
-          <Link to="/allwork">
+          <div 
+          onClick={stagePage ? ()=>(navigate('/login')):()=>(navigate('/allwork'))}>
             <div className="button-st">Start your plan!</div>
-          </Link>
+          </div>
         </header>
       </div>
       <footer className="footer"></footer>

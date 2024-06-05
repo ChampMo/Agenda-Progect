@@ -4,15 +4,18 @@ import { Navbar } from "../components/Navbar";
 import Share from "../components/Share";
 import Work from "../components/Work";
 import alltaskprop from "../public/images/alltask-prop.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function AllWork() {
+    const navigate = useNavigate();
     const handleCreateWorkspace = async () => {
         try {
         await axios.get("http://localhost:8000/api/create/workspace/",{ withCredentials: true })
             .then((response) => {
-            console.log(response.data);
+            console.log(response.data.workspace_id);
+            navigate("/workspace", { state: response.data.workspace_id});
             })
             .catch((error) => {
             console.error(error);
@@ -21,6 +24,21 @@ function AllWork() {
         console.error(error);
         }
     };
+
+    // useEffect(() => {
+    //     try{
+    //     axios.get("http://localhost:8000/api/allwork",{ withCredentials: true })
+    //         .then((response) => {
+    //         console.log(response.data);
+    //         })
+    //         .catch((error) => {
+    //         console.error(error);
+    //         });
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }, []);
+
     return (
         <>
         <div className="container-allwork">

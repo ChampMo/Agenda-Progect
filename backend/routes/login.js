@@ -71,7 +71,7 @@ router.post("/api/signup", async (req, res) => {
             .sort({ user_id: -1 }) // Sort by ID in descending order
             .limit(1); // Limit to 1 document (the highest ID)
 
-            let nextId
+        let nextId
         if(maxIdUser === null){
             nextId = 0;
         }else{
@@ -94,7 +94,7 @@ router.post("/api/signup", async (req, res) => {
 //logout
 
 router.get('/logout', (req, res) => {
-    req.session = null;
+    req.session.destroy();
     res.json({ massage:"Logout successfully!" });
 
 });
