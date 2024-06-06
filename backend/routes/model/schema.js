@@ -14,7 +14,8 @@ const UserSchema = new Schema({
 const UserWorkspaceSchema = new Schema({
     user_id:Number,
     workspace_id:Number,
-    Date_time:Date
+    Date_time:Date,
+    order_number: Number
 });
 
 const WorkspaceSchema = new Schema({

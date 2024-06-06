@@ -4,9 +4,9 @@ import React,{ useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Icon } from '@iconify/react';
 
-function Work() {
+function Work({loadingInfo, setLoadingInfo}) {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [allWorkspace, setAllWorkspace] = useState([]);
@@ -14,11 +14,14 @@ function Work() {
 
     useEffect(() => {
         const fetchAllWork = async () => {
+            setLoading(false);
             try{
             axios.get("http://localhost:8000/api/allwork",{ withCredentials: true })
                 .then((response) => {
                 
-                setAllWorkspace(response.data.allWorkspace);
+                const allWorkspace = response.data.allWorkspace;
+                allWorkspace.sort((a, b) => a.order_number - b.order_number);
+                setAllWorkspace(allWorkspace);
 
                 setLoading(false)
                 })
@@ -30,7 +33,9 @@ function Work() {
             }
         }
         fetchAllWork();
-    }, []);
+    }, [loadingInfo]);
+
+
         
     useEffect(() => {
         const dates = allWorkspace.map(workspace => {
@@ -62,15 +67,75 @@ function Work() {
         }
     };
 
-    const handleOnDragEnd = (result) => {
-        if (!result.destination) return;
 
-        const items = Array.from(workspaces);
-        const [reorderedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItem);
 
-        setWorkspaces(items);
+
+    const [draggedIndex, setDraggedIndex] = useState(null);
+    const [ hoverSection, setHoverSection ] = useState(null);
+    
+    const handleDragStart = (e, index) => {
+        setDraggedIndex(index);
+        e.currentTarget.classList.add('dragging');
     };
+    
+    const handleDragOver = (e, index) => {
+        
+        e.preventDefault();
+        const dragOverWorkspace = document.getElementById(`workspace-${index}`);
+        console.log(dragOverWorkspace.id.replace('workspace-', ''));
+
+        if (dragOverWorkspace) {
+            setHoverSection(dragOverWorkspace.id.replace('workspace-', ''));
+        }
+    };
+    
+    useEffect(() => {
+        if (hoverSection !== null) {
+            const dragOverWorkspace = document.getElementById(`workspace-${hoverSection}`);
+            const subworkhoverSection = document.getElementById(`subwork-${hoverSection}`);
+            for (let i = 0; i < allWorkspace.length; i++) {
+                const workspace = document.getElementById(`subwork-${i}`);
+                if (workspace) {
+                    workspace.classList.remove('drag-over');
+                }
+            }
+            subworkhoverSection.classList.add('drag-over');
+        }
+    }, [hoverSection]);
+    
+
+    const handleDrop = async(e, index) => {
+        e.preventDefault();
+        const updatedWorkspaces = [...allWorkspace];
+        const draggedWorkspace = updatedWorkspaces[draggedIndex];
+        updatedWorkspaces.splice(draggedIndex, 1);
+        updatedWorkspaces.splice(index, 0, draggedWorkspace);
+        setAllWorkspace(updatedWorkspaces);
+        setDraggedIndex(null);
+        setHoverSection(null);
+
+        const workspaceIds = updatedWorkspaces.map(workspace => workspace.workspace_id);
+        await axios.put("http://localhost:8000/api/update/order_number", {
+            withCredentials: true,
+            workspaceIds: workspaceIds,
+        })
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+        const dragOverWorkspace = document.getElementById(`subwork-${index}`);
+        if (dragOverWorkspace) {
+            dragOverWorkspace.classList.remove('drag-over');
+        }
+
+        const draggingWorkspace = document.querySelector('.subwork.dragging');
+        if (draggingWorkspace) {
+            draggingWorkspace.classList.remove('dragging');
+        }
+    };
+    
 
     return (
         <>
@@ -88,27 +153,43 @@ function Work() {
             :
             (allWorkspace.length === 0 ?
                 <div className="no-workspace">Let's start creating your workspace!</div>
-                :(allWorkspace.map((workspace,index) => (
+                :<div className="container-work">
+                {allWorkspace.map((workspace, index) => (
                     <React.Fragment key={index}>
-                        <div 
-                        className="subwork" >
+                        <div
+                            className="subwork"
+                            id={`subwork-${index}`}
+                            
+                            onDragStart={(e) => handleDragStart(e, index)}
+                            onDragOver={(e) => handleDragOver(e, index)}
+                            onDrop={(e) => handleDrop(e, index)}
+                        >
                             <div className="container-workspaceWork">
-                                <div className="workspaceId"># {index+1}</div>
+                                <div draggable
+                                className="workspaceId" id={`workspace-${index}`}>
+                                #{index + 1}
+                                </div>
                                 <input
                                     type="text"
-                                    onChange={(e) => handleNameChange(index, e.target.value, workspace.workspace_id)}
+                                    onChange={(e) =>
+                                        handleNameChange(index, e.target.value, workspace.workspace_id)
+                                    }
                                     className="workspaceName"
                                     value={workspace.workspace_name}
                                 />
                             </div>
                             <div className="date-workspace">{formattedDates[index]}</div>
                             <button
-                            onClick={()=>navigate("/workspace", { state: workspace.workspace_id})}
-                            >LAUNCH</button>
+                                onClick={() => navigate("/workspace", { state: workspace.workspace_id })}
+                            >
+                                LAUNCH
+                            </button>
                         </div>
                         <div className="bt-line-work"></div>
                     </React.Fragment>
-                )))
+                ))}
+            </div>
+            
             )}
         </>
     );

@@ -33,10 +33,10 @@ connection.once("open", async () => {
         ]);
     
         const userWorkspaces = await UserWorkspace.create([
-            { user_id: '1', workspace_id: '1', Date_time: new Date()},
-            { user_id: '2', workspace_id: '1', Date_time: new Date()},
-            { user_id: '1', workspace_id: '2', Date_time: new Date()},
-            { user_id: '2', workspace_id: '2', Date_time: new Date()},
+            { user_id: '1', workspace_id: '1', Date_time: new Date(), order_number: 0 },
+            { user_id: '2', workspace_id: '1', Date_time: new Date(), order_number: 1 },
+            { user_id: '1', workspace_id: '2', Date_time: new Date(), order_number: 1 },
+            { user_id: '2', workspace_id: '2', Date_time: new Date(), order_number: 0 },
         ]);
 
         const ShareRequests = await ShareRequest.create([

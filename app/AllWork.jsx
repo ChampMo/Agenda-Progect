@@ -9,7 +9,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
+
 function AllWork() {
+    const [loadingInfo, setLoadingInfo] = useState(false);
     useEffect(() => {
         const Checklogin = async () => {
             try {
@@ -49,6 +51,7 @@ function AllWork() {
     };
 
     useEffect(() => {
+        setLoadingInfo(false);
         const fetchAllWork = async () => {
             axios.get("http://localhost:8000/api/profileInfo",{ withCredentials: true })
                 .then((response) => {
@@ -67,7 +70,7 @@ function AllWork() {
                 });
         }
         fetchAllWork();
-    }, []);
+    }, [loadingInfo]);
 console.log(share_request);
 
     return (
@@ -86,14 +89,14 @@ console.log(share_request);
                         <h2>Welcome To Agenda</h2>
                     </div>
                     <div className="share">
-                        <Share share_request={share_request}/>
+                        <Share share_request={share_request} setLoadingInfo={setLoadingInfo}/>
                     </div>
                     <div className="work">
                         <div className="mail">
                             <h4>Workspaces for {userInfo.username ? userInfo.username : 'you'}.</h4>
                         </div>
                         <div className="container-work">
-                            <Work />
+                            <Work loadingInfo={loadingInfo} setLoadingInfo={setLoadingInfo}/>
                         </div>
                     </div>
 

@@ -20,13 +20,16 @@ router.get("/api/create/workspace/", async (req, res) => {
         }else{
             nextId = parseInt(lastId.workspace_id) + 1;
         }
+        
 
         Workspace.create([
             { workspace_id: nextId, workspace_name: 'Workspace Name', workspace_icon: '', workspace_create_date: new Date()},
         ]);
 
+        const workspace = await UserWorkspace.findOne({user_id:req.session.userId}).sort({ order_number: -1 }).limit(1);
+
         UserWorkspace.create([
-            { user_id:req.session.userId, workspace_id: nextId, Date_time: new Date()},
+            { user_id:req.session.userId, workspace_id: nextId, Date_time: new Date(), order_number:workspace === null? 0 : workspace.order_number + 1},
         ]);
 
         return res.json({
@@ -46,9 +49,17 @@ router.get("/api/allwork/", async (req, res) => {
         const result = await UserWorkspace.find({user_id:req.session.userId});
         const result2Promises = result.map(item => Workspace.findOne({ workspace_id: item.workspace_id }));
         const result2 = await Promise.all(result2Promises);
-
+        const result3 = result.map((item, index) => {
+            return {
+                order_number: item.order_number,
+                workspace_id: item.workspace_id,
+                workspace_name: result2[index].workspace_name,
+                workspace_icon: result2[index].workspace_icon,
+                workspace_create_date: result2[index].workspace_create_date,
+            }
+        });
         return res.json({
-            allWorkspace:result2,
+            allWorkspace:result3,
             massage: "Send Workspace Successfully!",
         });
     } catch (error) {
@@ -76,7 +87,7 @@ router.put("/api/update/workspace_name", async (req, res) => {
 });
 
 
-
+// invite request workspace
 router.get("/api/share_request/", async (req, res) => {
     try {
         console.log(req.session.userId, "req.session.userId");
@@ -115,6 +126,7 @@ router.get("/api/share_request/", async (req, res) => {
     }
 });
 
+// reject workspace
 router.put("/api/request_reject/", async (req, res) => {
     try {
         console.log(req.session.userId, "req.session.userId");
@@ -137,6 +149,7 @@ router.put("/api/request_reject/", async (req, res) => {
     }
 });
 
+// accept workspace
 router.put("/api/request_accept/", async (req, res) => {
     try {
         console.log(req.session.userId, "req.session.userId");
@@ -166,7 +179,23 @@ router.put("/api/request_accept/", async (req, res) => {
     }
 });
 
-
+router.put("/api/update/order_number/", async (req, res) => {
+    try {
+        console.log(req.session.userId, "req.session.userId");
+        const { workspaceIds } = req.body;
+        const userWorkspaces = await UserWorkspace.find({ user_id: req.session.userId });
+        userWorkspaces.map((item, index) => {
+            item.order_number = workspaceIds.indexOf(item.workspace_id);
+            item.save();
+        });
+        return res.json({
+            massage: "Accept Workspace Successfully!",
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 
 export default router;

@@ -1,8 +1,40 @@
 import "./Share.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-function Share({share_request}) {
+function Share({share_request, setLoadingInfo}) {
+    const handleReject = async (share) => {
+        try {
+            await axios.put("http://localhost:8000/api/request_reject",{ 
+                withCredentials: true,
+                workspace_id: share.workspace_id,
+                req_user_id: share.req_user_id})
+                .then((response) => {
+                console.log(response.data);
+                setLoadingInfo(true);
+                })
+                .catch((error) => {
+                console.error(error);
+                });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const handleAccept = async (share) => {
+        try {
+            await axios.put("http://localhost:8000/api/request_accept",{ 
+                withCredentials: true,
+                workspace_id: share.workspace_id})
+                .then((response) => {
+                console.log(response.data);
+                setLoadingInfo(true);
+                })
+                .catch((error) => {
+                console.error(error);
+                });
+        } catch (error) {
+            console.error(error);
+        }
+    };
     return (
         <>
         {share_request.map((share, item) => {
@@ -19,8 +51,12 @@ function Share({share_request}) {
                     workspace!
                 </div>
                 <div className="ans-share">
-                <div className="bt-share-ansno">Reject</div>
-                <div className="bt-share-ansyes">Accept</div>
+                <div 
+                onClick={() => handleReject(share)}
+                className="bt-share-ansno">Reject</div>
+                <div 
+                onClick={() => handleAccept(share)}
+                className="bt-share-ansyes">Accept</div>
                 </div>
             </div>
             );
