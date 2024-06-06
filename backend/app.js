@@ -65,6 +65,12 @@ app.use("/", allwork);
 import setting from './routes/setting.js';
 app.use("/", setting);
 
+import addtask from './routes/addtask.js';
+app.use("/", addtask);
+
+import showtask from './routes/showtask.js';
+app.use("/", showtask);
+
 // import datadb from './routes/model/datadb.js';
 // app.use("/", datadb);
 

@@ -2,8 +2,9 @@ import react, { useState } from "react";
 import "./Addtask.css";
 import Role from "./Role";
 import { faBorderAll } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-function Addtask({ setAtciveaddtask }) {
+function Addtask({ setAtciveaddtask , workspace_id }) {
     const [classcomponentaddtask, setClasscomponentaddtask] =
         useState("component-addtask");
     const setAtciveaddtaskfalse = () => {
@@ -20,11 +21,22 @@ function Addtask({ setAtciveaddtask }) {
         role: [], // ใช้ไม่ได้
         status: "not-start-status",
     });
+    const handleAddtask = async () => {
+        await axios.post("http://localhost:8000/api/addtask", {
+            data,
+            workspace_id
+        })
+        .then((response)=>{
+            console.log(response.data)
+        })
+    }
+
     const onChange = (e) => {
         const key = e.target.name;
         const value = e.target.value;
         setData({ ...data, [key]: value });
     };
+
     const [selectRole, setSelectRole] = useState(false);
     const colorBorder = "1px solid #000";
     return (
@@ -45,6 +57,7 @@ function Addtask({ setAtciveaddtask }) {
                     placeholder="Task Name"
                     name="taskname"
                     onChange={onChange}
+                    value={data.taskname}
                 />
                 </div>
                 <div className="bgaddt-note">
@@ -53,6 +66,7 @@ function Addtask({ setAtciveaddtask }) {
                     className="note"
                     name="note"
                     onChange={onChange}
+                    value={data.note}
                 />
                 </div>
                 <div className="bgaddt">
@@ -62,35 +76,18 @@ function Addtask({ setAtciveaddtask }) {
                     className="duedate"
                     name="duedate"
                     onChange={onChange}
+                    value={data.date}
                 />
                 </div>
                 <div className="bgaddt">
                 <div className="text-role">Role </div>
                 <div className="role-box">
-                    <Role
+                    <Role  
+                    workspace_id = {workspace_id}
                     onClick={() => setSelectRole(!selectRole)}
                     colorBorder={selectRole ? { colorBorder } : null}
                     />
 
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
-                    <Role />
                 </div>
                 </div>
                 <div className="bgaddt">
@@ -184,7 +181,7 @@ function Addtask({ setAtciveaddtask }) {
                 <div
                     type="submit"
                     className="bt-addtask"
-                    onClick={() => console.log(data)}
+                    onClick={handleAddtask}
                 >
                     Add Task
                 </div>

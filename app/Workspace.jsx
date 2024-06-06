@@ -19,7 +19,7 @@ function Workspace() {
   const renderActiveComponent = () => {
     switch (componentwork) {
       case "Taskshow":
-        return <Taskshow />;
+        return <Taskshow workspace_id={workspace_id}/>;
       case "Roleshow":
         return <Roleshow />;
       case "Scheduleshow":
