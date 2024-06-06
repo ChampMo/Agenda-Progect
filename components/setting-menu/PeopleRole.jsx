@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './PeopleRole.css'
 import UserInfoBox from '../UserInfoBox.jsx'
 import Role from '../Role.jsx';
 
-function PeopleRole() {
+function PeopleRole({workspace_id}) {
+    const [inputColor,setInputColor] = useState('')
+    const [name,setName] = useState('')
+    const handleAddrole=()=>{
+        
+    }
   return (
     <>
         <div className='peoplerole-show'>
@@ -19,10 +24,10 @@ function PeopleRole() {
             <div className="container-roleset">
                 <div className='container-role-add'>
                     <div className='bginput-role-add'>
-                        <input className='input-role' placeholder='Role Name'/>
-                        <input className='input-color' type='color'/>
+                        <input className='input-role' placeholder='Role Name' onChange={(e)=>setName(e.target.value)} value={name}/>
+                        <input className='input-color' type='color' onChange={(e)=>setInputColor(e.target.value)} value={inputColor}/>
                     </div>
-                    <div className="bt-role-add">Add Role</div>
+                    <div className="bt-role-add" onClick={handleAddrole}>Add Role</div>
                 </div>
                 <div className="container-role-show">
                     <Role/><Role/><Role/><Role/><Role/>

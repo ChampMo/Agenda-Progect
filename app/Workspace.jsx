@@ -30,7 +30,7 @@ function Workspace() {
       case "Project":
         return <Project />;
       case "PeopleRole":
-        return <PeopleRole />;
+        return <PeopleRole workspace_id={workspace_id}/>;
       default:
         return null;
     }
