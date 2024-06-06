@@ -13,6 +13,7 @@ function Work({loadingInfo, setLoadingInfo}) {
     const [formattedDates, setFormattedDates] = useState([]);
 
     useEffect(() => {
+        setLoadingInfo(false)
         const fetchAllWork = async () => {
             setLoading(false);
             try{
@@ -36,18 +37,24 @@ function Work({loadingInfo, setLoadingInfo}) {
     }, [loadingInfo]);
 
 
-        
     useEffect(() => {
+        const monthsAbbreviated = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+    
         const dates = allWorkspace.map(workspace => {
             const isoDate = workspace.workspace_create_date;
             const date = new Date(isoDate);
             const day = date.getDate();
-            const month = date.getMonth() + 1;
+            const month = monthsAbbreviated[date.getMonth()]; // ใช้เดือนอังกฤษแบบย่อ
             const year = date.getFullYear();
-            return `${day} / ${month} / ${year}`;
+            return `${day} ${month} ${year}`;
         });
+    
         setFormattedDates(dates);
     }, [allWorkspace]);
+    
 
     const handleNameChange = async(index, value, workspaceId) => {
 
@@ -165,9 +172,12 @@ function Work({loadingInfo, setLoadingInfo}) {
                             onDrop={(e) => handleDrop(e, index)}
                         >
                             <div className="container-workspaceWork">
-                                <div draggable
+                                {/* <div 
                                 className="workspaceId" id={`workspace-${index}`}>
                                 #{index + 1}
+                                </div> */}
+                                <div draggable className="icon-drag-drop">
+                                    <Icon   icon="mingcute:dots-fill" width="25" height="25" />
                                 </div>
                                 <input
                                     type="text"

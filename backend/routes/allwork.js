@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session'
+import { supabase } from '../supabaseClient.js';
 
 import { User, UserWorkspace, Workspace, Task, ShareRequest, RoleTask, RoleUser, Role } from './model/schema.js';
 
