@@ -3,7 +3,7 @@ import "./Taskshow.css";
 import Taskbox from "./Taskbox.jsx";
 import Addtask from "./Addtask.jsx";
 
-function Taskshow() {
+function Taskshow({ workspace_id }) {
   const [atciveaddtask, setAtciveaddtask] = useState(false);
   const [classAlltask, setClassAlltask] = useState(
     "all-task  task-title-active"
@@ -33,24 +33,8 @@ function Taskshow() {
             </div>
           </div>
           <div className="bg-all-taskbox">
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
-            <Taskbox />
+            <Taskbox workspace_id={workspace_id}/>
+            
           </div>
         </div>
         <div className="add-task-box">
@@ -59,7 +43,7 @@ function Taskshow() {
           </div>
         </div>
       </div>
-      {atciveaddtask && <Addtask setAtciveaddtask={setAtciveaddtask} />}
+      {atciveaddtask && <Addtask workspace_id={workspace_id} setAtciveaddtask={setAtciveaddtask} />}
     </>
   );
 }
