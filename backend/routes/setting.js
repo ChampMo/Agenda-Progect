@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session'
 import multer from 'multer';
-import { supabase, upLoadPROFILE  } from '../supabaseClient.js';
+import { supabase, upLoadPROFILE, upLoadWORKSPACEIMG } from '../supabaseClient.js';
 import { User, UserWorkspace, Workspace, Task, ShareRequest, RoleTask, RoleUser, Role } from './model/schema.js';
 const router = express.Router();
 const storage = multer.memoryStorage();
@@ -75,7 +75,7 @@ router.delete("/api/deleterole", async (req, res) => {
 
 
 
-
+// upload profile user
 router.post("/api/upload/profile", upload.single('profile'), async (req, res) => {
     try {
         const userId = req.session.userId;
@@ -112,5 +112,78 @@ router.post("/api/upload/profile", upload.single('profile'), async (req, res) =>
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+// upload profile workspace
+router.post("/api/upload/workspace", upload.single('workspace_icon'), async (req, res) => {
+    try {
+        const workspace_id = parseInt(req.body.workspace_id);
+
+        if (!workspace_id) {
+            return res.status(400).json({ error: "Workspace ID is required" });
+        }
+
+        const file = req.file;
+        if (!file) {
+            return res.status(400).json({ error: "No file uploaded" });
+        }
+
+        const buffer = file.buffer;
+        const fileName = file.originalname;
+
+        const imageUrl = await upLoadWORKSPACEIMG(buffer, workspace_id, fileName);
+        console.log('imageUrl',imageUrl)
+        
+        const updated = await Workspace.findOne(
+            { workspace_id: workspace_id }
+        );
+        updated.workspace_icon = imageUrl;
+        const updatedUser = await updated.save();
+    
+        return res.json({
+            userInfo: updatedUser,
+            message: "Image uploaded and profile updated successfully!"
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+// get workspace info
+router.post("/api/workspaceinfo", async (req, res) => {
+    try {
+        const { workspace_id } = req.body;
+        const result = await Workspace.findOne({workspace_id});
+        const task = await Task.find({workspace_id});
+        const role = await Role.find({workspace_id});
+        return res.json({
+            workspaceInfo:result,
+            taskInfo:task,
+            roleInfo:role,
+            massage: "Send workspaceInfo Successfully!",
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+// update user name
+router.put("/api/update/username", async (req, res) => {
+    const { username } = req.body;
+    try {
+        const user = await User.findOne({ user_id: req.session.userId });
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        user.username = username;
+        await user.save();
+        res.json({ message: 'Update successfully!', username: username});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 
 export default router;

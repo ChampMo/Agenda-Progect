@@ -72,8 +72,18 @@
     border-bottom: 1px solid #000000;
     width: 80%;
     margin:30px 20px 20px 40px;
+    padding-left: 10px;
 }
-
+.input-renewp{
+    margin-bottom: 5px;
+}
+.passnotmatch{
+    width: 100%;
+    padding-right:100px;
+    display: flex;
+    justify-content: flex-end;
+    color: red;
+}
 .bg-bt-cpass{
     width: 100%;
     display: flex;

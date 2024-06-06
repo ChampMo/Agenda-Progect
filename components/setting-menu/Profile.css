@@ -13,6 +13,10 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 250px;
+    
+}
+.bg-img-profile{
+    position: relative;
 }
 .img-profile{
     width: 300px;
@@ -21,6 +25,16 @@
     background-color: rgb(255, 255, 255);
     object-fit: cover;
     border: none;
+    cursor: pointer;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+.input-upload-profile{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    visibility: visible;
     cursor: pointer;
 }
 .info-profile{
@@ -46,6 +60,8 @@
     cursor: pointer;
     font-size: 22px;
     font-weight: 600;
+    border-bottom: 1px solid #8d8d8d;
+    padding-left: 5px;
 }
 .name-info:focus{
     border-bottom: 1px solid #000000;
