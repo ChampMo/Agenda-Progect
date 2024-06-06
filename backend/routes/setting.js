@@ -26,7 +26,7 @@ router.post("/api/addrole/", async (req,res)=>{
         const {workspace_id,role_name,color} = req.body;
         const role_id = await Role.findOne().sort({role_id:-1}).limit(1);
         await Role.create({ role_id:role_id === null?0:role_id.role_id + 1, workspace_id, role_name, color });
-        return res.json({role_id, massage: "Login successfully!"});
+        return res.json({role_id, massage: "Addrole successfully!"});
     }
     catch(error){
         console.error(error);
