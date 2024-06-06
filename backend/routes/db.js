@@ -1,15 +1,7 @@
 import express from "express";
 const router = express.Router();
 import mongoose from "mongoose";
-import {
-  User,
-  UserWorkspace,
-  Workspace,
-  Task,
-  RoleTask,
-  RoleUser,
-  Role,
-} from "./model/schema.js";
+import { User, UserWorkspace, Workspace, Task, ShareRequest, RoleTask, RoleUser, Role } from './model/schema.js';
 
 import dotenv from 'dotenv';
 

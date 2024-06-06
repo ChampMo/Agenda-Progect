@@ -3,16 +3,7 @@ import bcrypt from 'bcrypt';
 import { body, validationResult } from 'express-validator';
 import session from 'express-session'
 
-import {
-    User,
-    UserWorkspace,
-    Workspace,
-    Task,
-    RoleTask,
-    RoleUser,
-    Role,
-} from './model/schema.js';
-import e from 'express';
+import { User, UserWorkspace, Workspace, Task, ShareRequest, RoleTask, RoleUser, Role } from './model/schema.js';
 
 const router = express.Router();
 
@@ -79,7 +70,7 @@ router.post("/api/signup", async (req, res) => {
         }
         console.log('nextId',nextId);
         User.create([
-            { user_id: nextId, email: email, password: hashedPassword },
+            { user_id: nextId, email: email, username:'', password: hashedPassword, picture:''},
         ]);
         console.log('nextId',nextId);
         console.log("Data inserted successfully");

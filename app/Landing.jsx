@@ -16,8 +16,7 @@ function Landing() {
   useEffect(() => {
     const Checklogin = async () => {
       try {
-        await axios
-          .get("http://localhost:8000/api/checklogin")
+        await axios.get("http://localhost:8000/api/checklogin")
           .then((response) => {
             console.log(response.data.success);
             if (response.data.success) {
@@ -51,46 +50,54 @@ function Landing() {
   };
 
   return (
-    <div className="landing">
-      <div className="box-vector-landing">
-        <img className="vector-landing" src={vectorlanding} alt="" />
-      </div>
+    <>
+      <style>
+        {`body {
+            overflow-x: hidden;
+        }`}
+      </style>
+        
+      <div className="landing">
+        <div className="box-vector-landing">
+          <img className="vector-landing" src={vectorlanding} alt="" />
+        </div>
 
-      <div className="container">
-        <nav className="nav">
-          <Link to="/">
-            <img className="logo" src={loGo} alt="" />
-          </Link>
-          {stagePage ? (
-            <Link to="/login">
-              <div className="bt-login">Login</div>
+        <div className="container">
+          <nav className="nav">
+            <Link to="/">
+              <img className="logo" src={loGo} alt="" />
             </Link>
-          ) : (
-            <>
-              <div className="bt-logout" onClick={HandleLogout}>
-                <FontAwesomeIcon
-                  icon={faRightFromBracket}
-                  style={{ color: "#12419C" }}
-                />
-                Log out
-              </div>
-            </>
-          )}
-        </nav>
-        <header className="header">
-          <h1>Welcome to Agenda </h1>
-          <p>
-            Agenda is a platform that allows you to create and manage your
-            events
-          </p>
-          <div 
-          onClick={stagePage ? ()=>(navigate('/login')):()=>(navigate('/allwork'))}>
-            <div className="button-st">Start your plan!</div>
-          </div>
-        </header>
+            {stagePage ? (
+              <Link to="/login">
+                <div className="bt-login">Login</div>
+              </Link>
+            ) : (
+              <>
+                <div className="bt-logout" onClick={HandleLogout}>
+                  <FontAwesomeIcon
+                    icon={faRightFromBracket}
+                    style={{ color: "#12419C" }}
+                  />
+                  Log out
+                </div>
+              </>
+            )}
+          </nav>
+          <header className="header">
+            <h1>Welcome to Agenda </h1>
+            <p>
+              Agenda is a platform that allows you to create and manage your
+              events
+            </p>
+            <div 
+            onClick={stagePage ? ()=>(navigate('/login')):()=>(navigate('/allwork'))}>
+              <div className="button-st">Start your plan!</div>
+            </div>
+          </header>
+        </div>
+        <footer className="footer"></footer>
       </div>
-      <footer className="footer"></footer>
-    </div>
+    </>
   );
 }
 

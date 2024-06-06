@@ -53,14 +53,6 @@ app.use(session({
 }));
 
 
-
-// app.use(cookieSession({
-//     name: 'session',
-//     keys: ['key1', 'key2'],
-//     maxAge: 3600 * 1000 * 24,
-//     secure: process.env.SESSION_SECRET === '1234',
-// }));
-
 import login from './routes/login.js';
 app.use("/", login);
 
@@ -69,6 +61,10 @@ app.use("/", db);
 
 import allwork from './routes/allwork.js';
 app.use("/", allwork);
+
+import setting from './routes/setting.js';
+app.use("/", setting);
+
 
 
 // import datadb from './routes/model/datadb.js';

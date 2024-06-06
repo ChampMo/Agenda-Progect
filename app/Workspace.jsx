@@ -6,9 +6,9 @@ import Taskshow from "../components/Taskshow.jsx";
 import Roleshow from "../components/Roleshow.jsx";
 import Scheduleshow from "../components/Scheduleshow.jsx";
 import SidebarSetting from "../components/Sidebar-setting.jsx";
-import Profile from "../components/setting-manu/Profile.jsx";
-import Project from "../components/setting-manu/Project.jsx";
-import PeopleRole from "../components/setting-manu/PeopleRole.jsx";
+import Profile from "../components/setting-menu/Profile.jsx";
+import Project from "../components/setting-menu/Project.jsx";
+import PeopleRole from "../components/setting-menu/PeopleRole.jsx";
 import { useLocation } from "react-router-dom";
 
 function Workspace() {
@@ -51,7 +51,7 @@ function Workspace() {
             componentwork={componentwork}
           />
         )}
-        <div className="container-manu-show">
+        <div className="container-menu-show">
           <div className="sidebar-box"></div>
           {/* <Taskshow/> */}
           {/* <Roleshow/> */}

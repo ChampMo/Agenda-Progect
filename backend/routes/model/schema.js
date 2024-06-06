@@ -14,8 +14,7 @@ const UserSchema = new Schema({
 const UserWorkspaceSchema = new Schema({
     user_id:Number,
     workspace_id:Number,
-    Date_time:Date,
-    status_workspace:String
+    Date_time:Date
 });
 
 const WorkspaceSchema = new Schema({
@@ -33,6 +32,14 @@ const TaskSchema = new Schema({
     note:String,
     task_due_date:Date,
     status_task:String
+});
+
+const ShareRequestSchema = new Schema({
+    req_user_id:Number,
+    user_id:Number,
+    workspace_id:Number,
+    status:String,
+    date_request:Date
 });
 
 const RoleTaskSchema = new Schema({
@@ -58,11 +65,12 @@ const User = mongoose.model('User', UserSchema);
 const UserWorkspace = mongoose.model('UserWorkspace', UserWorkspaceSchema);
 const Workspace = mongoose.model('Workspace', WorkspaceSchema);
 const Task = mongoose.model('Task', TaskSchema);
+const ShareRequest = mongoose.model('ShareRequest', ShareRequestSchema);
 const RoleTask = mongoose.model('RoleTask', RoleTaskSchema);
 const RoleUser = mongoose.model('RoleUser', RoleUserSchema);
 const Role = mongoose.model('Role', RoleSchema);
 
-export { User, UserWorkspace, Workspace, Task, RoleTask, RoleUser, Role }; 
+export { User, UserWorkspace, Workspace, Task, ShareRequest, RoleTask, RoleUser, Role }; 
 
 
 

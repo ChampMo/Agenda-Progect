@@ -28,7 +28,6 @@ function Profile() {
                 
                 
             </div>
-            <div className="delete-acc-profile">Delete Account</div>
         </div>
         {atcivecpass && <ChangePass setAtcivecpass={setAtcivecpass}/>}
     </>

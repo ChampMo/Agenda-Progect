@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import mongoose from 'mongoose';
-import { User, UserWorkspace, Workspace, Task, RoleTask, RoleUser, Role } from './schema.js';
+import { User, UserWorkspace, Workspace, Task, ShareRequest, RoleTask, RoleUser, Role } from './schema.js';
 
 const connection = mongoose.connection;
 connection.once("open", async () => {
@@ -33,10 +33,16 @@ connection.once("open", async () => {
         ]);
     
         const userWorkspaces = await UserWorkspace.create([
-            { user_id: '1', workspace_id: '1', Date_time: new Date(), status_workspace: 'success' },
-            { user_id: '2', workspace_id: '1', Date_time: new Date(), status_workspace: 'success' },
-            { user_id: '1', workspace_id: '2', Date_time: new Date(), status_workspace: 'success' },
-            { user_id: '2', workspace_id: '2', Date_time: new Date(), status_workspace: 'wait' },
+            { user_id: '1', workspace_id: '1', Date_time: new Date()},
+            { user_id: '2', workspace_id: '1', Date_time: new Date()},
+            { user_id: '1', workspace_id: '2', Date_time: new Date()},
+            { user_id: '2', workspace_id: '2', Date_time: new Date()},
+        ]);
+
+        const ShareRequests = await ShareRequest.create([
+            {req_user_id: 1, user_id: 2, workspace_id:1, status: 'pending', date_request: new Date()},
+            {req_user_id: 3, user_id: 2, workspace_id:2, status: 'pending', date_request: new Date()},
+            {req_user_id: 1, user_id: 3, workspace_id:1, status: 'success', date_request: new Date()},
         ]);
     
         const roleTasks = await RoleTask.create([

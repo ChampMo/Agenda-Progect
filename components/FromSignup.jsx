@@ -81,7 +81,7 @@ function FromSignup(props) {
           <div className="invalidlogin"></div>
         )}
         {password.length < 6 ? (
-          <div className="invalidlogin">Passwoed more than 6 characters.</div>
+          <div className="invalidlogin">Password more than 6 characters.</div>
         ) : (
           <div className="invalidlogin"></div>
         )}

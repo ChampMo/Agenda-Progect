@@ -63,14 +63,3 @@
     background-color: #ffffff4b;
     cursor: pointer;
 }
-
-.delete-acc-profile{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 40PX;
-    font-size: 16px;
-    color: #f00000;
-    cursor: pointer;
-    
-}
