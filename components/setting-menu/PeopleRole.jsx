@@ -6,7 +6,9 @@ import axios from "axios";
 
 
 function PeopleRole({workspace_id}) {
-    const [inputColor, setInputColor] = useState('')
+    
+    const [loadingInfo, setLoadingInfo] = useState(false);
+    const [inputColor, setInputColor] = useState('#000')
     const [name, setName] = useState('')
     const handleAddrole = async () => {
         await axios.post("http://localhost:8000/api/addrole", {
@@ -15,7 +17,10 @@ function PeopleRole({workspace_id}) {
             color:inputColor
         })
         .then((response)=>{
+            setName('')
+            setInputColor('#000')
             console.log(response.data)
+            setLoadingInfo(p=>!p)
         })
     }
   return (
@@ -36,10 +41,10 @@ function PeopleRole({workspace_id}) {
                         <input className='input-role' placeholder='Role Name' onChange={(e)=>setName(e.target.value)} value={name}/>
                         <input className='input-color' type='color' onChange={(e)=>setInputColor(e.target.value)} value={inputColor}/>
                     </div>
-                    <div className="bt-role-add" onClick={handleAddrole}>Add Role</div>
+                    <div className="bt-role-add" onClick={name.replace(/\s+/g, '') === '' ?() => setName(''): handleAddrole}>Add Role</div>
                 </div>
                 <div className="container-role-show">
-                    <Role workspace_id = {workspace_id}/>
+                    <Role workspace_id={workspace_id} loadingInfo={loadingInfo} setLoadingInfo={setLoadingInfo} page='roleEdit'/>
                 </div>
             </div>
             <div className="text-people">People</div>

@@ -176,7 +176,10 @@ function Work({loadingInfo, setLoadingInfo}) {
                                 className="workspaceId" id={`workspace-${index}`}>
                                 #{index + 1}
                                 </div> */}
-                                <div draggable className="icon-drag-drop">
+                                <div 
+                                draggable 
+                                id={`workspace-${index}`}
+                                className="icon-drag-drop">
                                     <Icon   icon="mingcute:dots-fill" width="25" height="25" />
                                 </div>
                                 <input
@@ -184,6 +187,11 @@ function Work({loadingInfo, setLoadingInfo}) {
                                     onChange={(e) =>
                                         handleNameChange(index, e.target.value, workspace.workspace_id)
                                     }
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            e.target.blur();
+                                        }
+                                    }}
                                     className="workspaceName"
                                     value={workspace.workspace_name}
                                 />

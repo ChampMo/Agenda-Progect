@@ -21,12 +21,20 @@
     cursor: pointer;
     margin-top: 20px;
 }
+.userNav{
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    color: #fff;
+
+}
 .profile{
     width: 50px;
     height: 50px;
     background-color: aliceblue;
     border-radius: 100%;
     margin-bottom: 10px;
+    object-fit: cover;
 }
 .bg-logout-profile{
     display: flex;

@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 function AllWork() {
     const [loadingInfo, setLoadingInfo] = useState(false);
+    const [deletingIndex, setDeletingIndex] = useState(null);
     useEffect(() => {
         const Checklogin = async () => {
             try {
@@ -64,6 +65,7 @@ function AllWork() {
                 .then((response) => {
                 
                 setShareRequest(response.data.result);
+                setDeletingIndex(null);
                 })
                 .catch((error) => {
                 console.error(error);
@@ -89,7 +91,7 @@ console.log(share_request);
                         <h2>Welcome To Agenda</h2>
                     </div>
                     <div className="share">
-                        <Share share_request={share_request} setLoadingInfo={setLoadingInfo}/>
+                        <Share share_request={share_request} setLoadingInfo={setLoadingInfo} deletingIndex={deletingIndex} setDeletingIndex={setDeletingIndex}/>
                     </div>
                     <div className="work">
                         <div className="mail">

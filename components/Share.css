@@ -9,6 +9,14 @@
     justify-content: space-between;
     padding: 0 20px;
     margin-bottom: 5px;
+    
+}
+.duration-200{
+    transition-duration: 0.2s;
+}
+.subshare.slide-out{
+    transform: translateX(-100%);
+    opacity: 0;
 }
 .textsubshare{
     font-size: 18px;
@@ -65,4 +73,4 @@ background-color:#ff4f4f29 ;
 }
 .bt-share-ansyes:hover{
     background-color:rgba(3, 96, 0, 0.358) ;
-    }
+}
