@@ -27,7 +27,19 @@ router.post("/api/addrole/", async (req,res)=>{
         const { workspace_id, role_name, color } = req.body;
         const role_id = await Role.findOne().sort({ role_id:-1 }).limit(1); 
         const result = await Role.create({role_id:role_id === null ? 0 : role_id.role_id + 1, workspace_id, role_name, color});
-        return res.json({ result, massage: "Login successfully!"});
+        return res.json({ result , massage: "Add Role successfully!"});
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
+
+router.post("/api/getrole", async (req,res)=>{
+    try{
+        const { workspace_id } = req.body;
+        const role = await Role.find({workspace_id});
+        return res.json({ role , massage: "Send Role successfully!"});
     }
     catch(error){
         console.error(error);

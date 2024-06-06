@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './PeopleRole.css'
 import UserInfoBox from '../UserInfoBox.jsx'
 import Role from '../Role.jsx';
+import axios from "axios";
+
 
 function PeopleRole({workspace_id}) {
-    const [inputColor,setInputColor] = useState('')
-    const [name,setName] = useState('')
-    const handleAddrole=()=>{
-        
+    const [inputColor, setInputColor] = useState('')
+    const [name, setName] = useState('')
+    const handleAddrole = async () => {
+        await axios.post("http://localhost:8000/api/addrole", {
+            workspace_id,
+            role_name:name,
+            color:inputColor
+        })
+        .then((response)=>{
+            console.log(response.data)
+        })
     }
   return (
     <>
@@ -30,10 +39,7 @@ function PeopleRole({workspace_id}) {
                     <div className="bt-role-add" onClick={handleAddrole}>Add Role</div>
                 </div>
                 <div className="container-role-show">
-                    <Role/><Role/><Role/><Role/><Role/>
-                    <Role/><Role/><Role/><Role/><Role/>
-                    <Role/><Role/><Role/><Role/><Role/>
-                    <Role/><Role/><Role/><Role/><Role/>
+                    <Role workspace_id = {workspace_id}/>
                 </div>
             </div>
             <div className="text-people">People</div>
