@@ -65,8 +65,6 @@ app.use("/", allwork);
 import setting from './routes/setting.js';
 app.use("/", setting);
 
-
-
 // import datadb from './routes/model/datadb.js';
 // app.use("/", datadb);
 
