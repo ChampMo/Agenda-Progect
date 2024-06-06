@@ -21,12 +21,13 @@ router.get("/api/profileInfo/", async (req, res) => {
     }
 });
 
-router.post("/api/addrole/", async (res,req)=>{
+router.post("/api/addrole/", async (req,res)=>{
     try{
-        const {workspace_id,role_name,color} = req.body;
-        const role_id = Role.findOne().sort({role_id:-1}).limit(1);
-        await Role.create({role_id:role_id===null?0:role_id.role_id+1,workspace_id,role_name,color});
-        return res.json({ role_id, massage: "Login successfully!"});
+        console.log(req.session.userId, "req.session.userId")
+        const { workspace_id, role_name, color } = req.body;
+        const role_id = await Role.findOne().sort({ role_id:-1 }).limit(1); 
+        const result = await Role.create({role_id:role_id === null ? 0 : role_id.role_id + 1, workspace_id, role_name, color});
+        return res.json({ result, massage: "Login successfully!"});
     }
     catch(error){
         console.error(error);
