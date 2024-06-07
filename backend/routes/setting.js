@@ -186,4 +186,40 @@ router.put("/api/update/username", async (req, res) => {
 });
 
 
+//Send Email
+router.post("/api/sendemail", async (req, res) => {
+    const { emailUser, workspace_id } = req.body;
+    const date = Date.now();
+    console.log(req.body)
+    try{
+        const result = await ShareRequest.create({ req_user_id: req.session.userId, 
+            user_id: emailUser,
+            workspace_id, 
+            status: "pending", 
+            date_request: date});
+        res.json({ result, message: 'Share successfully!'});
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
+
+//search email
+router.post("/api/searchemail", async (req, res) => {
+    const { email } = req.body;
+    try{
+        const user = await User.findOne({ email: email });
+        if (!user){
+            return res.status(404).json({ error: "User not found" });
+        }
+        res.json({ user, message: 'Search successfully!'});
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+
+})
+
 export default router;

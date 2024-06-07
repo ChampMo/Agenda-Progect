@@ -27,7 +27,7 @@
 }
 .container-search-people{
     display: flex;
-    margin: 20px 30px;
+    flex-direction: column;
 }
 .input-search-people{
     border: none;
@@ -222,4 +222,20 @@
     cursor: pointer;
     color: #f00000;
     font-size: 16px;
+}
+.card-user{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.row1{
+    display: flex;
+    margin: 20px 30px;
+}
+.card-user img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
 }

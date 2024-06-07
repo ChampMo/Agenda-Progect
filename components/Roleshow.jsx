@@ -1,8 +1,9 @@
 import React from "react";
 import "./Roleshow.css";
-import Rolebox from "./Rolebox";
+import Taskbox from "./Taskbox.jsx";
+import Rolebox from "./Rolebox.jsx";
 
-function Roleshow() {
+function Roleshow({ workspace_id }) {
   return (
     <>
       <div className="role-show">
@@ -10,29 +11,7 @@ function Roleshow() {
           <div className="in-role">
             <div className="topic-role">Role 1</div>
           </div>
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
-          <Rolebox />
+          <Taskbox workspace_id = {workspace_id}/>
         </div>
       </div>
     </>
