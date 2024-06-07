@@ -4,7 +4,7 @@ import Role from "./Role";
 import { faBorderAll } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-function Addtask({ setAtciveaddtask , workspace_id }) {
+function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo }) {
     const [classcomponentaddtask, setClasscomponentaddtask] =
         useState("component-addtask");
     const setAtciveaddtaskfalse = () => {
@@ -18,16 +18,21 @@ function Addtask({ setAtciveaddtask , workspace_id }) {
         taskname: "",
         note: "",
         duedate: "",
-        role: [], // ใช้ไม่ได้
+        role: [],
         status: "not-start-status",
     });
     const handleAddtask = async () => {
+        if (data.taskname.replace(/\s+/g, "") === "") {
+            return;
+        }
         await axios.post("http://localhost:8000/api/addtask", {
             data,
             workspace_id
         })
         .then((response)=>{
             console.log(response.data)
+            setAtciveaddtaskfalse()
+            setLoadInfo(p=>!p)
         })
     }
 
@@ -36,9 +41,10 @@ function Addtask({ setAtciveaddtask , workspace_id }) {
         const value = e.target.value;
         setData({ ...data, [key]: value });
     };
-
-    const [selectRole, setSelectRole] = useState(false);
-    const colorBorder = "1px solid #000";
+    const [page, setPage] = useState({
+        page: "addtask",
+        selectRole:[]
+    });
     return (
         <>
         <div className="bgcomponent-addtask"></div>
@@ -84,8 +90,9 @@ function Addtask({ setAtciveaddtask , workspace_id }) {
                 <div className="role-box">
                     <Role  
                     workspace_id = {workspace_id}
-                    onClick={() => setSelectRole(!selectRole)}
-                    colorBorder={selectRole ? { colorBorder } : null}
+                    page={page}
+                    data={data}
+                    setData={setData}
                     />
 
                 </div>
@@ -180,6 +187,7 @@ function Addtask({ setAtciveaddtask , workspace_id }) {
                 <div className="bg-bt-addtask">
                 <div
                     type="submit"
+                    style={(data.taskname.replace(/\s+/g, "") === "")?{ backgroundColor: "#adadad" }:null}
                     className="bt-addtask"
                     onClick={handleAddtask}
                 >

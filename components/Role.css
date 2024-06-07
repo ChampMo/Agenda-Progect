@@ -1,5 +1,4 @@
 .role{
-    background-color: bisque;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +8,20 @@
     font-size: 20px;
     cursor: pointer;
     position: relative;
-    transition-duration: 0.2s;
+    transition-duration: 0.3s;
+}
+.rolemini{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+    transition-duration: 0.3s;
+    flex-grow: 1;
 }
 .role.scale-down {
     transform: scale(0);
@@ -35,4 +47,13 @@
 }
 .del-role:hover{
     color: rgb(189, 0, 0);
+}
+.no-roles{
+    color: #b1b1b1;
+    font-size: 15px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

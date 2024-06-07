@@ -15,7 +15,6 @@
 
 }
 .bg-all-taskbox{
-    margin-top: 20px;
     width: 100%;
     height: 80vh;
     overflow: auto;
@@ -65,3 +64,41 @@
     border:2px solid #12419C;
     cursor: pointer;
 }
+.titleTable{
+    max-width: 1500px;
+    margin: 20px 80px 10px 80px;
+    padding: 0 20px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition-duration: 0.2s;
+    color: #888888;
+}
+.titleTable-cdate,.titleTable-ddate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18%;
+}
+.titleTable-name{
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    justify-content: flex-start !important;
+    width: 18%;
+}
+.titleTable-role{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22%;
+}
+.titleTable-status{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end ;
+    padding-right: 60px;
+    width: 15%;
+}
+

@@ -120,7 +120,6 @@ const handleNameChange = async(e) => {
                     <div className="amount-task-project">Amount of Task : {taskInfo.length}</div>
                     <div className="amount-role-project">Amount of Role : {roleInfo.length}</div>
                 </div> 
-       
         </div>
         
     </>

@@ -12,17 +12,25 @@ router.post("/api/addtask/", async (req,res)=>{
         const task_name = data.taskname;
         const task_create_date = Date.now();
         const note = data.note;
-        const task_due_date = new Date(data.duedate);
+        const task_due_date = data.duedate?new Date(data.duedate):'';
         const status_task = data.status;
+        const role_id = data.role;
+
 
         const task_id = await Task.findOne().sort({ task_id:-1 }).limit(1); 
-        const result = await Task.create({task_id:task_id === null ? 0 : task_id.task_id + 1,
+        const result = await Task.create({
+            task_id:task_id === null ? 0 : task_id.task_id + 1,
             task_name, 
             task_create_date, 
-            note, 
+            note:note?note:'', 
             task_due_date, 
             status_task, 
             workspace_id});
+            
+        
+        for(let i = 0; i < role_id.length; i++){
+            await RoleTask.create({task_id:result.task_id, role_id:role_id[i]});
+        }
         console.log(result)
         return res.json({ result, massage: "Add Task successfully!" });
     }
