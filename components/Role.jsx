@@ -34,7 +34,6 @@ function getContrastColor(color) {
   const luminance = (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]) / 255;
 
   const contrastColor = luminance < 0.5 ? "white" : "black";
-  console.log(`Color: ${color}, Luminance: ${luminance}, Contrast color: ${contrastColor}`);
   return contrastColor;
 }
 
