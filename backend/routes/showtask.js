@@ -146,5 +146,19 @@ router.post("/api/getusertask", async (req,res)=>{
     }
 })
 
+router.post("/api/getrole/task", async (req,res)=>{
+    try{
+        const { workspace_id, task_id } = req.body;
+        const roleId = await RoleTask.find({task_id});
+        console.log(roleId)
+        const role = await Role.find({workspace_id, role_id: {$in: roleId.map(item => item.role_id)}});
+        return res.json({ role , massage: "Send Role successfully!"});
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
+
 
 export default router;
