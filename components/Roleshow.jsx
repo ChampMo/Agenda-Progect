@@ -1,18 +1,20 @@
 import React from "react";
 import "./Roleshow.css";
 import Taskbox from "./Taskbox.jsx";
-import axios from "axios";
+import axios, { all } from "axios";
 import { useState, useEffect } from "react";
 
 function Roleshow({ workspace_id }) {
-  const [data, setData] = useState('');
+  const [allTask, setAllTask] = useState();
+
 
   useEffect(() => {
     const getRoleTask = async () => {
       try {
         const response = await axios.post("http://localhost:8000/api/getroletask", {
-          task_id
+          workspace_id
         });
+        setAllTask(response.data.formattedData)
 
       } catch (error) {
         console.error("Error fetching tasks:", error);
@@ -22,17 +24,24 @@ function Roleshow({ workspace_id }) {
       getRoleTask();
     }
   }, []);
-
+  console.log(allTask)
   return (
     <>
       <div className="role-show">
+      
+      
 
-        <div className="all-role">
-          <div className="in-role">
-            <div className="topic-role">Role 1</div>
+        {/* <div className="all-role">
+          {allTask!==undefined && allTask.map((items, index) => (
+          <div className="all-role" key={index}>
+            <div className="in-role">
+              <div className="topic-role">{items.task_name}</div>
+            </div>
+            <Taskbox workspace_id={workspace_id} page="Roleshow" />
           </div>
-          <Taskbox workspace_id = {workspace_id}/>
-        </div>
+        ))}
+          
+        </div> */}
 
         
       </div>
