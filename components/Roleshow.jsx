@@ -24,24 +24,32 @@ function Roleshow({ workspace_id }) {
       getRoleTask();
     }
   }, []);
-  console.log(allTask)
+  if (allTask !== undefined){
+    console.log(allTask)
+  }
   return (
     <>
       <div className="role-show">
       
       
-
-        {/* <div className="all-role">
-          {allTask!==undefined && allTask.map((items, index) => (
+      <div className="titleTable">
+            <div className="titleTable-name">Task Name</div> 
+            <div className="titleTable-cdate">Task Create Date</div> 
+            <div className="titleTable-ddate">Task Due Date</div> 
+            <div className="titleTable-role">role</div> 
+            <div className="titleTable-status">Status</div> 
+      </div>
+        <div className="all-role">
+          {allTask !== undefined && allTask.map((items, index) => (
           <div className="all-role" key={index}>
             <div className="in-role">
-              <div className="topic-role">{items.task_name}</div>
+              <div className="topic-role">{items.roleName}</div>
             </div>
-            <Taskbox workspace_id={workspace_id} page="Roleshow" />
+            <Taskbox workspace_id={workspace_id} page="Roleshow" tasks = {items.tasks}/>
           </div>
         ))}
           
-        </div> */}
+        </div>
 
         
       </div>
