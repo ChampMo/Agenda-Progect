@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 import "./Role.css";
 import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
@@ -25,7 +25,6 @@ function getContrastColor(color) {
   color = hexToRgb(color);
 
   if (!color || !/^rgb\(\d+,\s*\d+,\s*\d+\)$/.test(color)) {
-    console.log("Invalid color format:", color);
     return "black";
   }
 
@@ -44,10 +43,22 @@ function getContrastColor(color) {
 
 
 
-function Role({ workspace_id, loadingInfo, setLoadingInfo, page, setData, data }) {
+function Role({ workspace_id, loadingInfo, setLoadingInfo, page, setData, data, data2, task }) {
   const [loading, setLoading] = useState(true);
+  const [loadInfo2, setLoadingInfo2] = useState(false);
   const [roleInfo, setRoleInfo] = useState([]);
   const [deletingIndex, setDeletingIndex] = useState(null);
+  const [roletoselect, setRoleToSelect] = useState([]);
+  const [roleSelectToChange, setRoleSelectToChange] = useState([]);
+  const [statePopup, setStatePopup] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const getRole = async () => {
@@ -59,6 +70,60 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, page, setData, data }
             withCredentials: true
           });
           setRoleInfo(response.data.role);
+
+        } catch (error) {
+          console.error("Error fetching role data:", error);
+        } finally {
+          setLoading(false);
+        }
+      }else if(page === 'userinfobox'){
+        try {
+          const response = await axios.post("http://localhost:8000/api/workspace/user/role", {
+            workspace_id,
+            user_id:data,
+            withCredentials: true
+          });
+          setRoleInfo(response.data.userInfo.role_id);
+          setRoleSelectToChange([])
+          for(let i=0;i<response.data.userInfo.role_id.length;i++){
+            setRoleSelectToChange(p=>[...p,response.data.userInfo.role_id[i].role_id])
+          }
+
+          const response2 = await axios.post("http://localhost:8000/api/getrole", {
+            workspace_id,
+            withCredentials: true
+          });
+          setRoleToSelect(response2.data.role);
+
+          
+        } catch (error) {
+          console.error("Error fetching role data:", error);
+        } finally {
+          setLoading(false);
+        }
+      }else if(page === 'EditTask'){
+        try {
+          const response = await axios.post("http://localhost:8000/api/getrole/task", {
+            workspace_id,
+            task_id:data2,
+            withCredentials: true
+          });
+          setData({
+            taskname: task.task_name,
+            note: task.note,
+            duedate: task.task_due_date,
+            status: task.status_task,
+            role: []
+          })
+          for(let i=0;i<response.data.role.length;i++){
+            setData(p=>({...p, role:[...p.role,response.data.role[i].role_id]}))
+          }
+          console.log('response.data.role',response.data.role)
+          const response2 = await axios.post("http://localhost:8000/api/getrole", {
+            workspace_id,
+            withCredentials: true
+          });
+          setRoleInfo(response2.data.role);
         } catch (error) {
           console.error("Error fetching role data:", error);
         } finally {
@@ -82,14 +147,30 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, page, setData, data }
     if (workspace_id !== undefined) {
       getRole();
     }
-  }, [workspace_id, loadingInfo]);
+  }, [workspace_id, loadingInfo, loadInfo2]);
 
-console.log('roleInforoleInfo',roleInfo)
+  // useEffect(() => {
+  //   console.log('----datadatadata',data,roleSelectToChange)
+  //   const fetchRole = async () => {
+  //   if(page === 'userinfobox'){
+  //     try {
+  //       const response = await axios.post("http://localhost:8000/api/workspace/user/roleadd", {
+  //         user_id: data,
+  //         role_id: roleSelectToChange,
+  //         withCredentials: true
+  //       });
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }};
+  //   fetchRole();
+      
+  // }, [roleSelectToChange]);
 
 
   const handleDelete = async (items, index) => {
     try {
-      console.log(items.role_id)
       await axios.delete("http://localhost:8000/api/deleterole", {
         data: { role_id: items.role_id }
       });
@@ -104,11 +185,18 @@ console.log('roleInforoleInfo',roleInfo)
     }
   }
 
-console.log('data',data)
-
 
   const handleSelect = (items, index) => {
-    if(page.page==='addtask'){
+    if(page==='userinfobox'){
+      let updatedRoles = [...roleSelectToChange];
+      const roleIndex = updatedRoles.findIndex((roleId) => roleId === items.role_id);
+      if (roleIndex === -1) {
+        updatedRoles.push(items.role_id);
+      } else {
+        updatedRoles.splice(roleIndex, 1);
+      }
+      setRoleSelectToChange(updatedRoles);
+    }else{
       const role = data.role;
       const roleIndex = role.findIndex((role) => role === items.role_id);
       if (roleIndex === -1) {
@@ -122,6 +210,22 @@ console.log('data',data)
 
   const handleSytle = (items, index) => {
     if(page.page==='addtask'){
+      const role = data.role;
+      const roleIndex = role.findIndex((role) => role === items.role_id);
+      if (roleIndex !== -1) {
+        return { backgroundColor: items.color };
+      }else{
+        return { backgroundColor: '#e7e7e7' };
+      }
+    }else if(page === 'userinfobox'){
+      const role = roleSelectToChange;
+      const roleIndex = role.findIndex((role) => role === items.role_id);
+      if (roleIndex !== -1) {
+        return { backgroundColor: items.color };
+      }else{
+        return { backgroundColor: '#e7e7e7' };
+      }
+    }else if( page === 'EditTask'){
       const role = data.role;
       const roleIndex = role.findIndex((role) => role === items.role_id);
       if (roleIndex !== -1) {
@@ -143,45 +247,172 @@ console.log('data',data)
       }else{
         return { color: '#686868' };
       }
+    }else if(page==='userinfobox'){
+      const role = roleSelectToChange;
+      const roleIndex = role.findIndex((role) => role === items.role_id);
+      if (roleIndex !== -1) {
+        return { color: getContrastColor(items.color) };
+      }else{
+        return { color: '#686868' };
+      }
+    }else if( page === 'EditTask'){
+      const role = data.role;
+      const roleIndex = role.findIndex((role) => role === items.role_id);
+      if (roleIndex !== -1) {
+        return { color: getContrastColor(items.color) };
+      }else{
+        return { color: '#686868' };
+      }
     }else{
       return { color: getContrastColor(items.color) };
     }
   }
+
+  const handleClickOutside = async(event) => {
+    if (containerRef.current && !containerRef.current.contains(event.target)) {
+
+      setStatePopup(false); // Close popup 
+      console.log('close')
+
+     
+    };
+  }
+
+  const handlesaveRole = async () => {
+  if(page === 'userinfobox'){
+    try {
+      
+      const response = await axios.post("http://localhost:8000/api/workspace/user/roleadd", {
+        user_id: data,
+        role_id: roleSelectToChange,
+        withCredentials: true
+      });
+      console.log(response.data);
+      setStatePopup(false);
+      setLoadingInfo2(p=>!p)
+    } catch (error) {
+      console.error(error);
+    }
+  }};
+    console.log('datadatadata',data)
   return (
     <>
       {loading ? (
         <div 
-        style={{height: page==='alltask'?20:50}}
-        className="bg-loading">
+          style={{height: page === 'alltask' ? 20 : 50}}
+          className="bg-loading"
+        >
           <DotLoader
             color="#2960cd"
             loading={loading}
-            size={page==='alltask'?20:50}
+            size={page === 'alltask' ? 20 : 50}
             aria-label="Loading Spinner"
             data-testid="loader"
           />
         </div>
       ) : (
-        roleInfo.length > 0 ? (
-          roleInfo.map((items, index) => (
-            <div
-              onClick={()=>handleSelect(items, index)}
-              className={page === 'alltask'?'rolemini':`role ${deletingIndex === index ? 'scale-down' : ''}`}
-              key={index}
-              style={handleSytle(items, index)}
-            >
-              <span style={handleStyleText(items, index)}>
-                {items.role_name}
-              </span>
-              {page === 'roleEdit' && <div onClick={()=>handleDelete(items, index)} className="del-role"><Icon icon="zondicons:close-solid" /></div>}
-            </div>
-          ))
-        ) : (
-          <div className="no-roles">{page === 'alltask'?"No Role":"Your workspace has no role."}</div>
-        )
+        <>
+          {roleInfo.length > 0 ? (
+            <>
+              {roleInfo.map((items, index) => (
+                <div
+                  onClick={() => page === 'userinfobox'?null:handleSelect(items, index)}
+                  className={page === 'alltask' || page === 'userinfobox' ? 'rolemini' : `role ${deletingIndex === index ? 'scale-down' : ''}`}
+                  key={index}
+                  style={page === 'userinfobox'?{backgroundColor: items.color}:handleSytle(items, index)}>
+                  <span style={page === 'userinfobox'?{color: getContrastColor(items.color)}:handleStyleText(items, index)}>
+                    {items.role_name}
+                  </span>
+                  {page === 'roleEdit' && (
+                    <div onClick={() => handleDelete(items, index)} className="del-role">
+                      <Icon icon="zondicons:close-solid" />
+                    </div>
+                  )}
+                </div>
+              ))}
+              {page === 'userinfobox' &&(
+                  <>
+                    <div
+                      ref={containerRef}
+                      onClick={() => setStatePopup(true)}
+                      className='roleminiadd'>
+                      <span>
+                        <Icon icon="fa-solid:plus" width="15" height="15" />
+                      </span>
+                    </div>
+
+                    <div 
+                    ref={containerRef}
+                    className={ statePopup ? "containerRoletoSelect":'containerRoletoSelect close_role'}>
+                      {roletoselect.map((items, index) => (
+                        <div
+                          onClick={() => handleSelect(items, index)}
+                          className='rolemini'
+                          key={index}
+                          style={handleSytle(items, index)}
+                        >
+                          <span style={handleStyleText(items, index)}>
+                            {items.role_name}
+                          </span>
+                        </div>
+                      ))}
+                      <div className='bg-checkMark'>
+                        <Icon className='checkMark' onClick={handlesaveRole} icon="mingcute:check-fill" width="20" height="20" />
+                      </div>
+                    </div>
+
+                  </>
+                )}
+              
+            </>
+            ) : (
+              <>
+                {page === 'userinfobox' &&(
+                  <>
+                    <div
+                      ref={containerRef}
+                      onClick={() => setStatePopup(true)}
+                      className='roleminiadd'>
+                      <span>
+                        <Icon icon="fa-solid:plus" width="15" height="15" />
+                      </span>
+                    </div>
+
+                    <div
+                    ref={containerRef}
+                    className={ statePopup ? "containerRoletoSelect":'containerRoletoSelect close_role'}>
+                      {roletoselect.map((items, index) => (
+                        <div
+                          onClick={() => handleSelect(items, index)}
+                          className='rolemini'
+                          key={index}
+                          style={handleSytle(items, index)}
+                        >
+                          <span style={handleStyleText(items, index)}>
+                            {items.role_name}
+                          </span>
+                        </div>
+                      ))}
+                      <div className='bg-checkMark'>
+                        <Icon onClick={handlesaveRole} icon="mingcute:check-fill" width="20" height="20" />
+                      </div>
+                    </div>
+
+                  </>
+                )}
+              {page !== 'userinfobox' && 
+              <div className="no-roles">
+                {page === 'alltask' ? "No Role" : page === 'userinfobox' ? '' : "Your workspace has no role."}
+              </div>}
+            </>
+
+          )}
+          
+        </>
       )}
     </>
   );
+  
 }
 
 export default Role;

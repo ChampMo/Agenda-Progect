@@ -1,16 +1,15 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import "./Addtask.css";
 import Role from "./Role";
 import { faBorderAll } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo }) {
-    const [classcomponentaddtask, setClasscomponentaddtask] =
-        useState("component-addtask");
+function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo, task, page2 }) {
+    const [classcomponentaddtask, setClasscomponentaddtask] = useState("component-addtask");
     const setAtciveaddtaskfalse = () => {
         setClasscomponentaddtask("component-addtask animation-addtask-reverse");
         setTimeout(() => {
-        setAtciveaddtask(false);
+            setAtciveaddtask(false);
         }, 200);
     };
 
@@ -21,6 +20,10 @@ function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo }) {
         role: [],
         status: "not-start-status",
     });
+    
+console.log('datadatadata---',data)
+
+
     const handleAddtask = async () => {
         if (data.taskname.replace(/\s+/g, "") === "") {
             return;
@@ -35,6 +38,24 @@ function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo }) {
             setLoadInfo(p=>!p)
         })
     }
+    const handleSavetask = async () => {
+
+        if (data.taskname.replace(/\s+/g, "") === "") {
+            return;
+        }
+        await axios.put("http://localhost:8000/api/savetask", {
+            data,
+            task_id:task.task_id,
+            workspace_id
+        })
+        .then((response)=>{
+            
+            console.log(response.data)
+            setAtciveaddtaskfalse()
+            setLoadInfo(p=>!p)
+        })
+    }
+
 
     const onChange = (e) => {
         const key = e.target.name;
@@ -45,6 +66,7 @@ function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo }) {
         page: "addtask",
         selectRole:[]
     });
+
     return (
         <>
         <div className="bgcomponent-addtask"></div>
@@ -82,7 +104,7 @@ function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo }) {
                     className="duedate"
                     name="duedate"
                     onChange={onChange}
-                    value={data.date}
+                    value={data.duedate!==null?data.duedate.split('T')[0]:''}
                 />
                 </div>
                 <div className="bgaddt">
@@ -90,8 +112,10 @@ function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo }) {
                 <div className="role-box">
                     <Role  
                     workspace_id = {workspace_id}
-                    page={page}
+                    page={page2 === 'EditTask'?'EditTask':page}
                     data={data}
+                    task={task}
+                    data2={task !== undefined?task.task_id:null}
                     setData={setData}
                     />
 
@@ -189,9 +213,8 @@ function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo }) {
                     type="submit"
                     style={(data.taskname.replace(/\s+/g, "") === "")?{ backgroundColor: "#adadad" }:null}
                     className="bt-addtask"
-                    onClick={handleAddtask}
-                >
-                    Add Task
+                    onClick={page2 === 'EditTask'?handleSavetask:handleAddtask}>
+                    {page2 === 'EditTask'?"save":"Add Task"}
                 </div>
                 </div>
             </div>

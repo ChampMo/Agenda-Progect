@@ -44,6 +44,7 @@
     width: 22%;
     gap: 4px;
     padding-right: 4px;
+    align-items: center;
 }
 .item-role::-webkit-scrollbar {
     background: none;

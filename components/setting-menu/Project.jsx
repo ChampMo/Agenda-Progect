@@ -48,7 +48,6 @@ function Project({ workspace_id }) {
       }
       fetchAllWork();
   }, [loadInfoname]);
-console.log(workspaceInfo)
 
 const handleImageClick = () => {
   fileInputRef.current.click();
@@ -119,7 +118,7 @@ const handleNameChange = async(e) => {
                     <div className="create-date-project">Create Date : {formattedDates}</div>
                     <div className="amount-task-project">Amount of Task : {taskInfo.length}</div>
                     <div className="amount-role-project">Amount of Role : {roleInfo.length}</div>
-                </div> 
+                </div>
         </div>
         
     </>

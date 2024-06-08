@@ -198,8 +198,7 @@ function Work({loadingInfo, setLoadingInfo}) {
                             </div>
                             <div className="date-workspace">{formattedDates[index]}</div>
                             <button
-                                onClick={() => navigate("/workspace", { state: workspace.workspace_id })}
-                            >
+                                onClick={() => navigate("/workspace", { state: workspace.workspace_id })}>
                                 LAUNCH
                             </button>
                         </div>

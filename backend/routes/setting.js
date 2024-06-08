@@ -192,7 +192,18 @@ router.post("/api/sendemail", async (req, res) => {
     const date = Date.now();
     console.log(req.body)
     try{
-        const result = await ShareRequest.create({ req_user_id: req.session.userId, 
+        const request = await ShareRequest.findOne({ 
+            req_user_id: req.session.userId, 
+            user_id: emailUser,
+            workspace_id,
+            status: "pending"
+        });
+        if (request){
+            return res.json({ request, message: "User already send request" });
+        }
+
+        const result = await ShareRequest.create({ 
+            req_user_id: req.session.userId, 
             user_id: emailUser,
             workspace_id, 
             status: "pending", 
@@ -207,19 +218,95 @@ router.post("/api/sendemail", async (req, res) => {
 
 //search email
 router.post("/api/searchemail", async (req, res) => {
-    const { email } = req.body;
+    const { email, workspace_id } = req.body;
     try{
+
+
         const user = await User.findOne({ email: email });
         if (!user){
-            return res.status(404).json({ error: "User not found" });
+            return res.json({ message: "User not found" });
+        }
+        
+        const request = await ShareRequest.findOne({ 
+            req_user_id: req.session.userId, 
+            user_id: user.user_id,
+            workspace_id,
+            status: "pending"
+        });
+        if (request){
+            return res.json({ user, message: "User already send request" });
         }
         res.json({ user, message: 'Search successfully!'});
+
+
     }
     catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
-
 })
+
+//get user info
+router.post("/api/workspace/user", async (req, res) => {
+    try {
+        const { workspace_id } = req.body;
+        const userWorkspace = await UserWorkspace.find({ workspace_id: workspace_id });
+        const userInfo = [];
+        for (let i = 0; i < userWorkspace.length; i++) {
+            const user = await User.findOne({ user_id: userWorkspace[i].user_id });
+            userInfo.push(user);
+        }
+
+        return res.json({
+            userInfo: userInfo,
+            massage: "Send userInfo for workspace Successfully!",
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+//get role user
+router.post("/api/workspace/user/role", async (req, res) => {
+    try {
+        const { workspace_id, user_id } = req.body;
+        const roleUser = await RoleUser.find({ user_id });
+        
+        const role = [];
+        for (let i = 0; i < roleUser.length; i++) {
+            const roleInfo = await Role.findOne({ role_id:roleUser[i].role_id });
+            role.push(roleInfo);
+        }
+
+
+        return res.json({
+            userInfo: {role_id : role},
+            massage: "Send Role User Successfully!",
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+router.post("/api/workspace/user/roleadd", async (req, res) => {
+    try {
+        const { user_id, role_id } = req.body;
+        await RoleUser.deleteMany({ user_id });
+        let results = [];
+        for (let i = 0; i < role_id.length; i++) {
+            const result = await RoleUser.create({ user_id, role_id: role_id[i] });
+            results.push(result);
+        }
+        res.json({ results, message: 'Add Role User successfully!' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
+
 
 export default router;

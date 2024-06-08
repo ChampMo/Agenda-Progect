@@ -1,16 +1,19 @@
 .container-box-people{
     width: 100%;
-    height: auto;
+    height: 100px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #205ea51e;
+    padding: 0px 20px;
+    position: relative;
 }
 .img-box-people{
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 10px;
     background-color: rgb(157, 255, 255);
     margin: 10px;
+    object-fit: cover;
 }
 .email-box-people{
     width: 35%;
@@ -25,19 +28,19 @@
     font-size: 18px;
 }
 .role-box-people{
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     width: 30%;
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
     height: 80px;
     padding: 10px 0;
-
 }
 .role-box-people::-webkit-scrollbar {
     background: none;
     border-radius: 10px;
-    width: 10px;
+    width: 5px;
     height: 10px;
    
 }
@@ -46,4 +49,17 @@
     background: none; 
     background-color: #205ea537;
     border-radius: 10px;
+}
+.bg-img-user{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.icon-img-user{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: rgb(243, 255, 71);
+    transform: rotate(30deg);
+    
 }
