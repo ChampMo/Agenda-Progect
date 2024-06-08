@@ -7,6 +7,7 @@ import axios from "axios";
 function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo, task, page2 }) {
     const [classcomponentaddtask, setClasscomponentaddtask] = useState("component-addtask");
     const setAtciveaddtaskfalse = () => {
+        
         setClasscomponentaddtask("component-addtask animation-addtask-reverse");
         setTimeout(() => {
             setAtciveaddtask(false);
@@ -38,6 +39,7 @@ console.log('datadatadata---',data)
             setLoadInfo(p=>!p)
         })
     }
+    
     const handleSavetask = async () => {
 
         if (data.taskname.replace(/\s+/g, "") === "") {
@@ -49,12 +51,12 @@ console.log('datadatadata---',data)
             workspace_id
         })
         .then((response)=>{
-            
-            console.log(response.data)
+            console.log('response.dataresponse.dataresponse.data',response.data)
             setAtciveaddtaskfalse()
             setLoadInfo(p=>!p)
         })
     }
+    
 
 
     const onChange = (e) => {
@@ -67,6 +69,19 @@ console.log('datadatadata---',data)
         selectRole:[]
     });
 
+    const handleDeleteTask = async () => {
+        try {
+            const response = await axios.delete("http://localhost:8000/api/deletetask", {
+                data: { task_id: task.task_id }
+            });
+            console.log(response.data);
+            setAtciveaddtaskfalse();
+            setLoadInfo(p => !p);
+        } catch (error) {
+            console.error("Error deleting task:", error);
+        }
+    }
+    
     return (
         <>
         <div className="bgcomponent-addtask"></div>
@@ -208,7 +223,14 @@ console.log('datadatadata---',data)
                     </>
                 )}
                 </div>
+                
                 <div className="bg-bt-addtask">
+                {page2 === 'EditTask'?
+                <div
+                    onClick={handleDeleteTask}
+                    className="bt-cancel">
+                    Delete Task
+                </div>:<div></div>}
                 <div
                     type="submit"
                     style={(data.taskname.replace(/\s+/g, "") === "")?{ backgroundColor: "#adadad" }:null}

@@ -22,6 +22,7 @@
     position: relative;
     transition-duration: 0.3s;
     flex-grow: 1;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 .roleminiadd{
     display: flex;
@@ -98,7 +99,7 @@
     padding: 20px 20px;
     padding-bottom: 10px;
     z-index: 100;
-    background-color: #ffffff42;
+    background-color: #ffffff79;
     border-radius: 15px;
     border-bottom-left-radius: 0;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;

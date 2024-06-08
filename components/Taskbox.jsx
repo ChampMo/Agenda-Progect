@@ -6,6 +6,8 @@ import Addtask from "./Addtask.jsx";
 
 function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask}) {
   const [numTask, setNumTask] = useState([]);
+  const [loadInfoRole, setLoadInfoRole] = useState(false);
+  
   const [task, setTask] = useState([]);
   const [atciveaddtask, setAtciveaddtask] = useState(false);
 
@@ -17,6 +19,8 @@ function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask}) {
         });
         if( stateTask ){
           setNumTask(response.data.task);
+          console.log('response.data.task',response.data.task)
+          setLoadInfoRole(p=>!p);
         }else{
           const updatedNumTask = response.data.task.filter(task => myTask.includes(task.task_id));
           setNumTask(updatedNumTask);
@@ -36,11 +40,14 @@ function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask}) {
     if (!isoDate) return ""; // จัดการกรณีที่วันที่เป็น undefined หรือ null
     return new Date(isoDate).toLocaleDateString('en-GB');
   };
-  console.log(loadInfo)
+
   const handleEditTask = (items) => {
     setTask(items);
     setAtciveaddtask(true);
   };
+
+console.log('numtask',numTask)
+
   return (
     <>
       {numTask.length === 0 ? <div className="no-task">{stateTask?"Don't have a job yet.":"You don't have a job yet."}</div>:
@@ -57,6 +64,7 @@ function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask}) {
                   workspace_id = {workspace_id}
                   page='alltask'
                   data={items.task_id}
+                  loadInfoRole={loadInfoRole}
               />
             </div>
             <div className="item-status_task">

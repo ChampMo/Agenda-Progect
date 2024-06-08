@@ -87,4 +87,17 @@ router.post("/api/gettask", async (req,res)=>{
     }
 })
 
+router.delete("/api/deletetask", async (req,res)=>{
+    try{
+        const { task_id } = req.body;
+        await Task.deleteOne({task_id});
+        await RoleTask.deleteMany({task_id});
+        return res.json({ task_id, massage: "Delete Task successfully!" });
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
+
 export default router;

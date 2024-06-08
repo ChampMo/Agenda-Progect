@@ -3,32 +3,63 @@ import "./Scheduleshow.css";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { Tooltip } from 'react-tooltip';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
-function Scheduleshow() {
-  const events = [
-    {
-      title: "front",
-      start: "2024-04-18",
-      end: "2024-04-20",
-      color: "#FF0000",
-      description: "Frontend Development",
-    },
-    { title: "Back", start: "2024-04-20", end: "2024-04-20", color: "#00FF00", description: "Backend Development" },
-    { title: "UI", start: "2024-04-19", end: "2024-04-18", color: "#fff", description: "UI Design" },
-    { title: "UX", start: "2024-04-28", end: "2024-04-29", color: "#888", description: "UX Research" },
-    { title: "UI", start: "2024-04-29", end: "2024-04-18", color: "#fff", description: "UI Review" },
-  ];
+
+function Scheduleshow({workspace_id}) {
+
   const handleEventClick = (clickInfo) => {
-    alert(`Event: ${clickInfo.event.title}`);
+    console.log(clickInfo.event.id)
   };
+
+  const [eventTask, setEventTask] = useState([]);
+  const [numTask, setNumTask] = useState([]);
+  useEffect(() => {
+    const getTask = async () => {
+      try {
+        const response = await axios.post("http://localhost:8000/api/gettask", {
+          workspace_id
+        });
+        console.log('response.data.task',response.data.task)
+          setNumTask(response.data.task);
+          setEventTask([]);
+          for (let i = 0; i < response.data.task.length; i++) {
+            setEventTask((prev) => [
+              ...prev,
+              {
+                id: response.data.task[i].task_id,
+                title: response.data.task[i].task_name,
+                start: response.data.task[i].task_create_date,
+                end: response.data.task[i].task_due_date,
+                status: response.data.task[i].status_task,
+                color: response.data.task[i].status_task === 'not-start-status' ? "#333" : response.data.task[i].status_task === "done-status" ? "#00FF00" : "#0000FF",
+                description: response.data.task[i].note,
+              },
+            ]);
+          }
+
+        
+        
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+
+    if (workspace_id !== undefined) {
+      getTask();
+    }
+  }, [workspace_id]);
+
+console.log('eventTask',eventTask)
+
   return (
     <>
       <div className="bg-calendar">
         <FullCalendar
-          className="calendar"
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
-          events={events}
+          events={eventTask}
           eventContent={renderEventContent}
           eventClick={handleEventClick}
         />
