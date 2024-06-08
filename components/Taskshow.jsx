@@ -46,7 +46,7 @@ function Taskshow({ workspace_id }) {
             <div className="titleTable-status">Status</div> 
           </div>
           <div className="bg-all-taskbox">
-            <Taskbox workspace_id={workspace_id} loadInfo={loadInfo} stateTask={stateTask}/>
+            <Taskbox workspace_id={workspace_id} loadInfo={loadInfo} setLoadInfo={setLoadInfo} stateTask={stateTask}/>
             
           </div>
         </div>

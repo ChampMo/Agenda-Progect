@@ -43,7 +43,7 @@ function getContrastColor(color) {
 
 
 
-function Role({ workspace_id, loadingInfo, setLoadingInfo, page, setData, data, data2, task }) {
+function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, setData, data, data2, task }) {
   const [loading, setLoading] = useState(true);
   const [loadInfo2, setLoadingInfo2] = useState(false);
   const [roleInfo, setRoleInfo] = useState([]);
@@ -147,8 +147,8 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, page, setData, data, 
     if (workspace_id !== undefined) {
       getRole();
     }
-  }, [workspace_id, loadingInfo, loadInfo2]);
-
+  }, [workspace_id, loadingInfo, loadInfo2, loadInfoRole]);
+  
   // useEffect(() => {
   //   console.log('----datadatadata',data,roleSelectToChange)
   //   const fetchRole = async () => {
@@ -294,7 +294,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, page, setData, data, 
       console.error(error);
     }
   }};
-    console.log('datadatadata',data)
+
   return (
     <>
       {loading ? (

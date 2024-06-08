@@ -24,7 +24,7 @@ function Workspace() {
       case "Roleshow":
         return <Roleshow workspace_id = {workspace_id}/>;
       case "Scheduleshow":
-        return <Scheduleshow />;
+        return <Scheduleshow workspace_id = {workspace_id}/>;
         
       case "Profile":
         return <Profile loadInfoname={loadInfoname} setLoadInfoname={setLoadInfoname}/>;

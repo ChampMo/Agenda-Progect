@@ -1,58 +1,58 @@
 /* Scheduleshow.css */
 .bg-calendar {
-    padding: 20px;
+    /* padding: 20px; */
     width: 50%;
-    background: linear-gradient(145deg, #7c98d675, #a5c1cc65);
+    /* background: linear-gradient(145deg, #7c98d675, #a5c1cc65);
+    background: linear-gradient(145deg, #c1d1f1d7, #a6d7ebec); */
     height: 45vw;
     max-height: 800px;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    /* box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px; */
     margin: auto auto;
+    /* margin-top: 50px; */
 }
 
 
-.calendar .fc-daygrid-day {
-    background-color: #ffffff;
-}
 
-.calendar .fc-event {
+
+.fc-event {
     border: none;
     font-size: 14px;
     font-weight: bold;
 }
-
-.calendar .fc-event-title {
+.fc-event-title {
     color: #fff;
     padding: 5px;
 }
 
-.calendar .fc-daygrid-day-number {
-    color: #0080ff;
-    font-weight: bold;
-}
 .fc-toolbar-title{
     color:#0c50d6;
+    scale: 1.5;
+    transform: translateX(30px);
 }
 .fc-daygrid-day-number{
     color:#0c50d6;
     /* color:#ffffff; */
-    background-color: #ffffff33;
-    border-bottom-left-radius: 15px;
+    /* background-color: #ffffff33; */
+    /* border-bottom-left-radius: 15px; */
 }
 .fc-col-header-cell-cushion{
     color:#0c50d6;
+    font-size: 18px;
 }
-.fc-scrollgrid-section-header {
+/* .fc-scrollgrid-section-header {
     background-color: #ffffff8f;
-}
+} */
 
 /* .fc-daygrid-day-frame{
     background-color: #ffffff8f;
 } */
-.fc-daygrid-day-bg{
-    background-color: #ffffff;
-}
+
+
+
+
+
 .fc-scroller::-webkit-scrollbar {
     background: none;
     border-radius: 10px;
@@ -64,3 +64,43 @@
     background-color: #ffffff55;
     border-radius: 10px;
 }
+
+
+
+
+.fc {
+    border-radius: 20px; /* Optional: Add border radius */
+    padding: 40px 20px 30px 20px; /* Optional: Add padding */
+    background: linear-gradient(145deg, #c1d1f1d7, #a6d7ebec);
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  }
+
+/* Custom styles for FullCalendar grid lines */
+.fc .fc-col-header-cell {
+    border-color: #ffffff; /* Change to your desired grid line color */
+  }
+  
+  .fc .fc-daygrid-day {
+    border-color: #ffffff; /* Change to your desired grid line color */
+  }
+  
+  /* You can also add hover effects or other styles as needed */
+  .fc .fc-daygrid-day:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Example hover effect */
+  }
+  
+  
+/* Custom styles for the outer border of FullCalendar */
+
+  
+  /* Additional customization for the outer container */
+  .fc .fc-toolbar {
+    padding-bottom: 10px;
+    border-bottom: 3px solid #ffffff;
+  }
+  
+  .fc .fc-view-harness {
+    border: 2px solid #ffffff; /* Change to your desired border color */
+    border-radius: 10px;
+  }
+  

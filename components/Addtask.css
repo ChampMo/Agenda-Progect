@@ -157,8 +157,20 @@
 .bg-bt-addtask{
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-top: 50px;
+}
+.bt-cancel{
+    color: #ff0000;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 35px;
+    cursor: pointer;
+    margin-left: 50px;
+
 }
 .bt-addtask{
     background-color: #205DA5;
