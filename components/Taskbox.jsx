@@ -4,7 +4,7 @@ import axios from 'axios';
 import Role from './Role.jsx';
 import Addtask from "./Addtask.jsx";
 
-function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask }) {
+function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask}) {
   const [numTask, setNumTask] = useState([]);
   const [loadInfoRole, setLoadInfoRole] = useState(false);
   
@@ -22,18 +22,18 @@ function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask }) {
           console.log('response.data.task',response.data.task)
           setLoadInfoRole(p=>!p);
         }else{
-          setNumTask([]);
+          const updatedNumTask = response.data.task.filter(task => myTask.includes(task.task_id));
+          setNumTask(updatedNumTask);
+          console.log(numTask)
         }
-        
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
     };
-
     if (workspace_id !== undefined) {
       getTask();
     }
-  }, [workspace_id, loadInfo]);
+  }, [workspace_id, loadInfo, stateTask, myTask]);
 
   // ฟังก์ชันสำหรับจัดรูปแบบวันที่
   const formatDate = (isoDate) => {
