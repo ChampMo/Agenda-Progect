@@ -4,36 +4,38 @@ import axios from 'axios';
 import Role from './Role.jsx';
 import Addtask from "./Addtask.jsx";
 
-function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask}) {
+function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, page}) {
   const [numTask, setNumTask] = useState([]);
   const [loadInfoRole, setLoadInfoRole] = useState(false);
   
   const [task, setTask] = useState([]);
   const [atciveaddtask, setAtciveaddtask] = useState(false);
-
-  useEffect(() => {
-    const getTask = async () => {
-      try {
-        const response = await axios.post("http://localhost:8000/api/gettask", {
-          workspace_id
-        });
-        if( stateTask ){
-          setNumTask(response.data.task);
-          console.log('response.data.task',response.data.task)
-          setLoadInfoRole(p=>!p);
-        }else{
-          const updatedNumTask = response.data.task.filter(task => myTask.includes(task.task_id));
-          setNumTask(updatedNumTask);
-          console.log(numTask)
+  if(page === "Roleshow"){
+    console.log("pageegegege")
+  }else{
+    useEffect(() => {
+      const getTask = async () => {
+        try {
+          const response = await axios.post("http://localhost:8000/api/gettask", {
+            workspace_id
+          });
+          if( stateTask ){
+            setNumTask(response.data.task);
+          }else{
+            const updatedNumTask = response.data.task.filter(task => myTask.includes(task.task_id));
+            setNumTask(updatedNumTask);
+            
+          }
+        } catch (error) {
+          console.error("Error fetching tasks:", error);
         }
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
+      };
+      if (workspace_id !== undefined) {
+        getTask();
       }
-    };
-    if (workspace_id !== undefined) {
-      getTask();
-    }
-  }, [workspace_id, loadInfo, stateTask, myTask]);
+    }, [workspace_id, loadInfo, stateTask, myTask]);
+  }
+  
 
   // ฟังก์ชันสำหรับจัดรูปแบบวันที่
   const formatDate = (isoDate) => {
@@ -51,7 +53,7 @@ console.log('numtask',numTask)
   return (
     <>
       {numTask.length === 0 ? <div className="no-task">{stateTask?"Don't have a job yet.":"You don't have a job yet."}</div>:
-      numTask.map((items, index) => (
+      page !== "Roleshow" ? numTask.map((items, index) => (
         <div 
         onClick={() => handleEditTask(items)}
         className="container-task" key={index}>
@@ -83,7 +85,39 @@ console.log('numtask',numTask)
             </div>
           </div>
         </div>
-      ))}
+      )) : numTask.map((items, index) => (
+        <div 
+        onClick={() => handleEditTask(items)}
+        className="container-task" key={index}>
+          <div className="box-task">
+            <div className="item-name">{items.task_name}</div>
+            <div className="item-task_create_date">{formatDate(items.task_create_date)}</div>
+            <div className="item-task_due_date">{formatDate(items.task_due_date)}</div>
+            <div className="item-role">
+              <Role  
+                  workspace_id = {workspace_id}
+                  page='alltask'
+                  data={items.task_id}
+              />
+            </div>
+            <div className="item-status_task">
+              {items.status_task === 'not-start-status'&&
+              <div className="not-start-status">
+                  Not Start
+              </div>}
+              {items.status_task === 'in-progress-status'&&
+              <div className="in-progress-status">
+                  In Progress
+              </div>}
+              {items.status_task === 'done-status'&&
+              <div className="done-status">
+                  Done
+              </div>}
+            </div>
+          </div>
+        </div>
+      ))
+      }
       {atciveaddtask && <Addtask workspace_id={workspace_id} setAtciveaddtask={setAtciveaddtask} setLoadInfo={setLoadInfo} task={task} page2='EditTask'/>}
 
     </>
