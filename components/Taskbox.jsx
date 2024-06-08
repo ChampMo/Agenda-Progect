@@ -3,7 +3,7 @@ import "./Taskbox.css";
 import axios from 'axios';
 import Role from './Role.jsx';
 
-function Taskbox({ workspace_id, loadInfo, stateTask }) {
+function Taskbox({ workspace_id, loadInfo, stateTask, myTask}) {
   const [numTask, setNumTask] = useState([]);
 
   useEffect(() => {
@@ -15,18 +15,18 @@ function Taskbox({ workspace_id, loadInfo, stateTask }) {
         if( stateTask ){
           setNumTask(response.data.task);
         }else{
-          setNumTask([]);
+          const updatedNumTask = response.data.task.filter(task => myTask.includes(task.task_id));
+          setNumTask(updatedNumTask);
+          console.log(numTask)
         }
-        
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
     };
-
     if (workspace_id !== undefined) {
       getTask();
     }
-  }, [workspace_id, loadInfo]);
+  }, [workspace_id, loadInfo, stateTask, myTask]);
 
   // ฟังก์ชันสำหรับจัดรูปแบบวันที่
   const formatDate = (isoDate) => {
@@ -67,6 +67,7 @@ function Taskbox({ workspace_id, loadInfo, stateTask }) {
           </div>
         </div>
       ))}
+      {stateTask? <div></div> : <div></div> }
     </>
   );
 }
