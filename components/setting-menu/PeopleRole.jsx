@@ -4,6 +4,7 @@ import UserInfoBox from '../UserInfoBox.jsx'
 import Role from '../Role.jsx';
 import axios from "axios";
 import { Icon } from '@iconify/react';
+import { useNavigate } from 'react-router-dom';
 
 
 function PeopleRole({workspace_id}) {
@@ -80,8 +81,19 @@ function PeopleRole({workspace_id}) {
         }
     }
     console.log('emailData',emailData)
-
-
+    
+    const exitWorkspace = async () =>{
+        try{
+            await axios.post("http://localhost:8000/api/workspace/exit", {
+                withCredentials: true,
+                workspace_id
+            })
+            navigate("/allwork")
+        }
+        catch (error) {
+        }
+    }
+    const navigate = useNavigate()
 return (
     <>
         <div className='peoplerole-show'>
@@ -131,7 +143,7 @@ return (
                 <UserInfoBox workspace_id={workspace_id}/>
             </div>
             <div className="bgexit-workspace">
-                <div className="exit-workspace">Exit Workspace</div>
+                <div className="exit-workspace" onClick={exitWorkspace}>Exit Workspace</div>
             </div>
             
         </div>

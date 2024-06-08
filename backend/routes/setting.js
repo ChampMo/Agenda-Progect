@@ -306,6 +306,27 @@ router.post("/api/workspace/user/roleadd", async (req, res) => {
     }
 });
 
+router.post("/api/workspace/exit", async (req, res) => {
+    try {
+        const { workspace_id } = req.body;
+        const { userId } = req.session; // Assume userId is stored in session
+
+        // Find roles associated with the workspace
+        const roles = await Role.find({ workspace_id });
+        const roleIds = roles.map(role => role.role_id);
+
+        // Delete UserWorkspace entries for the current user
+        await UserWorkspace.deleteMany({ user_id: userId, workspace_id : workspace_id});
+
+        // Delete RoleUser entries where role_id is in roleIds and user_id matches the current user
+        const resultDeleteRoleUser = await RoleUser.deleteMany({ role_id: { $in: roleIds }, user_id: userId });
+
+        res.json({ resultDeleteRoleUser, message: 'Exit Workspace successfully!' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 
 
