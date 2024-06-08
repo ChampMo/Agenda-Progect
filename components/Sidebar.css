@@ -47,6 +47,14 @@
     background-color: rgb(136, 136, 255);
     margin-right:20px ;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.img-profile-workspace{
+    width: 70px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
 }
 .name-project{
     width: 200px;
@@ -59,6 +67,8 @@
     font-size: 20px;
     font-weight: 600;
     padding-top:8px ;
+    overflow-x: auto;
+    
 }
 .name-project::-webkit-scrollbar {
     background: none;

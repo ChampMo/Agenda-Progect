@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
 import bgbtworkspace from "../public/images/bg-bt-workspace.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-function Sidebar({ setSidebar, setComponentwork, componentwork }) {
+function Sidebar({ setSidebar, setComponentwork, componentwork, workspace_id }) {
   const [classTask, setClassTask] = useState("manu-task");
   const [classRole, setClassRole] = useState("manu-role");
   const [classSche, setClassSche] = useState("manu-schedule");
   const [classbgbt, setClassbgbt] = useState("bg-bt-sidebar");
+  const [workspaceInfo, setWorkspaceInfo] = useState([]);
+  const [loadInfoname, setLoadInfoname] = useState(false);
+  const [workspace_name, setWorkspace_name] = useState("");
 
   React.useEffect(() => {
     switch (componentwork) {
@@ -46,15 +50,41 @@ function Sidebar({ setSidebar, setComponentwork, componentwork }) {
     setComponentwork("Profile");
     setSidebar(false);
   };
+
+
+  useEffect(() => {
+    const fetchAllWork = async () => {
+        axios.post("http://localhost:8000/api/workspaceinfo",{ 
+          withCredentials: true,
+          workspace_id
+        })
+            .then((response) => {
+            setWorkspaceInfo(response.data.workspaceInfo);
+
+            })
+            .catch((error) => {
+            console.error(error);
+            });
+    }
+    fetchAllWork();
+  }, [loadInfoname]);
+
+
+
+
+
+
+
+
   return (
     <>
       <div className="sidebar">
         <div className="top-manu">
           <div className="project-info">
-            <div className="profile-project"></div>
-            <textarea readOnly className="name-project">
-              Project name
-            </textarea>
+            <div className="profile-project">
+              <img src={workspaceInfo.workspace_icon} className="img-profile-workspace" />
+            </div>
+            <input readOnly value={workspaceInfo.workspace_name} className="name-project"/>
           </div>
           <div className="manu-sidebar">
             <div className={classbgbt}>

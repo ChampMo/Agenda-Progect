@@ -1,0 +1,66 @@
+/* Scheduleshow.css */
+.bg-calendar {
+    padding: 20px;
+    width: 50%;
+    background: linear-gradient(145deg, #7c98d675, #a5c1cc65);
+    height: 45vw;
+    max-height: 800px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    margin: auto auto;
+}
+
+
+.calendar .fc-daygrid-day {
+    background-color: #ffffff;
+}
+
+.calendar .fc-event {
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.calendar .fc-event-title {
+    color: #fff;
+    padding: 5px;
+}
+
+.calendar .fc-daygrid-day-number {
+    color: #0080ff;
+    font-weight: bold;
+}
+.fc-toolbar-title{
+    color:#0c50d6;
+}
+.fc-daygrid-day-number{
+    color:#0c50d6;
+    /* color:#ffffff; */
+    background-color: #ffffff33;
+    border-bottom-left-radius: 15px;
+}
+.fc-col-header-cell-cushion{
+    color:#0c50d6;
+}
+.fc-scrollgrid-section-header {
+    background-color: #ffffff8f;
+}
+
+/* .fc-daygrid-day-frame{
+    background-color: #ffffff8f;
+} */
+.fc-daygrid-day-bg{
+    background-color: #ffffff;
+}
+.fc-scroller::-webkit-scrollbar {
+    background: none;
+    border-radius: 10px;
+    width: 5px;
+    height: 10px;
+}
+.fc-scroller::-webkit-scrollbar-thumb {
+    background: none; 
+    background-color: #ffffff55;
+    border-radius: 10px;
+}

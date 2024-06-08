@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./Taskbox.css";
 import axios from 'axios';
 import Role from './Role.jsx';
+import Addtask from "./Addtask.jsx";
 
-function Taskbox({ workspace_id, loadInfo, stateTask }) {
+function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask }) {
   const [numTask, setNumTask] = useState([]);
+  const [task, setTask] = useState([]);
+  const [atciveaddtask, setAtciveaddtask] = useState(false);
 
   useEffect(() => {
     const getTask = async () => {
@@ -33,12 +36,18 @@ function Taskbox({ workspace_id, loadInfo, stateTask }) {
     if (!isoDate) return ""; // จัดการกรณีที่วันที่เป็น undefined หรือ null
     return new Date(isoDate).toLocaleDateString('en-GB');
   };
-
+  console.log(loadInfo)
+  const handleEditTask = (items) => {
+    setTask(items);
+    setAtciveaddtask(true);
+  };
   return (
     <>
       {numTask.length === 0 ? <div className="no-task">{stateTask?"Don't have a job yet.":"You don't have a job yet."}</div>:
       numTask.map((items, index) => (
-        <div className="container-task" key={index}>
+        <div 
+        onClick={() => handleEditTask(items)}
+        className="container-task" key={index}>
           <div className="box-task">
             <div className="item-name">{items.task_name}</div>
             <div className="item-task_create_date">{formatDate(items.task_create_date)}</div>
@@ -67,6 +76,8 @@ function Taskbox({ workspace_id, loadInfo, stateTask }) {
           </div>
         </div>
       ))}
+      {atciveaddtask && <Addtask workspace_id={workspace_id} setAtciveaddtask={setAtciveaddtask} setLoadInfo={setLoadInfo} task={task} page2='EditTask'/>}
+
     </>
   );
 }

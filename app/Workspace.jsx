@@ -44,6 +44,7 @@ function Workspace() {
           setSidebar={setSidebar}
           setComponentwork={setComponentwork}
           componentwork={componentwork}
+          workspace_id={workspace_id}
         />
         {sidebar ? null : (
           <SidebarSetting

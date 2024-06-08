@@ -55,6 +55,9 @@
 .bt-search-people:hover{
     background-color: #2377ac;
 }
+.bt-search-people:active{
+    scale: 0.9;
+}
 .text-role-set{
     margin-top: 30px;
     font-size: 20px;
@@ -86,7 +89,6 @@
     border-radius: 10px;
     width: 10px;
     height: 10px;
-   
 }
 
 .container-role-show::-webkit-scrollbar-thumb {
@@ -149,6 +151,9 @@
 .bt-role-add:hover{
     background-color: #2377ac;
 }
+.bt-role-add:active{
+    scale: 0.9;
+}
 .text-people{
     margin-top: 30px;
     font-size: 20px;
@@ -162,6 +167,7 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid #205ea51e;
+    padding: 0px 20px;
 }
 .head-img{
     width: 60px;
@@ -224,18 +230,66 @@
     font-size: 16px;
 }
 .card-user{
-    width: 100%;
-    height: 40px;
+    width: 95%;
+    margin: 0 auto;
+    height: 100px;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 10px;
+    background-color: #a7e3ec3a;
+    box-shadow: rgba(0, 0, 0, 0.062) 0px 1px 4px;
 }
 .row1{
     display: flex;
     margin: 20px 30px;
 }
+.bg-info-card{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    font-size: 20px;
+}
 .card-user img {
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.bt-share-people{
+    font-size: 18px;
+    width: 20%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background-color: #417bc6;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    margin-right: 20px;
+}
+.bt-share-people:hover{
+    background-color: #235eac;
+}
+.bt-share-people:active{
+    scale: 0.9;
+}
+.icon-cha{
+    transition-duration: 0.3s;
+}
+.no-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    height: 100px;
+    color: #bdbdbd;
 }
