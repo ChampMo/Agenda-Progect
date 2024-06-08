@@ -4,15 +4,13 @@ import axios from 'axios';
 import Role from './Role.jsx';
 import Addtask from "./Addtask.jsx";
 
-function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, page}) {
+function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, page, tasks }) {
   const [numTask, setNumTask] = useState([]);
   const [loadInfoRole, setLoadInfoRole] = useState(false);
-  
+  const [roleTask, setRoleTask] = useState([]);
   const [task, setTask] = useState([]);
   const [atciveaddtask, setAtciveaddtask] = useState(false);
-  if(page === "Roleshow"){
-    console.log("pageegegege")
-  }else{
+
     useEffect(() => {
       const getTask = async () => {
         try {
@@ -24,17 +22,21 @@ function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, page}
           }else{
             const updatedNumTask = response.data.task.filter(task => myTask.includes(task.task_id));
             setNumTask(updatedNumTask);
-            
           }
+
         } catch (error) {
           console.error("Error fetching tasks:", error);
         }
       };
       if (workspace_id !== undefined) {
-        getTask();
+        if(page === "Roleshow"){
+          setNumTask(tasks)
+        }else{
+          getTask();
+        }
       }
     }, [workspace_id, loadInfo, stateTask, myTask]);
-  }
+  
   
 
   // ฟังก์ชันสำหรับจัดรูปแบบวันที่
