@@ -65,7 +65,7 @@ function FromSignup(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <label htmlFor="password" className="text-passlogin">
-          Re-Password
+          Confirm-Password
         </label>
         <input
           type="password"
