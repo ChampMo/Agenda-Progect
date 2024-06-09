@@ -3,6 +3,7 @@ import "./Role.css";
 import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
 import { Icon } from '@iconify/react';
+import { axiosinstant } from "../lib/axiosinstant";
 
 
 function hexToRgb(hex) {
@@ -65,7 +66,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
     const getRole = async () => {
       if(page === 'alltask'){
         try {
-          const response = await axios.post("http://localhost:8000/api/getrole/task", {
+          const response = await axiosinstant.post("/api/getrole/task", {
             workspace_id,
             task_id:data,
             withCredentials: true
@@ -79,7 +80,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
         }
       }else if(page === 'userinfobox'){
         try {
-          const response = await axios.post("http://localhost:8000/api/workspace/user/role", {
+          const response = await axiosinstant.post("/api/workspace/user/role", {
             workspace_id,
             user_id:data,
             withCredentials: true
@@ -90,7 +91,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
             setRoleSelectToChange(p=>[...p,response.data.userInfo.role_id[i].role_id])
           }
 
-          const response2 = await axios.post("http://localhost:8000/api/getrole", {
+          const response2 = await axiosinstant.post("/api/getrole", {
             workspace_id,
             withCredentials: true
           });
@@ -104,7 +105,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
         }
       }else if(page === 'EditTask'){
         try {
-          const response = await axios.post("http://localhost:8000/api/getrole/task", {
+          const response = await axiosinstant.post("/api/getrole/task", {
             workspace_id,
             task_id:data2,
             withCredentials: true
@@ -120,7 +121,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
             setData(p=>({...p, role:[...p.role,response.data.role[i].role_id]}))
           }
           console.log('response.data.role',response.data.role)
-          const response2 = await axios.post("http://localhost:8000/api/getrole", {
+          const response2 = await axiosinstant.post("/api/getrole", {
             workspace_id,
             withCredentials: true
           });
@@ -132,7 +133,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
         }
       }else{
         try {
-          const response = await axios.post("http://localhost:8000/api/getrole", {
+          const response = await axiosinstant.post("/api/getrole", {
             workspace_id,
             withCredentials: true
           });
@@ -155,7 +156,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
   //   const fetchRole = async () => {
   //   if(page === 'userinfobox'){
   //     try {
-  //       const response = await axios.post("http://localhost:8000/api/workspace/user/roleadd", {
+  //       const response = await axiosinstant.post("/api/workspace/user/roleadd", {
   //         user_id: data,
   //         role_id: roleSelectToChange,
   //         withCredentials: true
@@ -172,7 +173,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
 
   const handleDelete = async (items, index) => {
     try {
-      await axios.delete("http://localhost:8000/api/deleterole", {
+      await axiosinstant.delete("/api/deleterole", {
         data: { role_id: items.role_id }
       });
       setDeletingIndex(index);
@@ -284,7 +285,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
   if(page === 'userinfobox'){
     try {
       
-      const response = await axios.post("http://localhost:8000/api/workspace/user/roleadd", {
+      const response = await axiosinstant.post("/api/workspace/user/roleadd", {
         user_id: data,
         workspace_id,
         role_id: roleSelectToChange,

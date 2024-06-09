@@ -120,3 +120,8 @@
 .bg-bt-People{
     top: 481px;
 }
+@media screen and (max-width: 650px){
+    .sidebarsetting{
+        display: none;
+    }
+}

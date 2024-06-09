@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
 import { Icon } from '@iconify/react';
+import { axiosinstant } from "../lib/axiosinstant";
 
 function Work({loadingInfo, setLoadingInfo}) {
     const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ function Work({loadingInfo, setLoadingInfo}) {
         const fetchAllWork = async () => {
             setLoading(false);
             try{
-            axios.get("http://localhost:8000/api/allwork",{ withCredentials: true })
+                axiosinstant.get("/api/allwork",{ withCredentials: true })
                 .then((response) => {
                 
                 const allWorkspace = response.data.allWorkspace;
@@ -59,7 +60,7 @@ function Work({loadingInfo, setLoadingInfo}) {
     const handleNameChange = async(index, value, workspaceId) => {
 
         try{
-            await axios.put("http://localhost:8000/api/update/workspace_name", {
+            await axiosinstant.put("/api/update/workspace_name", {
                 withCredentials: true,
                 workspace_id: workspaceId,
                 workspace_name: value,
@@ -122,7 +123,7 @@ function Work({loadingInfo, setLoadingInfo}) {
         setHoverSection(null);
 
         const workspaceIds = updatedWorkspaces.map(workspace => workspace.workspace_id);
-        await axios.put("http://localhost:8000/api/update/order_number", {
+        await axiosinstant.put("/api/update/order_number", {
             withCredentials: true,
             workspaceIds: workspaceIds,
         })
@@ -171,32 +172,34 @@ function Work({loadingInfo, setLoadingInfo}) {
                             onDragOver={(e) => handleDragOver(e, index)}
                             onDrop={(e) => handleDrop(e, index)}
                         >
-                            <div className="container-workspaceWork">
-                                {/* <div 
-                                className="workspaceId" id={`workspace-${index}`}>
-                                #{index + 1}
-                                </div> */}
-                                <div 
-                                draggable 
-                                id={`workspace-${index}`}
-                                className="icon-drag-drop">
-                                    <Icon   icon="mingcute:dots-fill" width="25" height="25" />
-                                </div>
-                                <input
-                                    type="text"
-                                    onChange={(e) =>
-                                        handleNameChange(index, e.target.value, workspace.workspace_id)
-                                    }
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter") {
-                                            e.target.blur();
+                            <div className="bg-container-workspaceWork">
+                                <div className="container-workspaceWork">
+                                    {/* <div 
+                                    className="workspaceId" id={`workspace-${index}`}>
+                                    #{index + 1}
+                                    </div> */}
+                                    <div 
+                                    draggable 
+                                    id={`workspace-${index}`}
+                                    className="icon-drag-drop">
+                                        <Icon   icon="mingcute:dots-fill" width="25" height="25" />
+                                    </div>
+                                    <input
+                                        type="text"
+                                        onChange={(e) =>
+                                            handleNameChange(index, e.target.value, workspace.workspace_id)
                                         }
-                                    }}
-                                    className="workspaceName"
-                                    value={workspace.workspace_name}
-                                />
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter") {
+                                                e.target.blur();
+                                            }
+                                        }}
+                                        className="workspaceName"
+                                        value={workspace.workspace_name}
+                                    />
+                                </div>
+                                <div className="date-workspace">{formattedDates[index]}</div>
                             </div>
-                            <div className="date-workspace">{formattedDates[index]}</div>
                             <button
                                 onClick={() => navigate("/workspace", { state: workspace.workspace_id })}>
                                 LAUNCH

@@ -9,6 +9,7 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     flex-direction: column;
     color: #ffffff;
+    text-decoration: 0.4s;
 }
 .bg-title-profile{
     display: flex;
@@ -148,4 +149,16 @@
     align-items: center;
     background-color: #ffffff4b;
     cursor: pointer;
+}
+
+
+@media screen and (max-width: 600px){
+    .profile-showset{
+        transform: scale(0.8);
+    }
+    .img-profile{
+        width: 200px;
+        height: 200px;
+        flex-shrink: 0;
+    }
 }

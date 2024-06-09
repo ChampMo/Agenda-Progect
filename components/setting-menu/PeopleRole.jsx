@@ -5,6 +5,7 @@ import Role from '../Role.jsx';
 import axios from "axios";
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
+import { axiosinstant } from "../../lib/axiosinstant";
 
 
 function PeopleRole({workspace_id}) {
@@ -19,7 +20,7 @@ function PeopleRole({workspace_id}) {
     const [noUser, setNoUser] = useState(false)
     const handleAddrole = async () => {
         try{
-            await axios.post("http://localhost:8000/api/addrole", {
+            await axiosinstant.post("/api/addrole", {
                 workspace_id,
                 role_name:name,
                 color:inputColor
@@ -38,7 +39,7 @@ function PeopleRole({workspace_id}) {
         if(!styleBt){
             try{
                 console.log(emailUser,workspace_id)
-                await axios.post("http://localhost:8000/api/sendemail", {
+                await axiosinstant.post("/api/sendemail", {
                     emailUser,
                     workspace_id,
                     withCredentials: true
@@ -56,7 +57,7 @@ function PeopleRole({workspace_id}) {
 
     const searchEmail = async () => {
         try{
-            await axios.post("http://localhost:8000/api/searchemail", {
+            await axiosinstant.post("/api/searchemail", {
                 email,
                 workspace_id
             })
@@ -84,7 +85,7 @@ function PeopleRole({workspace_id}) {
     
     const exitWorkspace = async () =>{
         try{
-            await axios.post("http://localhost:8000/api/workspace/exit", {
+            await axiosinstant.post("/api/workspace/exit", {
                 withCredentials: true,
                 workspace_id
             })

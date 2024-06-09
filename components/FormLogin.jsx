@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import axiosPath from "../lib/axiosPath";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { axiosinstant } from "../lib/axiosinstant";
 
 function FormLogin(props) {
   
@@ -11,8 +10,8 @@ function FormLogin(props) {
 
   const submitData = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/login/",{
+      const response = await axiosinstant.post(
+        "/api/login/",{
           withCredentials: true,
           email,
           password,

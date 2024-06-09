@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
+import { axiosinstant } from "../lib/axiosinstant";
 function Sidebar({ setSidebar, setComponentwork, componentwork, workspace_id }) {
   const [classTask, setClassTask] = useState("manu-task");
   const [classRole, setClassRole] = useState("manu-role");
@@ -54,7 +55,7 @@ function Sidebar({ setSidebar, setComponentwork, componentwork, workspace_id }) 
 
   useEffect(() => {
     const fetchAllWork = async () => {
-        axios.post("http://localhost:8000/api/workspaceinfo",{ 
+      axiosinstant.post("/api/workspaceinfo",{ 
           withCredentials: true,
           workspace_id
         })

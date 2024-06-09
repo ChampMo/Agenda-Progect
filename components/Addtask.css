@@ -124,6 +124,10 @@
     border-radius: 10px;
 
 }
+.bg-status-addtask{
+    display: flex;
+    gap: 10px;
+}
 .not-start-status{
     width: 110px;
     display: flex;
@@ -133,6 +137,7 @@
     color: #fff;
     background-color: #5d5d5d;
     cursor: pointer;
+    flex-shrink: 0;
 }
 .in-progress-status{
     width: 110px;
@@ -143,6 +148,7 @@
     color: #fff;
     background-color: #1c70d1;
     cursor: pointer;
+    flex-shrink: 0;
 }
 .done-status{
     width: 110px;
@@ -153,6 +159,7 @@
     color: #fff;
     background-color: #0dc404;
     cursor: pointer;
+    flex-shrink: 0;
 }
 .bg-bt-addtask{
     width: 100%;
@@ -203,4 +210,24 @@
 }
 .animation-addtask-reverse{
     animation: move-addtask-reverse 0.3s ease-in-out reverse forwards;
+}
+
+
+@media screen and (max-width: 650px){
+    .component-add{
+        margin-left: 10px;
+    }
+    .bg-back-addtask{
+        width: 100%;
+    }
+    .note{
+        height: 100px;
+        width: 70%;
+    }
+    .bgaddt{
+        width: 70%;
+    }
+    .bd-status{
+        flex-direction: column;
+    }
 }

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import footer from "../public/landingprop/footer.png";
 import logo from "../public/images/logo.png";
 import { Icon } from "@iconify/react";
+import { axiosinstant } from "../lib/axiosinstant";
 
 
 
@@ -19,7 +20,7 @@ function AllWork() {
     useEffect(() => {
         const Checklogin = async () => {
             try {
-            await axios.get("http://localhost:8000/api/checklogin")
+            await axiosinstant.get("/api/checklogin")
                 .then((response) => {
                 if (response.data.success) {
                     return;
@@ -129,13 +130,13 @@ console.log(share_request);
                 </div>
             </div>
             <footer className="footer">
-                <div className="flex relative">
+                <div className="flex relative justify-center">
                     <img className="footer-bg z-0" src={footer} alt="" />
-                    <div className="flex w-full justify-around z-10 absolute bottom-0 h-[300px]">
-                    <div className="flex flex-col ml-10 mt-10">
+                    <div className="flex w-5/12 sm:w-full justify-around z-10 absolute bottom-0 sm:h-[300px] scale-75  sm:scale-100">
+                    <div className="flex flex-col ml-10 justify-center mb-10">
                         <img 
                         onClick={()=>navigate('/')}
-                        className="w-60 h-20 cursor-pointer object-contain" src={logo} alt="" />
+                        className="w-48 sm:w-60 h-20 cursor-pointer object-contain" src={logo} alt="" />
                         <div className="flex text-col1 text-xl pl-3">Manage your task with Agenda.</div>
                         <div className="flex text-col1 text mt-5 pl-3">Connect with Agenda</div>
                         <div className="flex w-full items-center pl-3 gap-5 mt-2">
@@ -149,7 +150,7 @@ console.log(share_request);
                     <div className="flex">
                     </div>
                     <div className="flex">
-                        <div className="flex flex-col text-gray-400 mr-20 items-start mt-10 gap-3">
+                        <div className="flex flex-col text-gray-400 mr-20 items-start justify-center gap-3  mb-10">
                         <div className="flex text-xl cursor-pointer hover:text-col1">Learn More</div>
                         <div className="flex text-sm cursor-pointer hover:text-col1">About</div>
                         <div className="flex text-sm cursor-pointer hover:text-col1">FAQ</div>
@@ -164,7 +165,7 @@ console.log(share_request);
                     <Icon icon="mingcute:up-line" width="40" height="40" 
                     className='text-black group-hover:text-white'/>
                 </button>
-            </footer>
+                </footer>
             </>
         </div>
         </>

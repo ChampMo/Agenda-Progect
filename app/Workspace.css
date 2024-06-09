@@ -20,3 +20,10 @@
     width: 20%;
     min-width: 200px;
 }
+
+@media screen and (max-width: 650px){
+    .sidebar-box{
+        display: none;
+    }
+}
+

@@ -101,3 +101,20 @@
     border: 1px solid #ffffff; /* Change to your desired border color */
     border-radius: 10px;
 }
+
+@media screen and (max-width: 650px){
+    .bg-calendar {
+        /* padding: 20px; */
+        width: 90%;
+        /* background: linear-gradient(145deg, #7c98d675, #a5c1cc65);
+        background: linear-gradient(145deg, #c1d1f1d7, #a6d7ebec); */
+
+        max-height: 800px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        margin-top: 100px;
+    }
+    
+    
+    
+}

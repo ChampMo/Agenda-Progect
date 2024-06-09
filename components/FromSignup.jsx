@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import axiosPath from "../lib/axiosPath";
 import axios from "axios";
+import { axiosinstant } from "../lib/axiosinstant";
+
   // axios.defaults.withCredentials = true;
 function FromSignup(props) {
 
   const { change } = props;
   const submitData = async (data) => {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/signup",{ 
+      const response = await axiosinstant.post("/api/signup",{ 
           withCredentials: true,
           email,
           password,

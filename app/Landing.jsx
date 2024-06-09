@@ -8,6 +8,7 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { Link, Element, animateScroll as scroll } from 'react-scroll';
 import axios from "axios";
 import { Icon } from '@iconify/react';
+import { axiosinstant } from "../lib/axiosinstant";
 
 
 import logo from "../public/images/logo.png";
@@ -37,7 +38,6 @@ import img14 from "../public/landingprop/img14.png";
 
 
 
-axios.defaults.withCredentials = true;
 function Landing() {
   
   const [stagePage, setstagePage] = useState(true);
@@ -47,7 +47,7 @@ function Landing() {
   useEffect(() => {
     const Checklogin = async () => {
       try {
-        await axios.get("http://localhost:8000/api/checklogin")
+        await axiosinstant.get("/api/checklogin",{withCredentials: true})
           .then((response) => {
             console.log(response.data.success);
             if (response.data.success) {
@@ -71,7 +71,7 @@ function Landing() {
 
   const HandleLogout = async () => {
     try {
-      await axios.get("http://localhost:8000/logout")
+      await axiosinstant.get("/logout",{withCredentials: true,})
       console.log('Logout successfully!')
       setstagePage(true);
       navigate('/')
@@ -85,8 +85,6 @@ function Landing() {
         const scrollPosition = window.scrollY;
         const parallaxElement = document.querySelector(".parallax");
         parallaxElement.style.transform = `translateX(-${1000-2*(scrollPosition/8)}px) translateY(${scrollPosition * 0.6-500}px)`;
-
-        console.log('-=]-=]',scrollPosition , 400-2*(scrollPosition/10), scrollPosition * 0.6-400)
 
         if( scrollPosition > 3500){
           parallaxElement.style.transform = `translateX(-${1000-2*(3500/8)}px) translateY(${3500 * 0.6-500}px)`;
@@ -154,10 +152,10 @@ function Landing() {
               <div className="button-st">Start your plan!</div>
             </div>
           </header>
-          <section className="flex w-full mt-[400px]">
+          <section className="flex w-full mt-52 sm:mt-[400px] scale-75 sm:scale-100 gap-3 sm:gap-0">
             <div className="flex w-1/2 justify-center items-center flex-col">
-              <h2 className="flex text-4xl text-white ">Let's get to know Agenda.</h2>
-              <div className="flex text-2xl text-white w-[500px] mt-10 leading-10 text-center">
+              <h2 className="flex sm:text-4xl text-white ">Let's get to know Agenda.</h2>
+              <div className="flex sm:text-2xl text-white w-52 sm:w-[500px] mt-10 leading-10 text-center">
               adenda is a web application 
               For planning various plans and being able to share duties 
               and work with teammates comfortably.
@@ -171,23 +169,23 @@ function Landing() {
               </Link>
             </div>
             <div className="flex w-1/2 justify-center items-center">
-              <div className="flex flex-col p-10 max-w-[800px] bg-glass rounded-3xl shadow-lg">
+              <div className="flex flex-col p-2 sm:p-10 max-w-[800px] bg-glass rounded-3xl shadow-lg">
                 <img className="w- mx-auto rounded-t-3xl" src={propsignup} alt="" />
                 <img className="w- mx-auto rounded-b-3xl" src={proplogin} alt="" />
               </div>
             </div>
           </section>
           <Element name="secondSection">
-          <section className="flex w-full mt-32 relative items-center">
-            <img className="parallax w- mx-auto rounded-t-3xl absolute left-0 top-0 w-[1200px]" src={propcircle} alt="" />
+          <section className="flex w-full mt-20 relative items-center scale-75 sm:scale-100">
+            <img className="parallax invisible sm:visible w- mx-auto rounded-t-3xl absolute left-0 top-0 w-[1200px]" src={propcircle} alt="" />
             <div className="flex w-1/2 justify-center items-center z-10">
               <div className="flex flex-col max-w-[800px] bg-glass rounded-3xl shadow-lg mt-20">
               <img className="w- mx-auto rounded-3xl w-[800px]" src={img1} alt="" />
               </div>
             </div>
             <div className="flex w-1/2 justify-center items-center flex-col">
-              <h2 className="flex text-4xl text-white ">Log in and let's get started.</h2>
-              <div className="flex text-2xl text-white w-[450px] mt-10 leading-10 text-center items-center">
+              <h2 className="flex text-lg sm:text-4xl text-white ">Log in and let's get started.</h2>
+              <div className="flex sm:text-2xl text-white w-52 sm:w-[450px] mt-10 leading-10 text-center items-center">
               Log in and
               Let's start your planning with agenda.
               Start by manage your profile.
@@ -202,9 +200,9 @@ function Landing() {
           </section>
           </Element>
           <Element name="3Section">
-          <section className="flex w-full mt-52 pt-20">
+          <section className="flex w-full mt-20 sm:mt-52 pt-20 scale-75 sm:scale-100">
             <div className="flex w-1/2 justify-center items-center flex-col z-10 -translate-x-8">
-              <div className="flex text-2xl text-col1 w-[500px] mt-10 leading-10 text-center">
+              <div className="flex sm:text-2xl text-col1 sm:w-[500px] mt-10 leading-10 text-center justify-center">
               Create your work by pressing the create.
               </div>
               <Link 
@@ -225,9 +223,9 @@ function Landing() {
           </section>
           </Element>
           <Element name="4Section">
-          <section className="flex w-full mt-5 pt-80">
+          <section className="flex w-full mt-5 pt-32 sm:pt-80 scale-75 sm:scale-100">
             <div className="flex w-1/2 justify-center items-center flex-col z-10">
-              <div className="flex text-2xl text-col1 w-[500px] mt-10 leading-10 text-center justify-center">
+              <div className="flex text-2xl text-col1 sm:w-[500px] mt-10 leading-10 text-center justify-center">
               Start by setting up your project.
               </div>
               <Link 
@@ -245,19 +243,19 @@ function Landing() {
           </section>
           </Element>
           <Element name="5Section">
-          <section className="flex w-full mt-52 pt-60">
+          <section className="flex w-full  sm:mt-52 pt-60 scale-75 sm:scale-100">
             <div className="flex w-1/2 justify-center items-center z-10 relative">
-              <div className="flex flex-col max-w-[800px] rounded-3xl bg-glass p-5 py-14">
+              <div className="flex flex-col sm:max-w-[800px] rounded-3xl bg-glass p-5 py-14">
                 <img className=" mx-auto rounded-xl shadow-lg mb-12" src={img5} alt="" />
                 <Icon className="mx-auto text-glass" icon="icon-park-solid:down-two" width="40" height="40" />
                 <img className=" mx-auto rounded-xl shadow-lg mt-12" src={img6} alt="" />
               </div>
             </div>
-            <div className="flex w-1/2 justify-around items-center flex-col z-10 -translate-x-8">
-              <div className="flex text-2xl text-white w-[500px] leading-10 text-center justify-center">
+            <div className="flex w-1/2 justify-around items-center flex-col z-10 translate-x-3 sm:-translate-x-8">
+              <div className="flex sm:text-2xl text-white sm:w-[500px] leading-10 text-center justify-center">
               Work with multiple people by inviting your teammates.
               </div>
-              <div className="flex text-2xl text-white w-[500px] leading-10 text-center justify-center">
+              <div className="flex sm:text-2xl text-white sm:w-[500px] leading-10 text-center justify-center">
               Your friends will be able to accept the invitation.
               </div>
               
@@ -268,13 +266,13 @@ function Landing() {
               to="6Section" 
               smooth={true}  
               duration={1800} 
-              className="flex w-48 mx-auto mt-32 justify-center items-center h-10 text-xl text-white bg-col1 rounded-full cursor-pointer duration-300 active:scale-95">next
+              className="flex w-48 mx-auto sm:mt-32 justify-center items-center h-10 text-xl text-white bg-col1 rounded-full cursor-pointer duration-300 active:scale-95">next
               </Link>
           </Element>
           <Element name="6Section">
-          <section className="flex w-full mt-5 pt-60 flex-col">
+          <section className="flex w-full mt-5 pt-32 sm:pt-60 flex-col scale-75 sm:scale-100">
             <div className="flex w-full justify-center items-center z-10">
-              <div className="flex w-full justify-around items-center rounded-3xl mx-suto">
+              <div className="flex w-full flex-col justify-around items-center rounded-3xl mx-suto">
                 <img className=" w-[700px] rounded shadow-lg" src={img7} alt="" />
                 <img className=" w-[700px] rounded shadow-lg" src={img8} alt="" />
               </div>
@@ -297,9 +295,9 @@ function Landing() {
           </section>
           </Element>
           <Element name="7Section">
-          <section className="flex w-full mt-32 pt-32 relative items-center">
+          <section className="flex w-full sm:mt-32 pt-32 relative items-center scale-75 sm:scale-100">
             <div className="flex w-1/2 justify-center items-center z-10">
-              <div className="flex flex-col max-w-[800px] bg-glass rounded-3xl shadow-lg mt-20 p-5 py-10">
+              <div className="flex flex-col max-w-[800px] -translate-x-5 sm:translate-x-0 bg-glass rounded-3xl shadow-lg mt-20 p-2 sm:p-5 sm:py-10">
                 <img className="w- mx-auto rounded-xl w-[800px]" src={img9} alt="" />
               </div>
             </div>
@@ -317,12 +315,12 @@ function Landing() {
           </section>
           </Element>
           <Element name="8Section">
-          <section className="flex w-full mt-32 pt-52 relative items-center">
+          <section className="flex w-full sm:mt-32 pt-52 relative items-center  scale-75 sm:scale-100">
             <div className="flex w-1/2 justify-center items-center flex-col mt-32">
-              <div className="flex text-2xl text-white w-[600px] mt-10 leading-10 text-center items-center justify-center">
+              <div className="flex text-2xl text-white sm:w-[600px] mt-10 leading-10 text-center items-center justify-center">
               You can edit various tasks and view your own work.
               </div>
-              <div className="flex text-2xl text-white w-[450px] mt-10 leading-10 text-center items-center justify-center">
+              <div className="flex text-2xl text-white sm:w-[450px] mt-10 leading-10 text-center items-center justify-center">
               You can filter tasks according to status.
               </div>
               <Link 
@@ -335,21 +333,21 @@ function Landing() {
             <div className="flex w-1/2 justify-center items-center z-10">
               <div className="flex flex-col max-w-[800px] rounded-3xl mt-20 relative">
                 <img className=" mx-auto rounded-xl w-[800px] translate-x-10 -translate-y-14  shadow-xl" src={img10} alt="" />
-                <img className=" absolute mx-auto rounded-xl w-[600px]  shadow-xl top-32 right-60" src={img11} alt="" />
-                <img className=" absolute mx-auto rounded-xl w-[600px]  shadow-xl top-96 left-52 translate-y-16" src={img12} alt="" />
+                <img className=" absolute mx-auto rounded-xl w-[600px]  shadow-xl top-0 sm:top-32 sm:right-60" src={img11} alt="" />
+                <img className=" absolute mx-auto rounded-xl w-[600px]  shadow-xl top-32 sm:top-96 left-10 sm:left-52 sm:translate-y-16" src={img12} alt="" />
               </div>
             </div>
           </section>
           </Element>
           <Element name="9Section">
-          <section className="flex w-full mt-32 pt-52 relative items-center">
+          <section className="flex w-full sm:mt-32 pt-32 sm:pt-52 relative items-center scale-75 sm:scale-100">
             <div className="flex w-1/2 justify-center items-center z-10">
-              <div className="flex flex-col max-w-[800px] bg-glass rounded-3xl shadow-lg mt-20">
-                <img className="w- mx-auto rounded-xl w-[800px] translate-x-5 translate-y-5" src={img13} alt="" />
+              <div className="flex flex-col sm:max-w-[800px] bg-glass rounded-3xl shadow-lg mt-20 -translate-x-5 sm:translate-x-0">
+                <img className="w- mx-auto rounded-xl sm:w-[800px] translate-x-5 translate-y-5" src={img13} alt="" />
               </div>
             </div>
             <div className="flex w-1/2 justify-center items-center flex-col">
-              <div className="flex text-2xl text-white w-[450px] mt-10 leading-10 text-center items-center justify-center">
+              <div className="flex sm:text-2xl text-white sm:w-[450px] mt-10 leading-10 text-center items-center justify-center">
               Task is divided according to roles for ease of use.
               </div>
               <Link 
@@ -362,14 +360,14 @@ function Landing() {
           </section>
           </Element>
           <Element name="10Section">
-          <section className="flex w-full mt-10 pt-32 relative items-center">
+          <section className="flex w-full mt-10 pt-32 relative items-center  scale-75 sm:scale-100">
             <div className="flex w-1/2 justify-center items-center flex-col mt-32">
-              <div className="flex text-2xl text-white w-[600px] mt-10 leading-10 text-center items-center justify-center">
+              <div className="flex text-2xl text-white sm:w-[600px] mt-10 leading-10 text-center items-center justify-center">
               There is a calendar for convenience in event planning.
               </div>
             </div>
             <div className="flex w-1/2 justify-center items-center z-10">
-              <div className="flex flex-col max-w-[800px] bg-glass rounded-xl shadow-lg mt-20">
+              <div className="flex flex-col max-w-[800px] bg-glass translate-x-10 sm:translate-x-0 rounded-xl shadow-lg mt-20">
                 <img className=" mx-auto rounded-xl w-[800px] -translate-x-5 translate-y-5 shadow-xl" src={img14} alt="" />
               </div>
             </div>
@@ -395,13 +393,13 @@ function Landing() {
 
         </div>
         <footer className="footer">
-          <div className="flex relative">
+          <div className="flex relative justify-center">
             <img className="footer-bg z-0" src={footer} alt="" />
-            <div className="flex w-full justify-around z-10 absolute bottom-0 h-[300px]">
+            <div className="flex w-5/12 sm:w-full justify-around z-10 absolute bottom-0 sm:h-[300px] scale-75  sm:scale-100">
               <div className="flex flex-col ml-10 justify-center mb-10">
                 <img 
                 onClick={()=>navigate('/')}
-                className="w-60 h-20 cursor-pointer object-contain" src={logo} alt="" />
+                className="w-48 sm:w-60 h-20 cursor-pointer object-contain" src={logo} alt="" />
                 <div className="flex text-col1 text-xl pl-3">Manage your task with Agenda.</div>
                 <div className="flex text-col1 text mt-5 pl-3">Connect with Agenda</div>
                 <div className="flex w-full items-center pl-3 gap-5 mt-2">

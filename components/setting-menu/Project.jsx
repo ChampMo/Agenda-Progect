@@ -2,6 +2,8 @@ import React,{useState, useEffect, useRef  } from 'react'
 import './Project.css'
 import axios from "axios";
 
+import { axiosinstant } from "../../lib/axiosinstant";
+
 function Project({ workspace_id }) {
 
   const [loadInfoname, setLoadInfoname] = useState(false)
@@ -15,7 +17,7 @@ function Project({ workspace_id }) {
 
   useEffect(() => {
       const fetchAllWork = async () => {
-          axios.post("http://localhost:8000/api/workspaceinfo",{ 
+        axiosinstant.post("/api/workspaceinfo",{ 
             withCredentials: true,
             workspace_id
           })
@@ -60,7 +62,7 @@ const handleFileChange = async (event) => {
     formData.append('workspace_id', workspace_id);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/upload/workspace", formData, {
+      const response = await axiosinstant.post("/api/upload/workspace", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -81,7 +83,7 @@ const handleFileChange = async (event) => {
 const handleNameChange = async(e) => {
   const name = e.target.value;
   try{
-      await axios.put("http://localhost:8000/api/update/workspace_name", {
+      await axiosinstant.put("/api/update/workspace_name", {
           withCredentials: true,
           workspace_id: workspace_id,
           workspace_name: name,

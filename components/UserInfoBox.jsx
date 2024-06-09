@@ -4,12 +4,14 @@ import Role from "./Role.jsx";
 import axios from "axios";
 import { Icon } from '@iconify/react';
 
+import { axiosinstant } from "../lib/axiosinstant";
+
 function UserInfoBox({workspace_id, loadingInfo}) {
 
   const [ userInfos, setUserInfos ] = useState([]);
   useEffect(() => {
     const fetchRole = async () => {
-      axios.post("http://localhost:8000/api/workspace/user", {
+      axiosinstant.post("/api/workspace/user", {
         workspace_id
       })
         .then((response) => {

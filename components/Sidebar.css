@@ -55,6 +55,7 @@
     height: 60px;
     border-radius: 10px;
     object-fit: cover;
+    flex-shrink: 0;
 }
 .name-project{
     width: 200px;
@@ -130,4 +131,9 @@
     height: 50px;
     position: absolute;
     right: 20px;
+}
+@media screen and (max-width: 650px){
+    .sidebar{
+        display: none;
+    }
 }

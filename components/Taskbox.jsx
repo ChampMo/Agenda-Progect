@@ -3,6 +3,7 @@ import "./Taskbox.css";
 import axios from 'axios';
 import Role from './Role.jsx';
 import Addtask from "./Addtask.jsx";
+import { axiosinstant } from "../lib/axiosinstant";
 
 function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, selectShow, page, tasks}) {
   const [numTask, setNumTask] = useState([]);
@@ -14,7 +15,7 @@ function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, selec
     useEffect(() => {
       const getTask = async () => {
         try {
-          const response = await axios.post("http://localhost:8000/api/gettask", {
+          const response = await axiosinstant.post("/api/gettask", {
             workspace_id
           });
           if( stateTask ){
@@ -71,30 +72,34 @@ console.log('numtask',numTask)
         onClick={() => handleEditTask(items)}
         className="container-task" key={index}>
           <div className="box-task">
-            <div className="item-name">{items.task_name}</div>
-            <div className="item-task_create_date">{formatDate(items.task_create_date)}</div>
-            <div className="item-task_due_date">{formatDate(items.task_due_date)}</div>
-            <div className="item-role">
-              <Role  
-                  workspace_id = {workspace_id}
-                  page='alltask'
-                  data={items.task_id}
-                  loadInfoRole={loadInfoRole}
-              />
+            <div className="container-item">
+              <div className="item-name">{items.task_name}</div>
+              <div className="item-task_create_date">{formatDate(items.task_create_date)}</div>
+              <div className="item-task_due_date">{formatDate(items.task_due_date)}</div>
             </div>
-            <div className="item-status_task">
-              {items.status_task === 'not-start-status'&&
-              <div className="not-start-status">
-                  Not Start
-              </div>}
-              {items.status_task === 'in-progress-status'&&
-              <div className="in-progress-status">
-                  In Progress
-              </div>}
-              {items.status_task === 'done-status'&&
-              <div className="done-status">
-                  Done
-              </div>}
+            <div className="container-item2">
+              <div className="item-role">
+                <Role  
+                    workspace_id = {workspace_id}
+                    page='alltask'
+                    data={items.task_id}
+                    loadInfoRole={loadInfoRole}
+                />
+              </div>
+              <div className="item-status_task">
+                {items.status_task === 'not-start-status'&&
+                <div className="not-start-status">
+                    Not Start
+                </div>}
+                {items.status_task === 'in-progress-status'&&
+                <div className="in-progress-status">
+                    In Progress
+                </div>}
+                {items.status_task === 'done-status'&&
+                <div className="done-status">
+                    Done
+                </div>}
+              </div>
             </div>
           </div>
         </div>
@@ -103,31 +108,36 @@ console.log('numtask',numTask)
         onClick={() => handleEditTask(items)}
         className="container-task" key={index}>
           <div className="box-task">
-            <div className="item-name">{items.task_name}</div>
-            <div className="item-task_create_date">{formatDate(items.task_create_date)}</div>
-            <div className="item-task_due_date">{formatDate(items.task_due_date)}</div>
-            <div className="item-role">
-              <Role
-                  workspace_id = {workspace_id}
-                  page='alltask'
-                  data={items.task_id}
-                  loadInfoRole={loadInfoRole}
-              />
+          <div className="container-item">
+              <div className="item-name">{items.task_name}</div>
+              <div className="item-task_create_date">{formatDate(items.task_create_date)}</div>
+              <div className="item-task_due_date">{formatDate(items.task_due_date)}</div>
             </div>
-            <div className="item-status_task">
-              {items.status_task === 'not-start-status'&&
-              <div className="not-start-status">
-                  Not Start
-              </div>}
-              {items.status_task === 'in-progress-status'&&
-              <div className="in-progress-status">
-                  In Progress
-              </div>}
-              {items.status_task === 'done-status'&&
-              <div className="done-status">
-                  Done
-              </div>}
+            <div className="container-item2">
+              <div className="item-role">
+                <Role
+                    workspace_id = {workspace_id}
+                    page='alltask'
+                    data={items.task_id}
+                    loadInfoRole={loadInfoRole}
+                />
+              </div>
+              <div className="item-status_task">
+                {items.status_task === 'not-start-status'&&
+                <div className="not-start-status">
+                    Not Start
+                </div>}
+                {items.status_task === 'in-progress-status'&&
+                <div className="in-progress-status">
+                    In Progress
+                </div>}
+                {items.status_task === 'done-status'&&
+                <div className="done-status">
+                    Done
+                </div>}
+              </div>
             </div>
+            
           </div>
         </div>
       ))

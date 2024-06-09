@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Workspace.css";
 import Navinwork from "../components/Navinwork.jsx";
 import Sidebar from "../components/Sidebar.jsx";
@@ -10,6 +10,8 @@ import Profile from "../components/setting-menu/Profile.jsx";
 import Project from "../components/setting-menu/Project.jsx";
 import PeopleRole from "../components/setting-menu/PeopleRole.jsx";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { axiosinstant } from "../lib/axiosinstant";
 
 function Workspace() {
   const [loadInfoname, setLoadInfoname] = useState(false)
@@ -17,6 +19,31 @@ function Workspace() {
   const workspace_id = location.state;
   const [sidebar, setSidebar] = useState(true);
   const [componentwork, setComponentwork] = useState("Taskshow");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    
+    const Checklogin = async () => {
+        try {
+        await axiosinstant.get("/api/checklogin")
+            .then((response) => {
+            if (response.data.success) {
+                return;
+            } else {
+                navigate("/login");
+            }
+            })
+            .catch((error) => {
+            console.error(error);
+            });
+        } catch (error) {
+        console.error(error);
+        }
+    };
+    Checklogin();
+}, []);
+
+
   const renderActiveComponent = () => {
     switch (componentwork) {
       case "Taskshow":

@@ -4,6 +4,8 @@ import Taskbox from "./Taskbox.jsx";
 import axios, { all } from "axios";
 import { useState, useEffect } from "react";
 
+import { axiosinstant } from "../lib/axiosinstant";
+
 
 
 function hexToRgb(hex) {
@@ -48,7 +50,7 @@ function Roleshow({ workspace_id }) {
   useEffect(() => {
     const getRoleTask = async () => {
       try {
-        const response = await axios.post("http://localhost:8000/api/getroletask", {
+        const response = await axiosinstant.post("/api/getroletask", {
           workspace_id
         });
         setAllTask(response.data.formattedData)
@@ -78,18 +80,27 @@ function Roleshow({ workspace_id }) {
             <div className="in-role">
               <div className="topic-role">
                 <div
-                className="head_roleName"></div> 
+                className="head_roleName">
+                </div> 
                 <div 
                 style={{ background: `linear-gradient(to left, transparent, ${items.color})` , color: getContrastColor(items.color)}}
-                className="roleName" >{items.roleName}</div> 
+                className="roleName" >{items.roleName}
+                </div> 
               </div>
             </div>
               <div className="titleTable">
-              <div className="titleTable-name2">Task Name</div> 
-              <div className="titleTable-cdate">Task Create Date</div> 
-              <div className="titleTable-ddate">Task Due Date</div> 
-              <div className="titleTable-role">role</div> 
-              <div className="titleTable-status">Status</div> 
+                <div className="container-item">
+                <div className="titleTable-name">Task Name</div> 
+                <div className="titleTable-cdate">Task Create Date</div> 
+                <div className="titleTable-ddate">Task Due Date</div> 
+              </div>
+              <div className="container-item2">
+                <div className="titleTable-role">role</div> 
+                <div 
+                onClick={()=>setStateFilter(!stateFilter)}
+                className="titleTable-status">Status 
+                </div>
+              </div>
             </div>
             <Taskbox workspace_id={workspace_id} page="Roleshow" tasks = {items.tasks}/>
           </div>

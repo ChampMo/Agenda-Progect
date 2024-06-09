@@ -6,6 +6,7 @@ import { Tooltip } from 'react-tooltip';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Addtask from './Addtask.jsx';
+import { axiosinstant } from "../lib/axiosinstant";
 
 
 function Scheduleshow({workspace_id}) {
@@ -47,7 +48,7 @@ function Scheduleshow({workspace_id}) {
   useEffect(() => {
     const getTask = async () => {
       try {
-        const response = await axios.post("http://localhost:8000/api/gettask", {
+        const response = await axiosinstant.post("/api/gettask", {
           workspace_id
         });
         console.log('response.data.task',response.data.task)

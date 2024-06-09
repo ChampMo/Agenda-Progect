@@ -3,6 +3,7 @@ import "./Addtask.css";
 import Role from "./Role";
 import { faBorderAll } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { axiosinstant } from "../lib/axiosinstant";
 
 function Addtask({ setAtciveaddtask , workspace_id, setLoadInfo, task, page2 }) {
     const [classcomponentaddtask, setClasscomponentaddtask] = useState("component-addtask");
@@ -29,7 +30,7 @@ console.log('datadatadata---',data)
         if (data.taskname.replace(/\s+/g, "") === "") {
             return;
         }
-        await axios.post("http://localhost:8000/api/addtask", {
+        await axiosinstant.post("/api/addtask", {
             data,
             workspace_id
         })
@@ -45,7 +46,7 @@ console.log('datadatadata---',data)
         if (data.taskname.replace(/\s+/g, "") === "") {
             return;
         }
-        await axios.put("http://localhost:8000/api/savetask", {
+        await axiosinstant.put("/api/savetask", {
             data,
             task_id:task.task_id,
             workspace_id
@@ -71,7 +72,7 @@ console.log('datadatadata---',data)
 
     const handleDeleteTask = async () => {
         try {
-            const response = await axios.delete("http://localhost:8000/api/deletetask", {
+            const response = await axiosinstant.delete("/api/deletetask", {
                 data: { task_id: task.task_id }
             });
             console.log(response.data);
@@ -113,14 +114,14 @@ console.log('datadatadata---',data)
                 />
                 </div>
                 <div className="bgaddt">
-                <div className="text-duedate">Due Date :</div>
-                <input
-                    type="date"
-                    className="duedate"
-                    name="duedate"
-                    onChange={onChange}
-                    value={data.duedate!==null?data.duedate.split('T')[0]:''}
-                />
+                    <div className="text-duedate">Due Date :</div>
+                    <input
+                        type="date"
+                        className="duedate"
+                        name="duedate"
+                        onChange={onChange}
+                        value={data.duedate!==null?data.duedate.split('T')[0]:''}
+                    />
                 </div>
                 <div className="bgaddt">
                 <div className="text-role">Role </div>
@@ -136,10 +137,10 @@ console.log('datadatadata---',data)
 
                 </div>
                 </div>
-                <div className="bgaddt">
+                <div className="bgaddt bd-status">
                 <div className="text-status">Status </div>
                 {data.status === "not-start-status" && (
-                    <>
+                    <div className="bg-status-addtask">
                     <div
                         className="not-start-status"
                         onClick={() =>
@@ -164,10 +165,10 @@ console.log('datadatadata---',data)
                     >
                         Done
                     </div>
-                    </>
+                    </div>
                 )}
                 {data.status === "in-progress-status" && (
-                    <>
+                    <div className="bg-status-addtask">
                     <div
                         className="not-start-status"
                         onClick={() =>
@@ -192,10 +193,10 @@ console.log('datadatadata---',data)
                     >
                         Done
                     </div>
-                    </>
+                    </div>
                 )}
                 {data.status === "done-status" && (
-                    <>
+                    <div className="bg-status-addtask">
                     <div
                         className="not-start-status"
                         onClick={() =>
@@ -220,7 +221,7 @@ console.log('datadatadata---',data)
                     >
                         Done
                     </div>
-                    </>
+                    </div>
                 )}
                 </div>
                 

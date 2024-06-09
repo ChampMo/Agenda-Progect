@@ -1,11 +1,12 @@
 import "./Share.css";
 import axios from "axios";
 import { useState } from "react";
+import { axiosinstant } from "../lib/axiosinstant";
 
 function Share({share_request, setLoadingInfo, deletingIndex, setDeletingIndex}) {
     const handleReject = async (share, index) => {
         try {
-            await axios.put("http://localhost:8000/api/request_reject",{ 
+            await axiosinstant.put("/api/request_reject",{ 
                 withCredentials: true,
                 workspace_id: share.workspace_id,
                 req_user_id: share.req_user_id})
@@ -27,7 +28,7 @@ function Share({share_request, setLoadingInfo, deletingIndex, setDeletingIndex})
     const handleAccept = async (share, index) => {
         
         try {
-            await axios.put("http://localhost:8000/api/request_accept",{ 
+            await axiosinstant.put("/api/request_accept",{ 
                 withCredentials: true,
                 workspace_id: share.workspace_id})
                 .then((response) => {

@@ -4,6 +4,7 @@ import Taskbox from "./Taskbox.jsx";
 import Addtask from "./Addtask.jsx";
 import axios from "axios";
 import { Icon } from '@iconify/react';
+import { axiosinstant } from "../lib/axiosinstant";
 
 function Taskshow({ workspace_id }) {
   const [loadInfo, setLoadInfo] = useState(false);
@@ -46,7 +47,7 @@ function Taskshow({ workspace_id }) {
 
   const getMyTask = async () => {
     try{
-        await axios.post("http://localhost:8000/api/getusertask", {
+        await axiosinstant.post("/api/getusertask", {
           workspace_id,
           withCredentials: true 
         })
@@ -107,19 +108,23 @@ const handleClickOutside = (event) => {
             </div>
           </div>
           <div className="titleTable">
-            <div className="titleTable-name">Task Name</div> 
-            <div className="titleTable-cdate">Task Create Date</div> 
-            <div className="titleTable-ddate">Task Due Date</div> 
-            <div className="titleTable-role">role</div> 
-            <div 
-            onClick={()=>setStateFilter(!stateFilter)}
-            className="titleTable-status">Status 
-              <Icon
-              className="icon-titleTable-status" 
-              icon={stateFilter?'mingcute:up-fill':"mingcute:down-fill"} 
-              width="20" 
-              height="20" />
-            </div> 
+            <div className="container-item">
+              <div className="titleTable-name">Task Name</div> 
+              <div className="titleTable-cdate">Task Create Date</div> 
+              <div className="titleTable-ddate">Task Due Date</div> 
+            </div>
+            <div className="container-item2 container-item3">
+              <div className="titleTable-role">role</div> 
+              <div 
+              onClick={()=>setStateFilter(!stateFilter)}
+              className="titleTable-status">Status 
+                <Icon
+                className="icon-titleTable-status" 
+                icon={stateFilter?'mingcute:up-fill':"mingcute:down-fill"} 
+                width="20" 
+                height="20" />
+              </div>
+            </div>
             <div 
             ref={dropdownRef}
             className={stateFilter?"dropdown open":"dropdown"}>

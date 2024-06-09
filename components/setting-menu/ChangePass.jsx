@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import './ChangePass.css';
 import axios from 'axios';
+import { axiosinstant } from "../../lib/axiosinstant";
 
 function ChangePass({setAtcivecpass}){
     const [classcomponentcpass, setClasscomponentcpass] = useState('component-cpass');
@@ -21,7 +22,7 @@ function ChangePass({setAtcivecpass}){
         if(newPassword === reNewPassword && newPassword.length >= 6){
             setNotpass(false)
             try {
-                await axios.put("http://localhost:8000/changepassword",{
+                await axiosinstant.put("/changepassword",{
                     oldPassword,
                     newPassword
                 })

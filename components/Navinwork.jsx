@@ -4,6 +4,7 @@ import loGoW from "../public/images/logo-white.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { axiosinstant } from "../lib/axiosinstant";
 
 function Navinwork({loadInfoname}) {
   
@@ -12,7 +13,7 @@ function Navinwork({loadInfoname}) {
 
   useEffect(() => {
       const fetchAllWork = async () => {
-          axios.get("http://localhost:8000/api/profileInfo",{ withCredentials: true })
+        axiosinstant.get("/api/profileInfo",{ withCredentials: true })
               .then((response) => {
               setUserInfo(response.data.userInfo);
               })

@@ -4,6 +4,8 @@ import ChangePass from './ChangePass.jsx'
 import axios from "axios";
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
+import { axiosinstant } from "../../lib/axiosinstant";
+
 
 function Profile({loadInfoname, setLoadInfoname, type}) {
 
@@ -16,7 +18,7 @@ function Profile({loadInfoname, setLoadInfoname, type}) {
   useEffect(() => {
     
       const fetchAllWork = async () => {
-          axios.get("http://localhost:8000/api/profileInfo",{ withCredentials: true })
+        axiosinstant.get("/api/profileInfo",{ withCredentials: true })
               .then((response) => {
               setUserInfo(response.data.userInfo);
               setName(response.data.userInfo.username)
@@ -35,7 +37,7 @@ function Profile({loadInfoname, setLoadInfoname, type}) {
   const handleChangeName = async (e) => {
     try {
         const newName = e.target.value;
-        const response = await axios.put("http://localhost:8000/api/update/username", {
+        const response = await axiosinstant.put("/api/update/username", {
           withCredentials: true, 
           username: newName
         });
@@ -63,7 +65,7 @@ const handleFileChange = async (event) => {
     formData.append('profile', file);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/upload/profile", formData, {
+      const response = await axiosinstant.post("/api/upload/profile", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
