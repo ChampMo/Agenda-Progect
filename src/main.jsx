@@ -7,6 +7,7 @@ import AllWork from '../app/AllWork.jsx';
 import Landing from '../app/Landing.jsx';
 import Login from '../app/Login.jsx';
 import Workspace from '../app/Workspace.jsx';
+import Setting from '../components/setting-menu/Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,16 @@ const router = createBrowserRouter([
   {
     path: "workspace",
     element: <Workspace/>
+  },
+  {
+    path: "setting",
+    element: 
+    <>
+      <div className="container-setting">
+        <Setting type={'setting'}/>
+      </div>
+    </>
+    
   },
 ])
 

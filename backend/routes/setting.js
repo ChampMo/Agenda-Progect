@@ -271,18 +271,28 @@ router.post("/api/workspace/user", async (req, res) => {
 router.post("/api/workspace/user/role", async (req, res) => {
     try {
         const { workspace_id, user_id } = req.body;
-        const roleUser = await RoleUser.find({ user_id });
-        
-        const role = [];
-        for (let i = 0; i < roleUser.length; i++) {
-            const roleInfo = await Role.findOne({ role_id:roleUser[i].role_id });
-            role.push(roleInfo);
-        }
 
+        // Find all roles in the workspace
+        const roleWork = await Role.find({ workspace_id });
+
+        // Find all roles for the user
+        const roleUser = await RoleUser.find({ user_id });
+
+        // Fetch role information for each roleUser
+        const role = await Promise.all(
+            roleUser.map(async (roleUserItem) => {
+                return await Role.findOne({ role_id: roleUserItem.role_id });
+            })
+        );
+
+        // Filter roles that exist in both roleWork and role
+        const roleUserWork = roleWork.filter((roleWorkItem) => {
+            return role.some(roleItem => roleItem.role_id === roleWorkItem.role_id);
+        });
 
         return res.json({
-            userInfo: {role_id : role},
-            massage: "Send Role User Successfully!",
+            userInfo: { role_id: roleUserWork },
+            message: "Send Role User Successfully!",
         });
     } catch (error) {
         console.error(error);
@@ -290,15 +300,29 @@ router.post("/api/workspace/user/role", async (req, res) => {
     }
 });
 
+
 router.post("/api/workspace/user/roleadd", async (req, res) => {
     try {
-        const { user_id, role_id } = req.body;
-        await RoleUser.deleteMany({ user_id });
+        const { user_id, workspace_id, role_id } = req.body;
+        console.log(req.body)
+        const result = await Role.find({ workspace_id });
+        const roleWork = result.map(role => role.role_id);
+
+        const roleUser = await RoleUser.find({ role_id:roleWork, user_id });
+        const roleUserWork = roleUser.map(role => role.role_id);
+        console.log(roleUser)
+
+        
+        for (let i = 0; i < roleUser.length; i++) {
+            await RoleUser.deleteOne({ role_id: roleUser[i].role_id, user_id });
+        }
+
         let results = [];
         for (let i = 0; i < role_id.length; i++) {
             const result = await RoleUser.create({ user_id, role_id: role_id[i] });
             results.push(result);
         }
+
         res.json({ results, message: 'Add Role User successfully!' });
     } catch (error) {
         console.error(error);

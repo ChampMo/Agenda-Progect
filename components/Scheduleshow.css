@@ -73,34 +73,31 @@
     padding: 40px 20px 30px 20px; /* Optional: Add padding */
     background: linear-gradient(145deg, #c1d1f1d7, #a6d7ebec);
     box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  }
+}
 
 /* Custom styles for FullCalendar grid lines */
 .fc .fc-col-header-cell {
     border-color: #ffffff; /* Change to your desired grid line color */
-  }
-  
-  .fc .fc-daygrid-day {
+}
+
+.fc .fc-daygrid-day {
     border-color: #ffffff; /* Change to your desired grid line color */
-  }
-  
+}
+
   /* You can also add hover effects or other styles as needed */
-  .fc .fc-daygrid-day:hover {
+.fc .fc-daygrid-day:hover {
     background-color: rgba(255, 255, 255, 0.1); /* Example hover effect */
-  }
-  
-  
+}
 /* Custom styles for the outer border of FullCalendar */
 
-  
+
   /* Additional customization for the outer container */
-  .fc .fc-toolbar {
+.fc .fc-toolbar {
     padding-bottom: 10px;
     border-bottom: 3px solid #ffffff;
-  }
-  
-  .fc .fc-view-harness {
-    border: 2px solid #ffffff; /* Change to your desired border color */
+}
+
+.fc .fc-view-harness {
+    border: 1px solid #ffffff; /* Change to your desired border color */
     border-radius: 10px;
-  }
-  
+}

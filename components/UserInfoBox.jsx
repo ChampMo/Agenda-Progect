@@ -4,7 +4,7 @@ import Role from "./Role.jsx";
 import axios from "axios";
 import { Icon } from '@iconify/react';
 
-function UserInfoBox({workspace_id}) {
+function UserInfoBox({workspace_id, loadingInfo}) {
 
   const [ userInfos, setUserInfos ] = useState([]);
   useEffect(() => {
@@ -21,7 +21,7 @@ function UserInfoBox({workspace_id}) {
         });
     }
     fetchRole();
-  }, []);
+  }, [loadingInfo]);
 
 
   return (
@@ -41,6 +41,7 @@ function UserInfoBox({workspace_id}) {
             workspace_id = {workspace_id}
             page = 'userinfobox'
             data = {user.user_id}
+            loadingInfo = {loadingInfo}
           />
         </div>
       </div>

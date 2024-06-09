@@ -4,6 +4,7 @@ import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
 import { Icon } from '@iconify/react';
 
+
 function hexToRgb(hex) {
   hex = hex.replace(/^#/, '');
 
@@ -59,7 +60,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
+  console.log('+---------------------',data)
   useEffect(() => {
     const getRole = async () => {
       if(page === 'alltask'){
@@ -272,6 +273,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
     if (containerRef.current && !containerRef.current.contains(event.target)) {
 
       setStatePopup(false); // Close popup 
+      setLoadingInfo2(p=>!p)
       console.log('close')
 
      
@@ -284,6 +286,7 @@ function Role({ workspace_id, loadingInfo, setLoadingInfo, loadInfoRole, page, s
       
       const response = await axios.post("http://localhost:8000/api/workspace/user/roleadd", {
         user_id: data,
+        workspace_id,
         role_id: roleSelectToChange,
         withCredentials: true
       });

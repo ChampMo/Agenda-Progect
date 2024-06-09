@@ -14,7 +14,11 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    transition-duration: 0.2s;
+    transition-duration: 0.3s;
+}
+.box-task:active{
+    scale: 0.96;
+    transition-duration: 0.3s;
 }
 .item-task_create_date, .item-task_due_date{
     display: flex;

@@ -74,6 +74,7 @@
     align-items: center;
     transition-duration: 0.2s;
     color: #888888;
+    position: relative;
 }
 .titleTable-cdate,.titleTable-ddate{
     display: flex;
@@ -98,7 +99,71 @@
     display: flex;
     align-items: center;
     justify-content: flex-end ;
-    padding-right: 60px;
+    margin-right: 50px;
     width: 15%;
+    
+}
+.icon-titleTable-statu{
+    flex-shrink: 0;
+}
+.dropdown{
+    position: absolute;
+    top: -40px;
+    right: 25px;
+    background-color: #ffffff7a;
+    width: 150px;
+    height: auto;
+    padding: 15px 0;
+    gap: 10px;
+    z-index: 1000;
+    border-radius: 15px;
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    transition-duration: 0.3s;
+    scale: 0;
+}
+.open{
+    transform: translateY(80px);
+    scale: 1;
+}
+.dropdown-item1{
+    padding: 2px 0;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    background-color: #5d5d5d;
+    color: #fff;
+    border-radius: 50px;
+}
+.dropdown-item2{
+    padding: 2px 0;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    background-color: #1c70d1;
+    color: #fff;
+    border-radius: 50px;
+}
+.dropdown-item3{
+    padding: 2px 0;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    background-color: #0dc404;
+    color: #fff;
+    border-radius: 50px;
 }
 

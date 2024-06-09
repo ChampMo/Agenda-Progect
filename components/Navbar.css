@@ -41,6 +41,12 @@
     align-items: center;
     gap: 20px;
 }
+.bg-profile{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
 .logout{
     color: #fff;
 }

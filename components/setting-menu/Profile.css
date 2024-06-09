@@ -1,8 +1,44 @@
 .profile-show{
     width: 100%;
 }
+.profile-showset{
+    display: flex;
+    background: #ffffff1f;
+    padding: 30px 20px 80px 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    flex-direction: column;
+    color: #ffffff;
+}
+.bg-title-profile{
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+}
+.icon-title-profile{
+    font-size: 40px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.icon-title-profile:hover{
+    color: #e8fcff;
+}
+.icon-title-profile:active{
+    scale: 0.9;
+}
+
+.title-profile{
+    font-size: 40px;
+    font-weight: 700;
+    margin-left: 10px;
+    color: #ffffff;
+    display: flex;
+}
 .profile-box{
     margin-left: 50px;
+    display: flex;
+}
+.profile-boxset{
     display: flex;
 }
 .container-picture-profile{
@@ -14,6 +50,14 @@
     justify-content: flex-end;
     margin-top: 250px;
     
+}
+.container-picture-profileset{
+    max-width: 600px;
+    width: 100%;
+    height: 300px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 .bg-img-profile{
     position: relative;
@@ -50,6 +94,18 @@
     margin-top: 250px;
     margin-right: 50px;
 }
+.info-profileset{
+    margin-left: 5%;
+    width: 400px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-right: 50px;
+}
 .name-profile{
     display: flex;
     flex-wrap: wrap;
@@ -63,8 +119,22 @@
     border-bottom: 1px solid #8d8d8d;
     padding-left: 5px;
 }
+.name-infoset{
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 600;
+    border-bottom: 1px solid #bbbbbb;
+    padding-left: 5px;
+    color: #ffffff;
+
+}
 .name-info:focus{
     border-bottom: 1px solid #000000;
+}
+.name-infoset:focus{
+    border-bottom: 1px solid #ffffff;
 }
 .change-pass-profile{
     width: 200px;
