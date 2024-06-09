@@ -39,14 +39,14 @@ router.post("/api/gettask", async (req,res)=>{
 //     }
 // })
 
-router.post("/api/getroletask", async (req,res)=>{
+router.post("/api/getroletask", async (req, res) => {
     try {
         const { workspace_id } = req.body;
 
         // Find roles based on workspace_id
         const roles = await Role.find({ workspace_id });
         const roleMap = roles.reduce((map, role) => {
-            map[role.role_id] = role.role_name; // Pair role_id with role_name
+            map[role.role_id] = { role_name: role.role_name, color: role.color }; // Store role_name and color
             return map;
         }, {});
 
@@ -67,45 +67,19 @@ router.post("/api/getroletask", async (req,res)=>{
         for (const roleId of Object.keys(roleTasksMap)) {
             const taskIds = roleTasksMap[roleId];
             const tasks = await Task.find({ task_id: { $in: taskIds } });
-            taskDetailsMap[roleMap[roleId]] = tasks; // Use role name as key instead of role_id
+            taskDetailsMap[roleId] = tasks; // Use role_id as key for now
         }
 
         // Convert taskDetailsMap to the desired format
-        const formattedData = Object.entries(taskDetailsMap).map(([roleName, tasks]) => ({
-            roleName,
+        const formattedData = Object.entries(taskDetailsMap).map(([roleId, tasks]) => ({
+            roleName: roleMap[roleId].role_name,
+            color: roleMap[roleId].color,
             tasks
         }));
 
         res.json({ formattedData, message: "Send Task successfully!" });
-    
-
-    // try{
-    //     const { workspace_id } = req.body;
-    //     // Fetch tasks by workspace_id
-    //     const tasks = await Task.find({ workspace_id });
-    //     const task_ids = tasks.map(task => task.task_id);
-
-    //     // Fetch RoleTask entries using task_ids
-    //     const roleTasks = await RoleTask.find({ task_id: { $in: task_ids } });
-    //     const role_ids = roleTasks.map(roleTask => roleTask.role_id);
-
-    //     // Fetch Roles using role_ids
-    //     const roles = await Role.find({ role_id: { $in: role_ids } });
-
-    //     // Combine tasks and roles based on roleTasks
-    //     const allTask = tasks.map(task => {
-    //     const relatedRoleTasks = roleTasks.filter(rt => rt.task_id === task.task_id);
-    //     const relatedRoles = relatedRoleTasks.map(rt => roles.find(role => role.role_id === rt.role_id));
-
-    //     return {
-    //         ...task._doc, // Use _doc to access the raw task document
-    //         roles: relatedRoles
-    //     };
-    //     });
-    //     res.json({allTask, massage: "Get Role Task successfully!"})
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: "An error occurred while fetching tasks." });
     }
 });
 
