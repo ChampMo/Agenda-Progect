@@ -104,7 +104,7 @@ console.log(share_request);
                     </div>
                     <div className="work">
                         <div className="mail">
-                            <h4>Workspaces for {userInfo.username ? userInfo.username : 'you'}.</h4>
+                            <h4>Workspaces for {userInfo.username ? userInfo.username : 'you'}</h4>
                         </div>
                         <div className="container-work">
                             <Work loadingInfo={loadingInfo} setLoadingInfo={setLoadingInfo}/>

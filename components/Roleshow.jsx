@@ -4,6 +4,43 @@ import Taskbox from "./Taskbox.jsx";
 import axios, { all } from "axios";
 import { useState, useEffect } from "react";
 
+
+
+function hexToRgb(hex) {
+  hex = hex.replace(/^#/, '');
+
+  if (hex.length === 3) {
+    hex = hex.split('').map(function (char) {
+      return char + char;
+    }).join('');
+  }
+
+  var bigint = parseInt(hex, 16);
+  var r = (bigint >> 16) & 255;
+  var g = (bigint >> 8) & 255;
+  var b = bigint & 255;
+
+  return 'rgb(' + [r, g, b].join(', ') + ')';
+}
+
+function getContrastColor(color) {
+  color = hexToRgb(color);
+
+  if (!color || !/^rgb\(\d+,\s*\d+,\s*\d+\)$/.test(color)) {
+    return "black";
+  }
+
+  const rgb = color.match(/\d+/g).map(Number);
+
+  const luminance = (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]) / 255;
+
+  const contrastColor = luminance < 0.5 ? "white" : "black";
+  return contrastColor;
+}
+
+
+
+
 function Roleshow({ workspace_id }) {
   const [allTask, setAllTask] = useState();
 
@@ -27,6 +64,7 @@ function Roleshow({ workspace_id }) {
   if (allTask !== undefined){
     console.log('allTaskallTaskallTask',allTask)
   }
+  
   return (
     <>
       <div className="role-show">
@@ -40,9 +78,10 @@ function Roleshow({ workspace_id }) {
             <div className="in-role">
               <div className="topic-role">
                 <div
-                style={{backgroundColor: items.color}}
                 className="head_roleName"></div> 
-                <div className="roleName" >{items.roleName}</div> 
+                <div 
+                style={{ background: `linear-gradient(to left, transparent, ${items.color})` , color: getContrastColor(items.color)}}
+                className="roleName" >{items.roleName}</div> 
               </div>
             </div>
               <div className="titleTable">

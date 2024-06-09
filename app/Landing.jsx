@@ -188,8 +188,9 @@ function Landing() {
             <div className="flex w-1/2 justify-center items-center flex-col">
               <h2 className="flex text-4xl text-white ">Log in and let's get started.</h2>
               <div className="flex text-2xl text-white w-[450px] mt-10 leading-10 text-center items-center">
+              Log in and
               Let's start your planning with agenda.
-              Start by managing your profile.
+              Start by manage your profile.
               </div>
               <Link 
               to="3Section" 
@@ -204,7 +205,7 @@ function Landing() {
           <section className="flex w-full mt-52 pt-20">
             <div className="flex w-1/2 justify-center items-center flex-col z-10 -translate-x-8">
               <div className="flex text-2xl text-col1 w-[500px] mt-10 leading-10 text-center">
-              Let's start creating your work by pressing the create button.
+              Create your work by pressing the create.
               </div>
               <Link 
               to="4Section" 
@@ -254,10 +255,10 @@ function Landing() {
             </div>
             <div className="flex w-1/2 justify-around items-center flex-col z-10 -translate-x-8">
               <div className="flex text-2xl text-white w-[500px] leading-10 text-center justify-center">
-              Multitasking can be done by inviting your teammates.
+              Work with multiple people by inviting your teammates.
               </div>
               <div className="flex text-2xl text-white w-[500px] leading-10 text-center justify-center">
-              Your friends will be able to join.
+              Your friends will be able to accept the invitation.
               </div>
               
             </div>
@@ -280,7 +281,7 @@ function Landing() {
             </div>
             <div className="flex w-full justify-around items-center z-10 mt-5">
               <div className="flex text-2xl text-white w-[500px] mt-10 leading-10 text-center justify-center">
-              Able to manage various roles
+              Can to manage various roles
               </div>
               <div className="flex text-2xl text-white w-[500px] mt-10 leading-10 text-center justify-center">
               Allocate a role for each person.
@@ -304,7 +305,7 @@ function Landing() {
             </div>
             <div className="flex w-1/2 justify-center items-center flex-col">
               <div className="flex text-2xl text-white w-[450px] mt-10 leading-10 text-center items-center justify-center">
-              ...
+              Next, let's add tasks.
               </div>
               <Link 
               to="8Section" 
@@ -322,7 +323,7 @@ function Landing() {
               You can edit various tasks and view your own work.
               </div>
               <div className="flex text-2xl text-white w-[450px] mt-10 leading-10 text-center items-center justify-center">
-              You can filter jobs according to status.
+              You can filter tasks according to status.
               </div>
               <Link 
               to="9Section" 
@@ -349,7 +350,7 @@ function Landing() {
             </div>
             <div className="flex w-1/2 justify-center items-center flex-col">
               <div className="flex text-2xl text-white w-[450px] mt-10 leading-10 text-center items-center justify-center">
-              Work is divided into roles for ease of use.
+              Task is divided according to roles for ease of use.
               </div>
               <Link 
                 to="10Section" 

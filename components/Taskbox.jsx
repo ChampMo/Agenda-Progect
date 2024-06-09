@@ -27,7 +27,11 @@ function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, selec
               const updatedNumTask2 = updatedNumTask.filter(task => selectShow.includes(task.status_task));
               setNumTask(updatedNumTask2);
               setLoadInfoRole(p=>!p)
+            }else{
+              setNumTask([]);
+              setLoadInfoRole(p=>!p)
             }
+
             
           }
 
