@@ -84,7 +84,7 @@ function Sidebar({ setSidebar, setComponentwork, componentwork, workspace_id }) 
             <div className="profile-project">
               <img src={workspaceInfo!==null?workspaceInfo.workspace_icon:''} className="img-profile-workspace" />
             </div>
-            <input readOnly value={workspaceInfo.workspace_name} className="name-project"/>
+            <input readOnly value={workspaceInfo!==undefined?workspaceInfo.workspace_name:''} className="name-project"/>
           </div>
           <div className="manu-sidebar">
             <div className={classbgbt}>

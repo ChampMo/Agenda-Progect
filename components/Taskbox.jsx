@@ -4,7 +4,7 @@ import axios from 'axios';
 import Role from './Role.jsx';
 import Addtask from "./Addtask.jsx";
 
-function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, page, tasks }) {
+function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, selectShow, page, tasks}) {
   const [numTask, setNumTask] = useState([]);
   const [loadInfoRole, setLoadInfoRole] = useState(false);
   const [roleTask, setRoleTask] = useState([]);
@@ -18,10 +18,17 @@ function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, page,
             workspace_id
           });
           if( stateTask ){
-            setNumTask(response.data.task);
-          }else{
-            const updatedNumTask = response.data.task.filter(task => myTask.includes(task.task_id));
+            const updatedNumTask = response.data.task.filter(task => selectShow.includes(task.status_task));
             setNumTask(updatedNumTask);
+            setLoadInfoRole(p=>!p)
+          }else{
+            if(myTask !== undefined){
+              const updatedNumTask = response.data.task.filter(task => myTask.includes(task.task_id));
+              const updatedNumTask2 = updatedNumTask.filter(task => selectShow.includes(task.status_task));
+              setNumTask(updatedNumTask2);
+              setLoadInfoRole(p=>!p)
+            }
+            
           }
 
         } catch (error) {
@@ -35,10 +42,10 @@ function Taskbox({ workspace_id, loadInfo, setLoadInfo, stateTask, myTask, page,
           getTask();
         }
       }
-    }, [workspace_id, loadInfo, stateTask, myTask]);
+    }, [workspace_id, loadInfo, stateTask, myTask, selectShow]);
   
   
-
+console.log(numTask)
   // ฟังก์ชันสำหรับจัดรูปแบบวันที่
   const formatDate = (isoDate) => {
     if (!isoDate) return ""; // จัดการกรณีที่วันที่เป็น undefined หรือ null
@@ -54,7 +61,7 @@ console.log('numtask',numTask)
 
   return (
     <>
-      {numTask.length === 0 ? <div className="no-task">{stateTask?"Don't have a job yet.":"You don't have a job yet."}</div>:
+      {numTask.length === 0 ? <div className="no-task">{stateTask?"Don't have a task yet.":"You don't have a task yet."}</div>:
       page !== "Roleshow" ? numTask.map((items, index) => (
         <div 
         onClick={() => handleEditTask(items)}
@@ -96,10 +103,11 @@ console.log('numtask',numTask)
             <div className="item-task_create_date">{formatDate(items.task_create_date)}</div>
             <div className="item-task_due_date">{formatDate(items.task_due_date)}</div>
             <div className="item-role">
-              <Role  
+              <Role
                   workspace_id = {workspace_id}
                   page='alltask'
                   data={items.task_id}
+                  loadInfoRole={loadInfoRole}
               />
             </div>
             <div className="item-status_task">

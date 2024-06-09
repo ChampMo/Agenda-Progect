@@ -2,15 +2,19 @@ import React,{useState, useEffect, useRef  } from 'react'
 import './Profile.css'
 import ChangePass from './ChangePass.jsx'
 import axios from "axios";
+import { Icon } from '@iconify/react';
+import { useNavigate } from 'react-router-dom';
 
-function Profile({loadInfoname, setLoadInfoname}) {
+function Profile({loadInfoname, setLoadInfoname, type}) {
 
   const [atcivecpass, setAtcivecpass] = useState(false)
+  const [loadInfo, setLoadInfo] = useState(false)
   const [userInfo, setUserInfo] = useState({});
   const [name, setName] = useState('')
   const fileInputRef = useRef(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
+    
       const fetchAllWork = async () => {
           axios.get("http://localhost:8000/api/profileInfo",{ withCredentials: true })
               .then((response) => {
@@ -22,7 +26,7 @@ function Profile({loadInfoname, setLoadInfoname}) {
               });
       }
       fetchAllWork();
-  }, [loadInfoname]);
+  }, [loadInfoname, loadInfo]);
 
 
   const cpass =()=>{
@@ -35,8 +39,12 @@ function Profile({loadInfoname, setLoadInfoname}) {
           withCredentials: true, 
           username: newName
         });
-
-        setLoadInfoname(p=>!p)
+        if(type==="setting"){
+          setLoadInfo(p=>!p)
+        }else{
+          setLoadInfoname(p=>!p)
+        }
+        
         console.log(response.data);
     } catch (error) {
         console.error(error);
@@ -72,13 +80,21 @@ const handleFileChange = async (event) => {
     }
   }
 };
-
+const handleGoBack = () => {
+  navigate(-1);
+};
   
   return (
     <>
-        <div className='profile-show'>
-            <div className='profile-box'>
-                <div className="container-picture-profile">
+        <div className={type==="setting"?'profile-showset':'profile-show'}>
+            {type==="setting"&& 
+            <div className="bg-title-profile">
+              <Icon onClick={handleGoBack} className="icon-title-profile" icon="ion:caret-back" width="40" height="40" />
+              <div className="title-profile">Profile</div>
+            </div>
+            }
+            <div className={type==="setting"?'profile-boxset':'profile-box'}>
+                <div className={type==="setting"?'container-picture-profileset':"container-picture-profile"}>
                 <input 
                   type="file" 
                   ref={fileInputRef} 
@@ -92,10 +108,10 @@ const handleFileChange = async (event) => {
                   alt="Profile" 
                 />
                 </div>
-                <div className="info-profile">
+                <div className={type==="setting"?'info-profileset':"info-profile"}>
                     <div className="email-profile">Email : {userInfo.email}</div>
                     <div className="name-profile">Username :&nbsp;
-                    <input className="name-info" value={name} onChange={(e) => handleChangeName(e)} />
+                    <input className={type==="setting"?'name-infoset':"name-info"} value={name} onChange={(e) => handleChangeName(e)} />
                     </div>
                     <div className="change-pass-profile" onClick={cpass}>Change Password</div>
                 </div> 

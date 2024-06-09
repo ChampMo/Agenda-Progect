@@ -162,6 +162,7 @@ router.put("/api/request_accept/", async (req, res) => {
             });
         }
 
+
         const updatePromises = result.map(result => {
             result.status = 'accept';
             return result.save();

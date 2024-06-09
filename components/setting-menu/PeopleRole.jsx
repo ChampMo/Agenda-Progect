@@ -140,7 +140,7 @@ return (
                     <div className="head-username">Usermane</div>
                     <div className="head-role">Role</div>
                 </div>
-                <UserInfoBox workspace_id={workspace_id}/>
+                <UserInfoBox workspace_id={workspace_id} loadingInfo={loadingInfo}/>
             </div>
             <div className="bgexit-workspace">
                 <div className="exit-workspace" onClick={exitWorkspace}>Exit Workspace</div>
