@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { axiosinstant } from "../lib/axiosinstant";
+import { Icon } from '@iconify/react';
+
 
 function FormLogin(props) {
   
   const { change } = props;
   const navigate = useNavigate();
+  const [typePasswordlog, setTypePasswordlog] = useState('password');
 
   const submitData = async () => {
     try {
@@ -73,14 +76,27 @@ function FormLogin(props) {
         <label htmlFor="password" className="text-passlogin">
           Password
         </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className="input-passlogin"
-          value={password}
-          onChange={handleChange}
-        />
+        
+        <div className="bg-input-login">
+          <input
+            type={typePasswordlog}
+            id="password"
+            name="password"
+            className="input-passlogin"
+            value={password}
+            onChange={handleChange}
+          />
+          {typePasswordlog === "password" 
+            ? <Icon 
+                onClick={() => setTypePasswordlog("text")}
+                icon="majesticons:eye-line" width="25" height="25" 
+                className="eye-close"/>
+            :<Icon 
+                onClick={() => setTypePasswordlog("password")}
+                icon="iconamoon:eye-off" width="25" height="25" 
+                className="eye-open"/>}
+        </div>
+
         <div className="invalidlogin">{statusEmailPass}</div>
         <div className="bg-button-login">
           <div className="button-goto-signup">

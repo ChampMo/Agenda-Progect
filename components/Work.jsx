@@ -184,6 +184,10 @@ function Work({loadingInfo, setLoadingInfo}) {
                                     className="icon-drag-drop">
                                         <Icon   icon="mingcute:dots-fill" width="25" height="25" />
                                     </div>
+                                    <div className="bg-icon_workspace">
+                                        <img className="icon_workspace" src={workspace.workspace_icon}/>
+                                    </div>
+
                                     <input
                                         type="text"
                                         onChange={(e) =>

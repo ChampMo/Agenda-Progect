@@ -15,6 +15,7 @@ import { axiosinstant } from "../lib/axiosinstant";
 
 function Workspace() {
   const [loadInfoname, setLoadInfoname] = useState(false)
+  const [loadInfo, setLoadInfo] = useState(false)
   const location = useLocation();
   const workspace_id = location.state;
   const [sidebar, setSidebar] = useState(true);
@@ -56,7 +57,7 @@ function Workspace() {
       case "Profile":
         return <Profile loadInfoname={loadInfoname} setLoadInfoname={setLoadInfoname}/>;
       case "Project":
-        return <Project workspace_id={workspace_id}/>;
+        return <Project workspace_id={workspace_id} setLoadInfo={setLoadInfo}/>;
       case "PeopleRole":
         return <PeopleRole workspace_id={workspace_id}/>;
       default:
@@ -68,6 +69,7 @@ function Workspace() {
       <div className="container-workspace">
         <Navinwork loadInfoname={loadInfoname}/>
         <Sidebar
+          loadInfo={loadInfo}
           setSidebar={setSidebar}
           setComponentwork={setComponentwork}
           componentwork={componentwork}

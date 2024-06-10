@@ -115,6 +115,21 @@
     width: 70%;
     
 }
+.bg-input-login{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.eye-close, .eye-open{
+    cursor: pointer;
+    position: absolute;
+    top: 28px;
+    right: 130px;
+    color: #818181;
+
+}
 .input-email, .input-passlogin, .input-emailsignup, .input-passsignup, .input-repasssignup{
     width: 70%;
     height: 40px;

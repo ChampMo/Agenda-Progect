@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { axiosinstant } from "../../lib/axiosinstant";
 
-function Project({ workspace_id }) {
+function Project({ workspace_id, setLoadInfo }) {
 
   const [loadInfoname, setLoadInfoname] = useState(false)
   const [atcivecpass, setAtcivecpass] = useState(false)
@@ -73,6 +73,7 @@ const handleFileChange = async (event) => {
         ...prevInfo,
         workspace_icon: response.data.userInfo.workspace_icon
       }));
+      setLoadInfo(p=>!p)
       console.log('Image uploaded successfully:', response.data);
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -90,6 +91,7 @@ const handleNameChange = async(e) => {
       })
       .then((response) => {
         setName(response.data.workspace_name);
+        setLoadInfo(p=>!p)
       })
   } catch (error) {
       console.error(error);

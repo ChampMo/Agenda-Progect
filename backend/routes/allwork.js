@@ -24,7 +24,7 @@ router.get("/api/create/workspace/", async (req, res) => {
         
 
         Workspace.create([
-            { workspace_id: nextId, workspace_name: 'Workspace Name', workspace_icon: '', workspace_create_date: new Date()},
+            { workspace_id: nextId, workspace_name: 'Workspace Name', workspace_icon: 'https://fpvhqgksrqktucubhvte.supabase.co/storage/v1/object/public/profile/workspace/24/profile_workspace1c4fd5c7-d2db-41bb-8d0c-c86f3608f906', workspace_create_date: new Date()},
         ]);
 
         const workspace = await UserWorkspace.findOne({user_id:req.session.userId}).sort({ order_number: -1 }).limit(1);

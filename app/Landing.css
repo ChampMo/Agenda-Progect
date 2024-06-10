@@ -1,4 +1,16 @@
 
+
+body::-webkit-scrollbar {
+    background: none;
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(to top, #12419C, #7CFBDD);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 10px;
+}
 .landing {
     background: linear-gradient(to bottom, #12419C, #7CFBDD);
     width: 100%;

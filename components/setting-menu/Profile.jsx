@@ -34,6 +34,7 @@ function Profile({loadInfoname, setLoadInfoname, type}) {
   const cpass =()=>{
     setAtcivecpass(true)
   }
+
   const handleChangeName = async (e) => {
     try {
         const newName = e.target.value;
@@ -71,7 +72,11 @@ const handleFileChange = async (event) => {
         },
         withCredentials: true
       });
-      setLoadInfoname(p=>!p)
+      if(type==="setting"){
+        setLoadInfo(p=>!p)
+      }else{
+        setLoadInfoname(p=>!p)
+      }
       setUserInfo((prevInfo) => ({
         ...prevInfo,
         picture: response.data.userInfo.picture

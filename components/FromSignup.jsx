@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { axiosinstant } from "../lib/axiosinstant";
+import { Icon } from '@iconify/react';
+
 
   // axios.defaults.withCredentials = true;
 function FromSignup(props) {
+  
+  const [typePasswordlog, setTypePasswordlog] = useState('password');
+  const [typePasswordlog2, setTypePasswordlog2] = useState('password');
 
   const { change } = props;
   const submitData = async (data) => {
@@ -56,25 +61,48 @@ function FromSignup(props) {
         <label htmlFor="password" className="text-passlogin">
           Password
         </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className="input-passsignup"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="bg-input-login">
+          <input
+            type={typePasswordlog2}
+            id="password"
+            name="password"
+            className="input-passsignup"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {typePasswordlog2 === "password" 
+            ? <Icon 
+                onClick={() => setTypePasswordlog2("text")}
+                icon="majesticons:eye-line" width="25" height="25" 
+                className="eye-close"/>
+            :<Icon 
+                onClick={() => setTypePasswordlog2("password")}
+                icon="iconamoon:eye-off" width="25" height="25" 
+                className="eye-open"/>}
+        </div>
+
         <label htmlFor="password" className="text-passlogin">
           Confirm-Password
         </label>
-        <input
-          type="password"
-          id="repassword"
-          name="repassword"
-          className="input-repasssignup"
-          value={repassword}
-          onChange={(e) => setRepassword(e.target.value)}
-        />
+
+        <div className="bg-input-login">
+          <input
+            type={typePasswordlog}
+            id="repassword"
+            name="repassword"
+            className="input-repasssignup"
+            value={repassword}
+            onChange={(e) => setRepassword(e.target.value)}/>
+          {typePasswordlog === "password" 
+          ? <Icon 
+              onClick={() => setTypePasswordlog("text")}
+              icon="majesticons:eye-line" width="25" height="25" 
+              className="eye-close"/>
+          :<Icon 
+              onClick={() => setTypePasswordlog("password")}
+              icon="iconamoon:eye-off" width="25" height="25" 
+              className="eye-open"/>}
+        </div>
         {password !== repassword ? (
           <div className="invalidlogin">Password not match.</div>
         ) : (

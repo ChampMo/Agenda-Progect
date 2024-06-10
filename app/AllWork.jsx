@@ -133,7 +133,7 @@ console.log(share_request);
                 <div className="flex relative justify-center">
                     <img className="footer-bg z-0" src={footer} alt="" />
                     <div className="flex w-5/12 sm:w-full justify-around z-10 absolute bottom-0 sm:h-[300px] scale-75  sm:scale-100">
-                    <div className="flex flex-col ml-10 justify-center mb-10">
+                    <div className="flex flex-col ml-10 justify-start mb-20 -translate-y-10">
                         <img 
                         onClick={()=>navigate('/')}
                         className="w-48 sm:w-60 h-20 cursor-pointer object-contain" src={logo} alt="" />
@@ -150,7 +150,7 @@ console.log(share_request);
                     <div className="flex">
                     </div>
                     <div className="flex">
-                        <div className="flex flex-col text-gray-400 mr-20 items-start justify-center gap-3  mb-10">
+                        <div className="flex flex-col text-gray-400 mr-20 items-start justify-start gap-3  mb-10">
                         <div className="flex text-xl cursor-pointer hover:text-col1">Learn More</div>
                         <div className="flex text-sm cursor-pointer hover:text-col1">About</div>
                         <div className="flex text-sm cursor-pointer hover:text-col1">FAQ</div>

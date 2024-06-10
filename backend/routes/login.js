@@ -70,7 +70,7 @@ router.post("/api/signup", async (req, res) => {
         }
         console.log('nextId',nextId);
         User.create([
-            { user_id: nextId, email: email, username:'', password: hashedPassword, picture:''},
+            { user_id: nextId, email: email, username:'', password: hashedPassword, picture:'https://fpvhqgksrqktucubhvte.supabase.co/storage/v1/object/public/profile/workspace/26/profile_workspace0959ecee-f6fb-41e9-92e4-08b14623a57b'},
         ]);
         console.log('nextId',nextId);
         console.log("Data inserted successfully");

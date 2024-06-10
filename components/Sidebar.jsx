@@ -6,7 +6,7 @@ import { faGear } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 import { axiosinstant } from "../lib/axiosinstant";
-function Sidebar({ setSidebar, setComponentwork, componentwork, workspace_id }) {
+function Sidebar({ setSidebar, setComponentwork, componentwork, workspace_id, loadInfo }) {
   const [classTask, setClassTask] = useState("manu-task");
   const [classRole, setClassRole] = useState("manu-role");
   const [classSche, setClassSche] = useState("manu-schedule");
@@ -68,7 +68,7 @@ function Sidebar({ setSidebar, setComponentwork, componentwork, workspace_id }) 
             });
     }
     fetchAllWork();
-  }, [loadInfoname]);
+  }, [loadInfoname, loadInfo]);
 
 
 
